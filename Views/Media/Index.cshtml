@@ -1,0 +1,194 @@
+﻿@model ZAFMC.Models.Media
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <asp:Panel ID="MediaOne" runat="server" BorderStyle="None" Height="650px" ScrollBars="Auto" ToolTip="Media details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon" Width="349px">
+
+
+                    <%-- ************************************* --%>
+                    <%-- ***************ACCORDIONS********** --%>
+
+                    <%-- Panel NEWS --%>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default panel-danger">
+                            <div class="panel-heading">
+                                <a href="#ZIONNews" data-toggle="collapse" data-parent="#accordion">
+                                    <h2 class="panel-title ">
+                                        <span class="glyphicon glyphicon-home text-danger">~News </span>
+                                    </h2>
+                                </a>
+                            </div>
+                            <div id="ZIONNews" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="text-danger " style="list-style-type: none;">
+                                        <li>Zion</li>
+                                        <li>Church</li>
+                                        <li>Zion</li>
+                                        <li>Church</li>
+                                        <li>Zion</li>
+                                        <li>Church</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Panel SERMONS -->
+                        <div class="panel  panel-danger">
+                            <div class="panel-heading ">
+                                <a href="#ZIONSermon" data-toggle="collapse" data-parent="#accordion">
+                                    <h2 class="panel-title">
+                                        <span class="glyphicon glyphicon-road text-danger">~Sermons </span>
+                                    </h2>
+                                </a>
+                            </div>
+                            <div id="ZIONSermon" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="text-danger" style="list-style-type: none;">
+
+                                        <li>
+                                            <asp:Label ID="Pr" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Preacher"></asp:Label><br />
+                                        </li>
+                                        <li>
+                                            <asp:TextBox ID="Preacher" runat="server" placeholder="Preacher.." BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" MaxLength="20" Width="160px"></asp:TextBox>
+                                        </li>
+                                        <li>
+                                            <asp:Label ID="ETN" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Event Name"></asp:Label>
+                                        </li>
+                                        <li>
+                                            <asp:TextBox ID="EventName" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" MaxLength="30" placeholder="Event.." TextMode="SingleLine" Width="160px"></asp:TextBox>
+                                        </li>
+                                        <li>
+                                            <asp:Label ID="DP" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Date Preached"></asp:Label><br />
+                                        </li>
+                                        <li>
+                                            <asp:TextBox ID="DatePreached" runat="server" BorderColor="Maroon" CssClass="form-control" Height="29px" TextMode="Date" Width="160px"></asp:TextBox>
+                                        </li>
+                                        <li>
+                                            <asp:Label ID="MBV" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Main Bible Verse"></asp:Label><br />
+                                        </li>
+                                        <li>
+                                            <asp:TextBox ID="MainBibleVerse" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" MaxLength="20" placeholder="Bible Verse.." TextMode="SingleLine" Width="160px"></asp:TextBox>
+                                        </li>
+                                        <li>
+                                            <asp:Label ID="SM" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Sermon"></asp:Label><br />
+                                        </li>
+                                        <li>
+                                            <asp:TextBox ID="Sermon" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="135px" MaxLength="2000" placeholder="Sermon.." TextMode="MultiLine" Width="245px"></asp:TextBox>
+                                        </li>
+                                        <li>
+                                            <asp:FileUpload ID="SermonUpload" runat="server" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Height="30px" Width="245px" ToolTip="Upload Sermon!!" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Panel Videos and Music -->
+                        <div class="panel  panel-danger">
+                            <div class="panel-heading ">
+                                <a href="#ZIONVid" data-toggle="collapse" data-parent="#accordion">
+                                    <h2 class="panel-title">
+                                        <span class="glyphicon glyphicon-flag text-danger">~Videos and Music </span>
+                                    </h2>
+                                </a>
+                            </div>
+                            <div id="ZIONVid" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="text-danger" style="list-style-type: none;">
+                                        <li>
+                                            <asp:Label ID="VN" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Video Name"></asp:Label><br />
+                                        </li>
+                                        <li>
+                                            <asp:TextBox ID="VideoName" runat="server" placeholder="Clip Name.." BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" MaxLength="20" Width="160px"></asp:TextBox>
+                                        </li>
+                                        <li>
+                                            <asp:Label ID="VO" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Video Occassion"></asp:Label><br />
+                                        </li>
+                                        <li>
+                                            <asp:TextBox ID="VideoOccassion" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" MaxLength="30" placeholder="Occassion.." TextMode="SingleLine" Width="160px"></asp:TextBox>
+                                        </li>
+                                        <li>
+                                            <asp:Label ID="VD" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Video Date"></asp:Label><br />
+                                        </li>
+                                        <li>
+                                            <asp:TextBox ID="VideoDate" runat="server" BorderColor="Maroon" CssClass="form-control" Height="29px" TextMode="Date" Width="160px"></asp:TextBox>
+                                        </li>
+
+                                        <li>
+                                            <asp:Label ID="VM" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Videos and Music"></asp:Label><br />
+                                        </li>
+                                        <li>
+                                            <asp:TextBox ID="VideoMusic" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="135px" MaxLength="2000" placeholder="Music & Videos.." TextMode="MultiLine" Width="245px"></asp:TextBox>
+                                        </li>
+                                        <li>
+                                            <asp:FileUpload ID="VidMus" runat="server" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Height="30px" Width="245px" ToolTip="Upload Music / Video!!" />
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PANEL TESTIMONIES -->
+
+                        <div class="panel  panel-danger">
+                            <div class="panel-heading ">
+                                <a href="#ZIONTestimon" data-toggle="collapse" data-parent="#accordion">
+                                    <h2 class="panel-title">
+                                        <span class="glyphicon glyphicon-calendar text-danger">~Testimons </span>
+                                    </h2>
+                                </a>
+                            </div>
+                            <div id="ZIONTestimon" class="panel-collapse collapse">
+                                <%-- Remove Bullets --%>
+                                <ul class="text-danger" style="list-style-type: none;">
+                                    <%-- End Remove Bullets --%>
+                                    <li>
+                                        <asp:Label ID="Tst" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Testifier"></asp:Label><br />
+                                    </li>
+
+                                    <li>
+                                        <asp:TextBox ID="Testifier" runat="server" placeholder="Testifier Name.." BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" MaxLength="20" Width="160px"></asp:TextBox>
+                                    </li>
+                                    <li>
+                                        <asp:Label ID="TsDt" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Testimon Date"></asp:Label><br />
+                                    </li>
+                                    <li>
+                                        <asp:TextBox ID="TestimonDate" runat="server" BorderColor="Maroon" CssClass="form-control" Height="29px" TextMode="Date" Width="160px"></asp:TextBox>
+                                    </li>
+                                    <li>
+                                        <asp:Label ID="UpTs" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Testimony File"></asp:Label><br />
+                                    </li>
+                                    <li>
+                                        <asp:TextBox ID="Testimon" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="135px" MaxLength="1000" placeholder="Testifier Testimony.." TextMode="MultiLine" Width="245px"></asp:TextBox>
+                                    </li>
+                                    <li>
+                                        <asp:FileUpload ID="TestimonUpload" runat="server" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Height="30px" Width="245px" ToolTip="Upload Testimony!!" />
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </asp:Panel>
+            </div>
+
+            <div class="col-md-8">
+                <asp:Panel ID="MediaTwo" runat="server" BorderStyle="Groove" Height="500px" ScrollBars="Auto" ToolTip="Media details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
+
+                    <%-- Insert Grid View Control here --%>
+                </asp:Panel>
+            </div>
+        </div>
+    </div>
+    <br />
+
+</asp:Content>
+

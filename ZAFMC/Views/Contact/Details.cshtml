@@ -1,0 +1,58 @@
+﻿@model ZAFMC.Models.Contact
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Contact</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContPosition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContMobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContMobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContAddress)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CONTACTID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

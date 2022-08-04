@@ -1,0 +1,198 @@
+﻿@model ZAFMC.Models.Churches
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <asp:Panel ID="ChurchesOne" runat="server" BorderStyle="None" Height="600px" ScrollBars="Auto" ToolTip="Church details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
+                    <asp:Label ID="CN" runat="server" Text="Church Name" CssClass="text-danger" Font-Bold="True" Font-Size="Small"></asp:Label>
+                    <asp:TextBox ID="ChurchName" runat="server" placeholder="Name.." BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" MaxLength="20" ToolTip="Name!!" Width="150px"></asp:TextBox>
+                    <asp:Label ID="CL" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Church Leader"></asp:Label>
+                    <asp:TextBox ID="ChurchLeader" runat="server" placeholder="Leader.." BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" Width="150px"></asp:TextBox>
+                    <asp:Label ID="LCN" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Leader Cell Number"></asp:Label>
+                    <asp:TextBox ID="LeaderCell" runat="server" placeholder="Cell.." BorderColor="Maroon" CssClass="form-control" Height="29px" Width="150px"></asp:TextBox>
+                    <asp:Label ID="LEA" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Leader Email"></asp:Label>
+                    <asp:TextBox ID="LeaderEmail" runat="server" placeholder="Email.." BorderColor="Maroon" CssClass="form-control" Height="29px" Width="150px"></asp:TextBox>
+                    <asp:Label ID="DOO" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Date Officially Opened"></asp:Label>
+                    <asp:TextBox ID="DateOpened" runat="server" BorderColor="Maroon" CssClass="form-control" Height="29px" MaxLength="30" TextMode="Date" Width="150px"></asp:TextBox>
+                    <asp:Label ID="NOM" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Number Of Members"></asp:Label>
+                    <asp:TextBox ID="NumberOfMembers" runat="server" placeholder="Total.." BorderColor="Maroon" CssClass="form-control" Height="29px" MaxLength="4" Width="150px"></asp:TextBox>
+                    <asp:Label ID="PRV" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Province"></asp:Label>
+
+                    <asp:DropDownList ID="ChurchProvince" runat="server" CssClass="form-control" Height="29px" Width="150px">
+                        <asp:ListItem>Select..</asp:ListItem>
+                        <asp:ListItem>Bulawayo</asp:ListItem>
+                        <asp:ListItem>Harare</asp:ListItem>
+                        <asp:ListItem>Manicaland</asp:ListItem>
+                        <asp:ListItem>Mash. Central</asp:ListItem>
+                        <asp:ListItem>Mash. East</asp:ListItem>
+                        <asp:ListItem>Mash. West</asp:ListItem>
+                        <asp:ListItem>Masvingo</asp:ListItem>
+                        <asp:ListItem>Matabeleland</asp:ListItem>
+                        <asp:ListItem>Midlands</asp:ListItem>
+                        <asp:ListItem>----------------</asp:ListItem>
+                        <asp:ListItem>WesternCape</asp:ListItem>
+                        <asp:ListItem>EasternCape</asp:ListItem>
+                        <asp:ListItem>NorthenCape</asp:ListItem>
+                        <asp:ListItem>NorthWest</asp:ListItem>
+                        <asp:ListItem>FreeState</asp:ListItem>
+                        <asp:ListItem>KZN</asp:ListItem>
+                        <asp:ListItem>Gauteng</asp:ListItem>
+                        <asp:ListItem>Limpopo</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:Label ID="DSTC" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="District"></asp:Label>
+                    <asp:DropDownList ID="ChurchDistrict" runat="server" CssClass="form-control" Height="29px" Width="150px">
+                        <asp:ListItem>Select..</asp:ListItem>
+                        <asp:ListItem>Bulawayo</asp:ListItem>
+                        <asp:ListItem>Harare</asp:ListItem>
+                        <asp:ListItem>Buhera</asp:ListItem>
+                        <asp:ListItem>Chimanimani</asp:ListItem>
+                        <asp:ListItem>Chipinge</asp:ListItem>
+                        <asp:ListItem>Makoni</asp:ListItem>
+                        <asp:ListItem>Mutare</asp:ListItem>
+                        <asp:ListItem>Mutasa</asp:ListItem>
+                        <asp:ListItem>Nyanga</asp:ListItem>
+                        <asp:ListItem>Bindura</asp:ListItem>
+                        <asp:ListItem>Guruve</asp:ListItem>
+                        <asp:ListItem>Mazowe</asp:ListItem>
+                        <asp:ListItem>Mbire</asp:ListItem>
+                        <asp:ListItem>Mt. Darwin</asp:ListItem>
+                        <asp:ListItem>Muzarabani</asp:ListItem>
+                        <asp:ListItem>Rushinga</asp:ListItem>
+                        <asp:ListItem>Shamva</asp:ListItem>
+                        <asp:ListItem>Chikomba</asp:ListItem>
+                        <asp:ListItem>Goromonzi</asp:ListItem>
+                        <asp:ListItem>Marondera</asp:ListItem>
+                        <asp:ListItem>Mudzi</asp:ListItem>
+                        <asp:ListItem>Murehwa</asp:ListItem>
+                        <asp:ListItem>Mutoko</asp:ListItem>
+                        <asp:ListItem>Seke</asp:ListItem>
+                        <asp:ListItem>Uzumba</asp:ListItem>
+                        <asp:ListItem>Wedza</asp:ListItem>
+                        <asp:ListItem>Chegutu</asp:ListItem>
+                        <asp:ListItem>Chinhoyi</asp:ListItem>
+                        <asp:ListItem>Hurungwe</asp:ListItem>
+                        <asp:ListItem>Kariba</asp:ListItem>
+                        <asp:ListItem>Makonde</asp:ListItem>
+                        <asp:ListItem>Ngezi</asp:ListItem>
+                        <asp:ListItem>Sanyati</asp:ListItem>
+                        <asp:ListItem>Zvimba</asp:ListItem>
+                        <asp:ListItem>Bikita</asp:ListItem>
+                        <asp:ListItem>Chiredzi</asp:ListItem>
+                        <asp:ListItem>Chivi</asp:ListItem>
+                        <asp:ListItem>Gutu</asp:ListItem>
+                        <asp:ListItem>Masvingo</asp:ListItem>
+                        <asp:ListItem>Mwenezi</asp:ListItem>
+                        <asp:ListItem>Zaka</asp:ListItem>
+                        <asp:ListItem>Binga</asp:ListItem>
+                        <asp:ListItem>Binga</asp:ListItem>
+                        <asp:ListItem>Bubi</asp:ListItem>
+                        <asp:ListItem>Hwange</asp:ListItem>
+                        <asp:ListItem>Lupane</asp:ListItem>
+                        <asp:ListItem>Nkayi</asp:ListItem>
+                        <asp:ListItem>Tsholotsho</asp:ListItem>
+                        <asp:ListItem>Umguza</asp:ListItem>
+                        <asp:ListItem>BeitBridge</asp:ListItem>
+                        <asp:ListItem>Bulilima</asp:ListItem>
+                        <asp:ListItem>Gwanda</asp:ListItem>
+                        <asp:ListItem>Insiza</asp:ListItem>
+                        <asp:ListItem>Mangwe</asp:ListItem>
+                        <asp:ListItem>Matobo</asp:ListItem>
+                        <asp:ListItem>Umzingwane</asp:ListItem>
+                        <asp:ListItem>Chirumhanzu</asp:ListItem>
+                        <asp:ListItem>Gokwe North</asp:ListItem>
+                        <asp:ListItem>Gokwe South</asp:ListItem>
+                        <asp:ListItem>Gweru</asp:ListItem>
+                        <asp:ListItem>Kwekwe</asp:ListItem>
+                        <asp:ListItem>Mberengwa</asp:ListItem>
+                        <asp:ListItem>Shurugwi</asp:ListItem>
+                        <asp:ListItem>Zvishavane</asp:ListItem>
+                        <asp:ListItem>-------------</asp:ListItem>
+                        <asp:ListItem>Pretoria</asp:ListItem>
+                        <asp:ListItem>JHBurg</asp:ListItem>
+                        <asp:ListItem>Durban</asp:ListItem>
+                        <asp:ListItem>CapeTown</asp:ListItem>
+                        <asp:ListItem>PE</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:Label ID="Zns" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Zone"></asp:Label>
+                    <asp:DropDownList ID="ChurchZone" runat="server" CssClass="form-control" Height="29px" Width="150px">
+                        <asp:ListItem>Select..</asp:ListItem>
+                        <asp:ListItem>Museva</asp:ListItem>
+                        <asp:ListItem>Rusape</asp:ListItem>
+                        <asp:ListItem>Sese</asp:ListItem>
+                        <asp:ListItem>New Canaan</asp:ListItem>
+                        <asp:ListItem>Kuwadzana</asp:ListItem>
+                        <asp:ListItem>Sunningdale</asp:ListItem>
+                        <asp:ListItem>Epworth</asp:ListItem>
+                        <asp:ListItem>Dangamvura</asp:ListItem>
+                        <asp:ListItem>Sakubva</asp:ListItem>
+                        <asp:ListItem>Sharara</asp:ListItem>
+                        <asp:ListItem>Mvuma</asp:ListItem>
+                        <asp:ListItem>Chivhu</asp:ListItem>
+                        <asp:ListItem>Ngomahuru</asp:ListItem>
+                        <asp:ListItem>Checheche</asp:ListItem>
+                        <asp:ListItem>Glen View</asp:ListItem>
+                        <asp:ListItem>Chitungwiza</asp:ListItem>
+                        <asp:ListItem>Mkoba</asp:ListItem>
+                        <asp:ListItem>Mzilikazi</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:Label ID="Sectn" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Section"></asp:Label>
+                    <br />
+                    <asp:DropDownList ID="ChurchSection" runat="server" CssClass="form-control" Height="29px" Width="150px">
+                        <asp:ListItem>Select..</asp:ListItem>
+                        <asp:ListItem>Mucheke</asp:ListItem>
+                        <asp:ListItem>Rujeko</asp:ListItem>
+                        <asp:ListItem>Eastvale</asp:ListItem>
+                        <asp:ListItem>Vengere</asp:ListItem>
+                        <asp:ListItem>Matibe</asp:ListItem>
+                        <asp:ListItem>Vhembe View</asp:ListItem>
+                        <asp:ListItem>Senga</asp:ListItem>
+                        <asp:ListItem>Riverside</asp:ListItem>
+                        <asp:ListItem>Ascot</asp:ListItem>
+                        <asp:ListItem>Barbour Fields</asp:ListItem>
+                        <asp:ListItem>Jahunda</asp:ListItem>
+                        <asp:ListItem>Kuhle</asp:ListItem>
+                    </asp:DropDownList>
+                </asp:Panel>
+            </div>
+            <%-- PAGINATION --%>
+            <div class="col-md-4">
+                <asp:Panel ID="ChurchesTwo" runat="server" BorderStyle="None" Height="600px" ScrollBars="Auto" ToolTip="Church details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
+                    <asp:Label ID="Pst" runat="server" Text="List Of Pastors (Vafundisi)" CssClass="text-danger" Font-Bold="True" Font-Size="Small"></asp:Label>
+                    <asp:TextBox ID="ChurchPastors" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="135px" MaxLength="100" placeholder="Pastor's List" TextMode="MultiLine" Width="225px"></asp:TextBox>
+                    <br />
+                    <asp:Label ID="LOV" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="List Of Evangelist (Vavhangeri)"></asp:Label>
+                    <asp:TextBox ID="ChurchEvangelist" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="135px" MaxLength="100" placeholder="Evangelist's List" TextMode="MultiLine" Width="225px"></asp:TextBox>
+                    <br />
+                    <asp:Label ID="LOP" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="List Of Preachers (Vaparidzi)"></asp:Label>
+                    <asp:TextBox ID="ChurchPreacher" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="135px" MaxLength="100" placeholder="Preacher's List" TextMode="MultiLine" Width="225px"></asp:TextBox>
+                </asp:Panel>
+            </div>
+            <%-- END PAGINATION --%>
+            <div class="col-md-4">
+                <asp:Panel ID="ChurchesThree" runat="server" BorderStyle="None" Height="600px" ScrollBars="Auto" ToolTip="Church details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
+                    <asp:Label ID="LOPts" runat="server" Text="List Of Prophets" CssClass="text-danger" Font-Bold="True" Font-Size="Small"></asp:Label>
+                    <asp:TextBox ID="ChurchProphet" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="135px" MaxLength="100" placeholder="Prophet's List.." TextMode="MultiLine" Width="225px"></asp:TextBox>
+                    <br />
+                    <asp:Label ID="LOD" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="List Of Decons (Vana Gosa)"></asp:Label>
+                    <asp:TextBox ID="ChurchDecon" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="135px" TextMode="MultiLine" placeholder="Decon's List" Width="225px"></asp:TextBox>
+                    <br />
+                    <asp:Label ID="OM" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Other Members"></asp:Label>
+                    <asp:TextBox ID="ChurchMember" runat="server" BorderColor="Maroon" CssClass="form-control text-capitalize" Height="139px" MaxLength="100" placeholder="Other Members.." TextMode="MultiLine" Width="225px"></asp:TextBox>
+                </asp:Panel>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+
+</asp:Content>
+

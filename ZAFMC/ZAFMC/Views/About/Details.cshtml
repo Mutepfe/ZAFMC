@@ -1,0 +1,154 @@
+﻿@model ZAFMC.Models.About
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>About</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LeaderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeaderName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeaderSurname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeaderSurname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeaderDOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeaderDOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeaderIdentity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeaderIdentity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeaderPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeaderPosition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminSurname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminSurname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminAppntDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminAppntDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminInterComm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminInterComm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminInterDir)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminInterDir)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecSurname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecSurname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecDOD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecDOD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecPosition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecBurialPlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecBurialPlace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecMemorial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecMemorial)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

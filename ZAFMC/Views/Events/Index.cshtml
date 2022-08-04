@@ -1,0 +1,73 @@
+﻿@model ZAFMC.Models.Events
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <asp:Panel ID="EventsOne" runat="server" BorderStyle="None" Height="520px" ScrollBars="Auto" ToolTip="Capture details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
+                    <asp:Label ID="EN" runat="server" Text="Event Name" CssClass="text-danger" Font-Bold="True" Font-Size="Small"></asp:Label>
+                    <asp:TextBox ID="EventName" runat="server" placeholder="Name.." BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" Width="160px"></asp:TextBox>
+                    <asp:Label ID="ED" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Event Date"></asp:Label>
+                    <asp:TextBox ID="EventDate" runat="server" placeholder="Date.." BorderColor="Maroon" CssClass="form-control" Height="29px" TextMode="Date" Width="160px"></asp:TextBox>
+                    <asp:Label ID="EV" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Event Venue"></asp:Label>
+                    <asp:TextBox ID="EventVenue" runat="server" placeholder="Venue.." BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" MaxLength="20" Width="160px"></asp:TextBox>
+                    <asp:Label ID="ECP" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Contact Person"></asp:Label>
+                    <asp:TextBox ID="EventContact" runat="server" placeholder="Contact.." BorderColor="Maroon" CssClass="form-control text-capitalize" Height="29px" MaxLength="20" Width="160px"></asp:TextBox>
+                    <asp:Label ID="ECC" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Contact Cell"></asp:Label>
+                    <asp:TextBox ID="EventCell" runat="server" placeholder="Mobile.." BorderColor="Maroon" CssClass="form-control" Height="29px" MaxLength="15" Width="160px"></asp:TextBox>
+                    <asp:Label ID="ECE" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Contact Email"></asp:Label>
+                    <asp:TextBox ID="EventEmail" runat="server" placeholder="Mail.." BorderColor="Maroon" CssClass="form-control text-uppercase" Height="29px" Width="160px"></asp:TextBox>
+                    <asp:Label ID="EVD" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Event Duration (Days)"></asp:Label>
+                    <asp:TextBox ID="EventDuration" runat="server" placeholder="Timeframe.." BorderColor="Maroon" CssClass="form-control" Height="29px" Width="160px"></asp:TextBox>
+                    <asp:Label ID="ES" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Event Status"></asp:Label>
+                    <asp:DropDownList ID="EventStatus" runat="server" CssClass="form-control" Height="32px" Width="160px">
+                        <asp:ListItem>Select..</asp:ListItem>
+                        <asp:ListItem>Approved</asp:ListItem>
+                        <asp:ListItem>Not Approved</asp:ListItem>
+                    </asp:DropDownList>
+                    <br />
+                    <br />
+                </asp:Panel>
+            </div>
+
+            <div class="col-md-9">
+                <asp:Panel ID="EventsTwo" runat="server" BorderStyle="Groove" Height="520px" ScrollBars="Auto" ToolTip="Capture details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
+                    <asp:Label ID="SchEvn" runat="server" Text="List Of Scheduled Events" CssClass="text-danger" Font-Bold="True" Font-Size="Small"></asp:Label>
+                    <br />
+                    <br />
+                    <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="3px" CellPadding="4" DataSourceID="ZIONEvents" Height="230px" HorizontalAlign="Justify" Width="609px">
+                        <Columns>
+                            <asp:BoundField DataField="EventName" HeaderText="EventName" SortExpression="EventName" />
+                            <asp:BoundField DataField="EventVenue" HeaderText="EventVenue" SortExpression="EventVenue" />
+                            <asp:BoundField DataField="ContactPerson" HeaderText="ContactPerson" SortExpression="ContactPerson" />
+                            <asp:BoundField DataField="EventDuration" HeaderText="EventDuration" SortExpression="EventDuration" />
+                        </Columns>
+                        <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
+                        <HeaderStyle BackColor="#990000" BorderStyle="Groove" Font-Bold="True" ForeColor="#FFFFCC" />
+                        <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" HorizontalAlign="Center" />
+                        <RowStyle BackColor="White" BorderColor="Maroon" ForeColor="#330099" />
+                        <SelectedRowStyle BackColor="#FFCC66" BorderColor="#009933" Font-Bold="True" ForeColor="#663399" />
+                        <SortedAscendingCellStyle BackColor="#FEFCEB" />
+                        <SortedAscendingHeaderStyle BackColor="#AF0101" />
+                        <SortedDescendingCellStyle BackColor="#F6F0C0" />
+                        <SortedDescendingHeaderStyle BackColor="#7E0000" />
+                    </asp:GridView>
+                    <asp:SqlDataSource ID="ZIONEvents" runat="server" ConnectionString="<%$ ConnectionStrings:ZIONConnection %>" SelectCommand="SELECT * FROM [Events]"></asp:SqlDataSource>
+                </asp:Panel>
+            </div>
+
+        </div>
+    </div>
+
+    <br />
+
+</asp:Content>
+
+

@@ -1,0 +1,224 @@
+﻿@model ZAFMC.Models.Congregation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Congregation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CongTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongSurname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongSurname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongDOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongDOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongPassportID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongPassportID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongProfession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongProfession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongKin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongKin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongKinContact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongKinContact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongMobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongMobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongPosition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongDateAppointed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongDateAppointed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongManagerialPost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongManagerialPost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongDateElected)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongDateElected)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongProvince)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongProvince)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongDistrict)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongDistrict)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongZone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongSection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongSection)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongSSeniorLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongSSeniorLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongViceLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongViceLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongPhoto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongIDPass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongIDPass)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

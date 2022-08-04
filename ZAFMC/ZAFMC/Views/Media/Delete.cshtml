@@ -1,0 +1,144 @@
+﻿@model ZAFMC.Models.Media
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Media</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NewsName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewsName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewsDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewsDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewsFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewsFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SermonPreacher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SermonPreacher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SermonEventName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SermonEventName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SermonDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SermonDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SermonVerse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SermonVerse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SermonFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SermonFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoOccassion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoOccassion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestmTestifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestmTestifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestmDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestmDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestmFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestmFile)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

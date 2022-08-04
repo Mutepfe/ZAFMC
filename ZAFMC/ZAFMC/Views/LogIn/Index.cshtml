@@ -1,0 +1,56 @@
+﻿@model ZAFMC.Models.LogIn
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
+    <div class="jumbotron" style="border:1px solid maroon">
+        <h3 class="text-danger"><strong>ZAFMC</strong></h3>
+
+        <hr />
+        <h4 class="text-danger"><strong>Log In</strong></h4>
+        <hr />
+        <p>
+            <asp:Label ID="PassportID" runat="server" Font-Size="Small" Text="ID Number / Passport" Font-Bold="True" CssClass="text-danger"></asp:Label>
+        </p>
+        <p>
+            <asp:TextBox ID="PassID" runat="server" placeholder="ID Number.." Height="30px" Width="133px" BorderStyle="Groove" MaxLength="20" ViewStateMode="Disabled" CssClass="form-control text-uppercase" ToolTip="ID Number / Passport !!" BorderColor="Maroon"></asp:TextBox>
+        </p>
+        <p>
+            <asp:Label ID="Pswd" runat="server" Font-Size="Small" Text="Password" Font-Bold="True" CssClass="text-danger"></asp:Label>
+        </p>
+        <p>
+            <asp:TextBox ID="Passwd" runat="server" type="password" placeholder="Password.." Height="30px" MaxLength="20" Width="130px" BorderStyle="Groove" ViewStateMode="Disabled" CssClass="form-control" ToolTip="Your Password!!" BorderColor="Maroon"></asp:TextBox>
+        </p>
+        <p>
+            <asp:Label ID="OTP" runat="server" Font-Bold="True" Font-Size="Small" Text="OTP" CssClass="text-danger"></asp:Label>
+        </p>
+        <p>
+            <asp:DropDownList ID="OTPList" runat="server" Font-Bold="True" Font-Size="Small" Height="30px" ToolTip="Select Option!!" Width="67px" ViewStateMode="Disabled" CssClass="text-danger">
+                <asp:ListItem>Select</asp:ListItem>
+                <asp:ListItem>SMS</asp:ListItem>
+                <asp:ListItem>Email</asp:ListItem>
+            </asp:DropDownList>
+            <asp:TextBox ID="OTPNumber" runat="server" type="password" placeholder="PIN.." Height="25px" MaxLength="4" ViewStateMode="Disabled" Width="59px" BorderStyle="Groove" ToolTip="Enter OTP!!" CssClass="text-uppercase"></asp:TextBox>
+        </p>
+        <br />
+        <hr />
+        <p>
+            <asp:CheckBox ID="LogIn" runat="server" BorderStyle="None" Font-Size="Small" Text="Log In" Font-Bold="True" Width="67px" OnCheckedChanged="LogIn_CheckedChanged" CssClass="text-danger" ToolTip="Click to LogIn!!" BorderColor="Maroon" />
+            <asp:CheckBox ID="Cancel" runat="server" Font-Size="Small" Text="Cancel" Width="75px" Font-Bold="True" BorderStyle="None" CssClass="text-danger" ToolTip="Cancel LogIn!!" BorderColor="Maroon" />
+            <asp:CheckBox ID="Resets" runat="server" CssClass="text-danger" Font-Size="Small" Text="Reset" ToolTip="Reset LogIn Details!!" BorderColor="Maroon" />
+        </p>
+        <hr />
+        <asp:Label ID="CurDateTime" runat="server" Font-Bold="True" Font-Italic="False" Font-Size="Small" OnLoad="CurDateTime_Load" Text="DateTime" CssClass="text-danger" ToolTip="Current LogIn Date &amp; Time!!"></asp:Label>
+    </div>
+    <br />
+    <br />
+    <br />
+
+    <br />
+</asp:Content>
+

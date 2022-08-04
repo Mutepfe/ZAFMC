@@ -1,0 +1,362 @@
+﻿@model ZAFMC.Models.Passovers
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Passovers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSOVERID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSOVERID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassoverDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassoverDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassoverVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassoverVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassoverVenueLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassoverVenueLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassoverLeaderCell)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassoverLeaderCell)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemDeceasedName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemDeceasedName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemChurchLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemChurchLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemRelativeCell)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemRelativeCell)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BigSunDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BigSunDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BigSunVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BigSunVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BigSunLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BigSunLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BigSunLeaderCell)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BigSunLeaderCell)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradCell)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradCell)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradDegree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradDegree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradLeaderCell)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradLeaderCell)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YouthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YouthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YouthVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YouthVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YouthLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YouthLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YouthDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YouthDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WomenDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WomenDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WomenVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WomenVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WomenLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WomenLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WomenDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WomenDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddBride)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddBride)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddBrideCell)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddBrideCell)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddGroom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddGroom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddGroomCell)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddGroomCell)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddOfficer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddOfficer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddLeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddLeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddLeaderCell)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddLeaderCell)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
