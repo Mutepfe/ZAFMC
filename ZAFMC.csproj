@@ -358,6 +358,7 @@
     <Compile Include="Congregation.aspx.designer.cs">
       <DependentUpon>Congregation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CongregationRules.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

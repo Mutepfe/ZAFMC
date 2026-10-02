@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,8 +10,8 @@ using System.Data.OleDb;
 using System.Data.Entity;
 using System.Data.Sql;
 using System.Configuration; //For DBase connection in the Web.Config
-using System.Windows.Forms;
 using System.Data;
+using System.Globalization;
 using System.Web.ModelBinding;
 using ZAFMC.Models;
 
@@ -18,6 +19,34 @@ namespace ZAFMC
 {
     public partial class Congregation : System.Web.UI.Page
     {
+        // Passport / ID of the member loaded from the grid (null = new-member mode).
+        // Kept in the Page's ViewState: the form panels have ViewState disabled.
+        private string EditPassportID
+        {
+            get { return ViewState["EditPassportID"] as string; }
+            set { ViewState["EditPassportID"] = value; }
+        }
+
+        // Membership Number shown in the read-only box while that member is current.
+        private string CurrentMembershipNumber
+        {
+            get { return ViewState["CurrentMembershipNumber"] as string; }
+            set { ViewState["CurrentMembershipNumber"] = value; }
+        }
+
+        // Stored dropdown values of the loaded member that are not in the dropdown's list
+        // (control ID -> value). Re-added on every request so Update does not lose them.
+        private Hashtable LegacyDropDowns
+        {
+            get { return ViewState["LegacyDropDowns"] as Hashtable ?? new Hashtable(); }
+        }
+
+        // Every dropdown of the member form
+        private DropDownList[] MemberDropDowns
+        {
+            get { return new[] { Titles, MaritalStatus, RankPosition, ManagerialPost, Province, District, Zones, Sect, SeniorLeader, ViceLeader }; }
+        }
+
         //Page Load
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,22 +55,79 @@ namespace ZAFMC
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetNoStore();
 
-            ResetControls(Page); //Resets Web Controls
+            //Block future Dates Of Birth in the browser (panel ViewState is disabled, so set on every request)
+            DOB.Attributes["max"] = DateTime.Today.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+            //Reset only on first load; on postbacks the click handlers need the posted values
+            if (!IsPostBack)
+            {
+                ResetForm(); //Resets Web Controls
+            }
 
 
         }
+
+        // Re-applies the current member state on every request (the form panels have ViewState disabled)
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            MembershipNumber.Text = CurrentMembershipNumber ?? string.Empty;
+
+            if (EditPassportID != null)
+            {
+                PassportID.Text = EditPassportID;
+                PassportID.ReadOnly = true;
+            }
+
+            foreach (DropDownList ddl in MemberDropDowns)
+            {
+                string legacy = LegacyDropDowns[ddl.ID] as string;
+                if (legacy == null || ddl.Items.FindByValue(legacy) != null)
+                {
+                    continue; // nothing remembered, or the option is still there (load request)
+                }
+                bool reposted = GetDropDownValue(ddl) == legacy;
+                ListItem item = new ListItem(legacy, legacy);
+                ddl.Items.Insert(1, item);
+                if (reposted)
+                {
+                    ddl.ClearSelection();
+                    item.Selected = true;
+                }
+            }
+        }
+
         //Delete  Congregation (Event)
         protected void DeleteCongregation_Click(object sender, EventArgs e)
         {
             //Using SQL Stored Procedure
+            string key = EditPassportID ?? PassportID.Text;
 
-            CongregationDelete();
-            ResetControls(Page); //Resets Web Controls
+            string error = CongregationRules.ValidateRequired(key, "Passport / ID")
+                ?? CongregationRules.ValidateMaxLength(key, 15, "Passport / ID");
+            if (error != null)
+            {
+                ShowValidationError(error);
+                return;
+            }
+
+            int? rows = CongregationDelete(key);
+            if (rows == null)
+            {
+                return; // error already shown
+            }
+            if (rows == 0)
+            {
+                ShowMessage("No member with Passport / ID '" + key + "' was found. Nothing was deleted.", "warning");
+                return;
+            }
+            ResetForm(); //Resets Web Controls
+            CongregationConnection(); // Refresh the Database
+            ShowMessage("Member " + key + " deleted.", "success");
 
         }
 
-        //Delete  Congregation(Method)
-        private void CongregationDelete()
+        //Delete  Congregation(Method): returns the number of deleted rows, or null on error
+        private int? CongregationDelete(string passportId)
         {
             //Using SQL Stored Procedure
 
@@ -51,16 +137,19 @@ namespace ZAFMC
 
             try
             {
-                Cong.Parameters.AddWithValue("@DelCongregation", PassportID.Text); //@DelCongregation StoredProcedure actual parameter passed in the DB
+                Cong.Parameters.AddWithValue("@DelCONG", passportId); //@DelCONG StoredProcedure actual parameter passed in the DB
+                SqlParameter rows = new SqlParameter("@RowsAffected", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                Cong.Parameters.Add(rows);
                 Cong.CommandType = System.Data.CommandType.StoredProcedure;
                 CD.Open();
                 Cong.ExecuteNonQuery();
-                CongregationConnection(); // Refresh the Database
+                return rows.Value == DBNull.Value ? 0 : Convert.ToInt32(rows.Value);
 
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception("An Error occured, contact IT Department");
+                ShowDbError(ex, "deleted");
+                return null;
             }
             finally
             {
@@ -75,16 +164,34 @@ namespace ZAFMC
         //AddNew Congregation (Event)
         protected void SaveCongregation_Click(object sender, EventArgs e)
         {
-            CongregationAddNew(); // Add or Save Record
-            UpLoadsFiles();       //Save Photo
+            if (EditPassportID != null)
+            {
+                ShowMessage("You are editing an existing member. Use Edit to update it, or Reset for a new member.", "warning");
+                return;
+            }
+
+            CurrentMembershipNumber = null; // a new member is being created
+            string number = CongregationAddNew(); // Add or Save Record
+            if (number == null)
+            {
+                return; // Validation or insert failed: keep the entered values
+            }
+            string uploads = UpLoadsFiles();       //Save Photo
+            ResetForm(); //Resets Web Controls
             CongregationConnection(); // Refresh Database
-            ResetControls(Page); //Resets Web Controls
+            CurrentMembershipNumber = number; // Show the generated Membership Number (re-applied in Page_PreRender)
+            ShowMessage("Member saved. Membership Number: " + number + "." + uploads, "success");
 
 
         }
-        //AddNew Congregation (Method)
-        private void CongregationAddNew()
+        //AddNew Congregation (Method): returns the generated Membership Number, or null when nothing was saved
+        private string CongregationAddNew()
         {
+            DateTime? dob, appointed, elected;
+            if (!TryReadMemberForm(out dob, out appointed, out elected))
+            {
+                return null;
+            }
 
             string CongInsert = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
             SqlConnection CID = new SqlConnection(CongInsert);
@@ -94,43 +201,28 @@ namespace ZAFMC
             {
 
                 Prosper.CommandType = CommandType.StoredProcedure;
-                
-                Prosper.Parameters.AddWithValue("@CongTitle", Titles.Text);
-                Prosper.Parameters.AddWithValue("@CongName", Firstname.Text);
-                Prosper.Parameters.AddWithValue("@CongSurname", Surname.Text);
-                Prosper.Parameters.AddWithValue("@CongDOB", DOB.Text);
-                Prosper.Parameters.AddWithValue("@CongGender", Gender.Text);
-                Prosper.Parameters.AddWithValue("@CongPassportID", PassportID.Text);
-                Prosper.Parameters.AddWithValue("@CongStatus", MaritalStatus.Text);
-                Prosper.Parameters.AddWithValue("@CongProfession", Profession.Text);
-                Prosper.Parameters.AddWithValue("@CongKin", NextOfKin.Text);
-                Prosper.Parameters.AddWithValue("@CongKinContact", KinContact.Text);
-                Prosper.Parameters.AddWithValue("@CongCell", CellNumber.Text);
-                Prosper.Parameters.AddWithValue("@CongAddress", PhysAddress.Text);
-                Prosper.Parameters.AddWithValue("@CongEmail", EmailAdd.Text);
-                Prosper.Parameters.AddWithValue("@CongPosition", RankPosition.Text);
-                Prosper.Parameters.AddWithValue("@CongDateAppointed", DateAppointed.Text);
-                Prosper.Parameters.AddWithValue("@CongManagerial", ManagerialPost.Text);
-                Prosper.Parameters.AddWithValue("@CongDateElected", DateElected.Text);
-                Prosper.Parameters.AddWithValue("@CongProvince", Province.Text);
-                Prosper.Parameters.AddWithValue("@CongDistrict", District.Text);
-                Prosper.Parameters.AddWithValue("@CongZone", Zones.Text);
-                Prosper.Parameters.AddWithValue("@CongSection", Sect.Text);
-                Prosper.Parameters.AddWithValue("@CongSnrLeader", SeniorLeader.Text);
-                Prosper.Parameters.AddWithValue("@CongViceLeader", ViceLeader.Text);
-                Prosper.Parameters.AddWithValue("@CongPhoto", PersonPhoto.ImageUrl);
-                Prosper.Parameters.AddWithValue("@CongPassID", PassID.ImageUrl);
-                Prosper.Parameters.AddWithValue("@CongregationID", DBNull.Value);
-                Prosper.Parameters.AddWithValue("@CongFingerprint", FingerPrint.ImageUrl);
-                Prosper.Parameters.AddWithValue("@CongBarcode", Barcode.ImageUrl);
-                
+
+                AddMemberParameters(Prosper, dob, appointed, elected);
+                // Generated by the database; any value typed or posted for it is ignored
+                SqlParameter membership = new SqlParameter("@CongMembershipNumber", SqlDbType.NVarChar, 20) { Direction = ParameterDirection.Output };
+                Prosper.Parameters.Add(membership);
+
                 CID.Open();
                 Prosper.ExecuteNonQuery();
+
+                string number = Convert.ToString(membership.Value);
+                if (!CongregationRules.IsMembershipNumber(number))
+                {
+                    ShowMessage("The Membership Number could not be generated. Please contact the IT Department.", "danger");
+                    return null;
+                }
+                return number;
 
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                ShowDbError(P, "saved");
+                return null;
             }
             finally
             {
@@ -139,61 +231,196 @@ namespace ZAFMC
 
             }
         }
-        //Refresh Congregation(Event)
+
+        // Validates the member form; shows the first problem and returns false when invalid
+        private bool TryReadMemberForm(out DateTime? dob, out DateTime? appointed, out DateTime? elected)
+        {
+            dob = null;
+            appointed = null;
+            elected = null;
+
+            string key = EditPassportID ?? PassportID.Text;
+
+            string error = CongregationRules.ValidateRequired(key, "Passport / ID")
+                ?? CongregationRules.ValidateMaxLength(Firstname.Text, 15, "Firstname")
+                ?? CongregationRules.ValidateMaxLength(Surname.Text, 20, "Surname")
+                ?? CongregationRules.ValidateMaxLength(key, 15, "Passport / ID")
+                ?? CongregationRules.ValidateMaxLength(Profession.Text, 20, "Profession")
+                ?? CongregationRules.ValidateMaxLength(NextOfKin.Text, 20, "Next Of Kin")
+                ?? CongregationRules.ValidateMaxLength(KinContact.Text, 20, "Kin Contact")
+                ?? CongregationRules.ValidateMaxLength(CellNumber.Text, 20, "Cell Number")
+                ?? CongregationRules.ValidateMaxLength(PhysAddress.Text, 50, "Physical Address")
+                ?? CongregationRules.ValidateMaxLength(EmailAdd.Text, 50, "Email Address")
+                // Dropdown values must fit their proc parameters (no silent truncation)
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(Titles), 5, "Title")
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(MaritalStatus), 10, "Marital Status")
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(RankPosition), 50, "Rank / Position")
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(ManagerialPost), 50, "Managerial Post")
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(Province), 30, "Province")
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(District), 30, "District")
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(Zones), 30, "Zone")
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(Sect), 30, "Section")
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(SeniorLeader), 20, "Snr. Leader")
+                ?? CongregationRules.ValidateMaxLength(GetDropDownValue(ViceLeader), 20, "Vice-Leader")
+                ?? CongregationRules.ValidateGender(Gender.SelectedValue)
+                ?? CongregationRules.ValidateDateOfBirth(DOB.Text, DateTime.Today, out dob)
+                ?? CongregationRules.ValidateOptionalDate(DateAppointed.Text, "Date Appointed", out appointed)
+                ?? CongregationRules.ValidateOptionalDate(DateElected.Text, "Date Elected", out elected);
+
+            if (error != null)
+            {
+                ShowValidationError(error);
+                return false;
+            }
+            return true;
+        }
+
+        private void ShowValidationError(string message)
+        {
+            ShowMessage(message, "warning");
+        }
+
+        // Shows an on-page Bootstrap alert; kind = success | warning | danger | info
+        private void ShowMessage(string text, string kind)
+        {
+            CongAlert.CssClass = "alert alert-" + kind + " alert-dismissible";
+            CongAlertText.Text = HttpUtility.HtmlEncode(text);
+            CongAlert.Visible = true;
+        }
+
+        // Logs the full error on the server and shows a friendly message (no SQL details in the browser)
+        private void ShowDbError(Exception ex, string action)
+        {
+            System.Diagnostics.Trace.TraceError(ex.ToString());
+            SqlException sql = ex as SqlException;
+            if (sql != null && (sql.Number == 2627 || sql.Number == 2601))
+            {
+                ShowMessage("A member with this Passport / ID already exists.", "danger");
+                return;
+            }
+            ShowMessage("The record could not be " + action + ". Please contact the IT Department.", "danger");
+        }
+
+        // Value of a member dropdown, including a remembered legacy value that was posted back
+        private string GetDropDownValue(DropDownList ddl)
+        {
+            string value = ddl.SelectedValue;
+            if (value != "-1")
+            {
+                return value;
+            }
+            string legacy = LegacyDropDowns[ddl.ID] as string;
+            // Event validation has already checked that the posted value was rendered as an option
+            if (legacy != null && Request.Form[ddl.UniqueID] == legacy)
+            {
+                return legacy;
+            }
+            return "-1";
+        }
+
+        // Selects a stored value; a value that is not in the list is added as an extra option and remembered
+        private void SetDropDown(DropDownList ddl, string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                value = "-1";
+            }
+            ddl.ClearSelection();
+            ListItem item = ddl.Items.FindByValue(value);
+            if (item == null)
+            {
+                item = new ListItem(value, value);
+                ddl.Items.Insert(1, item);
+                Hashtable legacy = LegacyDropDowns;
+                legacy[ddl.ID] = value;
+                ViewState["LegacyDropDowns"] = legacy; // re-assign so the change is saved
+            }
+            item.Selected = true;
+        }
+
+        // Parameters shared by AddNewCongregation and UpdateCongregation (names match the procs)
+        private void AddMemberParameters(SqlCommand cmd, DateTime? dob, DateTime? appointed, DateTime? elected)
+        {
+            cmd.Parameters.AddWithValue("@CongTitle", GetDropDownValue(Titles));
+            cmd.Parameters.AddWithValue("@CongName", Firstname.Text);
+            cmd.Parameters.AddWithValue("@CongSurname", Surname.Text);
+            cmd.Parameters.Add(new SqlParameter("@CongDOB", SqlDbType.Date) { Value = (object)dob ?? DBNull.Value });
+            cmd.Parameters.AddWithValue("@CongGender", Gender.SelectedValue);
+            cmd.Parameters.AddWithValue("@CongPassportID", EditPassportID ?? PassportID.Text); // a loaded member is always keyed by its own ID
+            cmd.Parameters.AddWithValue("@CongStatus", GetDropDownValue(MaritalStatus));
+            cmd.Parameters.AddWithValue("@CongProfession", Profession.Text);
+            cmd.Parameters.AddWithValue("@CongKin", NextOfKin.Text);
+            cmd.Parameters.AddWithValue("@CongKinContact", KinContact.Text);
+            cmd.Parameters.AddWithValue("@CongCell", CellNumber.Text);
+            cmd.Parameters.AddWithValue("@CongAddress", PhysAddress.Text);
+            cmd.Parameters.AddWithValue("@CongEmail", EmailAdd.Text);
+            cmd.Parameters.AddWithValue("@CongPosition", GetDropDownValue(RankPosition));
+            cmd.Parameters.Add(new SqlParameter("@CongDateAppointed", SqlDbType.Date) { Value = (object)appointed ?? DBNull.Value });
+            cmd.Parameters.AddWithValue("@CongManagerial", GetDropDownValue(ManagerialPost));
+            cmd.Parameters.Add(new SqlParameter("@CongDateElected", SqlDbType.Date) { Value = (object)elected ?? DBNull.Value });
+            cmd.Parameters.AddWithValue("@CongProvince", GetDropDownValue(Province));
+            cmd.Parameters.AddWithValue("@CongDistrict", GetDropDownValue(District));
+            cmd.Parameters.AddWithValue("@CongZone", GetDropDownValue(Zones));
+            cmd.Parameters.AddWithValue("@CongSection", GetDropDownValue(Sect));
+            cmd.Parameters.AddWithValue("@CongSnrLeader", GetDropDownValue(SeniorLeader));
+            cmd.Parameters.AddWithValue("@CongViceLeader", GetDropDownValue(ViceLeader));
+            cmd.Parameters.AddWithValue("@CongPhoto", PersonPhoto.ImageUrl);
+            cmd.Parameters.AddWithValue("@CongPassID", PassID.ImageUrl);
+            cmd.Parameters.AddWithValue("@CongregationID", DBNull.Value);
+            // image columns: must be typed as Image (an nvarchar value clashes with image)
+            cmd.Parameters.Add(new SqlParameter("@CongFingerprint", SqlDbType.Image) { Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@CongBarcode", SqlDbType.Image) { Value = DBNull.Value });
+        }
+
+        //Refresh Congregation(Event): clear the form and the search box first, then rebind the full list
         protected void RefreshCongregation_Click(object sender, EventArgs e)
         {
+            ResetForm(); //Resets Web Controls
             CongregationConnection();
-            ResetControls(Page); //Resets Web Controls
         }
-        //Refresh Congregation(Method)
+        //Refresh Congregation(Method): rebinds the Congregants grid through the ZAFMCCong data source
         public void CongregationConnection()
         {
-
-            string CongConn = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
-            SqlConnection FORD = new SqlConnection(CongConn);
-            SqlCommand RANGER = new SqlCommand(@"SELECT [CongTitle] as [Title],[CongName] as [Name],[CongSurname] as [Surname],(REPLACE(convert(nvarchar,[CongDOB],106),'','/')) as [D.O.B],[CongGender] as [Gender],[CongPassportID] as [Identity],[CongStatus] as [Status],[CongProfession] as [Profession],[CongKin] as [Kin],[CongKinContact] as [Kin Contact],[CongCell] as [Mobile],[CongAddress] as [Address],[CongEmail] as [Email],[CongPosition] as [Position],(REPLACE(convert(nvarchar,[CongDateAppointed],106),'','/')) as [Date Appointed],[CongManagerial] as [Managerial Post],(REPLACE(convert(nvarchar,[CongDateElected],106),'','/')) as [Date Elected],[CongProvince] as [Province],[CongDistrict] as [District],[CongZone] as [Zone],[CongSection] as [Section],[CongSnrLeader] as [Snr. Leader],[CongViceLeader] as [Vice-Leader],[CongPhoto] as [Photo],[CongPassID] as [Identity-Photo],[CongFingerprint] as [Fingerprint],[CongBarcode] as [Encrypted-Data] FROM [dbo].[Congregation] ORDER BY [CongPassportID] ASC ", FORD);
             try
             {
-                FORD.Open();
-                SqlDataReader DOUBLECAB = RANGER.ExecuteReader();
-                //ChurchList.DataSource = DOUBLECAB;
-                //MediaList.DataBind();
+                CongregantsList.DataBind();
             }
             catch
             {
                 throw new Exception("Failed to connect to the database");
             }
-            finally
-            {
-                RANGER.Dispose(); //Clean up memory
-                FORD.Close(); //Close DBase  connection
-                ResetControls(Page); //Resets Web Controls
-            }
 
         }
 
-        //Update Congregation(Event) 
+        //Update Congregation(Event): the "are you sure?" confirmation runs in the browser (OnClientClick)
         protected void EditCongregation_Click(object sender, EventArgs e)
         {
-
-            DialogResult MPJ = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (MPJ == DialogResult.Yes)
+            DateTime? dob, appointed, elected;
+            if (!TryReadMemberForm(out dob, out appointed, out elected))
             {
-                UpdateEditedCongregation(); // Update the Record
-                CongregationConnection();  //Refresh the DBase
+                return;
             }
-            else
-               if (MPJ == DialogResult.No)
-            {
 
-                CongregationConnection();
-                ResetControls(Page); //Resets Web Controls
+            string key = EditPassportID ?? PassportID.Text;
+            int? rows = UpdateEditedCongregation(dob, appointed, elected); // Update the Record
+            if (rows == null)
+            {
+                return; // error already shown, keep the entered values
             }
+            if (rows == 0)
+            {
+                ShowMessage("No member with Passport / ID '" + key + "' was found. Nothing was updated.", "warning");
+                return;
+            }
+            ResetForm(); //Resets Web Controls
+            CongregationConnection();  //Refresh the DBase
+            ShowMessage("Member " + key + " updated.", "success");
 
         }
 
-        //Update Congregation(Method) 
-        private void UpdateEditedCongregation()
+        //Update Congregation(Method): the Membership Number is permanent and is never sent.
+        //Returns the number of updated rows, or null on error.
+        private int? UpdateEditedCongregation(DateTime? dob, DateTime? appointed, DateTime? elected)
         {
 
             string ALLAN = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
@@ -203,43 +430,20 @@ namespace ZAFMC
             try
             {
                 ANITA.CommandType = System.Data.CommandType.StoredProcedure;
-                ANITA.Parameters.AddWithValue("@CongTitle", Titles.Text);
-                ANITA.Parameters.AddWithValue("@CongName", Firstname.Text);
-                ANITA.Parameters.AddWithValue("@CongSurname", Surname.Text);
-                ANITA.Parameters.AddWithValue("@CongDOB", DOB.Text);
-                ANITA.Parameters.AddWithValue("@CongGender", Gender.Text);
-                ANITA.Parameters.AddWithValue("@CongPassportID", PassportID.Text);
-                ANITA.Parameters.AddWithValue("@CongStatus", MaritalStatus.Text);
-                ANITA.Parameters.AddWithValue("@CongProfession", Profession.Text);
-                ANITA.Parameters.AddWithValue("@CongKin", NextOfKin.Text);
-                ANITA.Parameters.AddWithValue("@CongKinContact", KinContact.Text);
-                ANITA.Parameters.AddWithValue("@CongCell", CellNumber.Text);
-                ANITA.Parameters.AddWithValue("@CongAddress", PhysAddress.Text);
-                ANITA.Parameters.AddWithValue("@CongEmail", EmailAdd.Text);
-                ANITA.Parameters.AddWithValue("@CongPosition", RankPosition.Text);
-                ANITA.Parameters.AddWithValue("@CongAppointed", DateAppointed.Text);
-                ANITA.Parameters.AddWithValue("@CongManagerial", ManagerialPost.Text);
-                ANITA.Parameters.AddWithValue("@CongElected", DateElected.Text);
-                ANITA.Parameters.AddWithValue("@CongProvince", Province.Text);
-                ANITA.Parameters.AddWithValue("@CongDistrict", District.Text);
-                ANITA.Parameters.AddWithValue("@CongZone", Zones.Text);
-                ANITA.Parameters.AddWithValue("@CongSection", Sect.Text);
-                ANITA.Parameters.AddWithValue("@CongSnrLeader", SeniorLeader.Text);
-                ANITA.Parameters.AddWithValue("@CongViceLeader", ViceLeader.Text);
-                ANITA.Parameters.AddWithValue("@CongPhoto", PersonPhoto.ImageUrl);
-                ANITA.Parameters.AddWithValue("@CongPassID", PassID.ImageUrl);
-                ANITA.Parameters.AddWithValue("@CongregationID", DBNull.Value);
-                ANITA.Parameters.AddWithValue("@CongFingerprint", FingerPrint.ImageUrl);
-                ANITA.Parameters.AddWithValue("@CongBarcode", Barcode.ImageUrl);
+                AddMemberParameters(ANITA, dob, appointed, elected);
+                SqlParameter rows = new SqlParameter("@RowsAffected", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                ANITA.Parameters.Add(rows);
 
 
                 GRACE.Open();
                 ANITA.ExecuteNonQuery();
+                return rows.Value == DBNull.Value ? 0 : Convert.ToInt32(rows.Value);
 
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                ShowDbError(ZIM, "updated");
+                return null;
             }
             finally
             {
@@ -249,7 +453,94 @@ namespace ZAFMC
             }
         }
 
-        //View Congregation(Event)
+        // Grid "Select": loads that member into the form for editing
+        protected void CongregantsList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "LoadMember")
+            {
+                LoadMember(Convert.ToString(e.CommandArgument));
+            }
+        }
+
+        // Reads one member from the database (parameterised) and fills every form field
+        private void LoadMember(string passportId)
+        {
+            ResetForm();
+
+            string cs = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
+            const string sql = "SELECT TOP 1 [CongMembershipNumber],[CongTitle],[CongName],[CongSurname],[CongDOB],[CongGender],[CongPassportID],[CongStatus],[CongProfession],[CongKin],[CongKinContact],[CongCell],[CongAddress],[CongEmail],[CongPosition],[CongDateAppointed],[CongManagerial],[CongDateElected],[CongProvince],[CongDistrict],[CongZone],[CongSection],[CongSnrLeader],[CongViceLeader] FROM [dbo].[Congregation] WHERE [CongPassportID] = @id";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(cs))
+                using (SqlCommand cmd = new SqlCommand(sql, cn))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.NVarChar, 15) { Value = passportId ?? string.Empty });
+                    cn.Open();
+                    using (SqlDataReader r = cmd.ExecuteReader())
+                    {
+                        if (!r.Read())
+                        {
+                            ShowMessage("Member not found. It may have been deleted.", "warning");
+                            return;
+                        }
+
+                        Firstname.Text = ReadString(r, "CongName");
+                        Surname.Text = ReadString(r, "CongSurname");
+                        Profession.Text = ReadString(r, "CongProfession");
+                        NextOfKin.Text = ReadString(r, "CongKin");
+                        KinContact.Text = ReadString(r, "CongKinContact");
+                        CellNumber.Text = ReadString(r, "CongCell");
+                        PhysAddress.Text = ReadString(r, "CongAddress");
+                        EmailAdd.Text = ReadString(r, "CongEmail");
+                        DOB.Text = ReadDate(r, "CongDOB");
+                        DateAppointed.Text = ReadDate(r, "CongDateAppointed");
+                        DateElected.Text = ReadDate(r, "CongDateElected");
+
+                        string gender = ReadString(r, "CongGender");
+                        Gender.ClearSelection();
+                        if (gender == "Male" || gender == "Female")
+                        {
+                            Gender.SelectedValue = gender;
+                        }
+
+                        SetDropDown(Titles, ReadString(r, "CongTitle"));
+                        SetDropDown(MaritalStatus, ReadString(r, "CongStatus"));
+                        SetDropDown(RankPosition, ReadString(r, "CongPosition"));
+                        SetDropDown(ManagerialPost, ReadString(r, "CongManagerial"));
+                        SetDropDown(Province, ReadString(r, "CongProvince"));
+                        SetDropDown(District, ReadString(r, "CongDistrict"));
+                        SetDropDown(Zones, ReadString(r, "CongZone"));
+                        SetDropDown(Sect, ReadString(r, "CongSection"));
+                        SetDropDown(SeniorLeader, ReadString(r, "CongSnrLeader"));
+                        SetDropDown(ViceLeader, ReadString(r, "CongViceLeader"));
+
+                        EditPassportID = ReadString(r, "CongPassportID");
+                        CurrentMembershipNumber = ReadString(r, "CongMembershipNumber");
+                        ShowMessage("Editing " + CurrentMembershipNumber + " (" + EditPassportID + "). Passport / ID is locked. Click Reset for a new member.", "info");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ResetForm();
+                ShowDbError(ex, "loaded");
+            }
+        }
+
+        private static string ReadString(SqlDataReader r, string column)
+        {
+            object v = r[column];
+            return v == DBNull.Value ? string.Empty : Convert.ToString(v);
+        }
+
+        private static string ReadDate(SqlDataReader r, string column)
+        {
+            object v = r[column];
+            return v is DateTime ? ((DateTime)v).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) : string.Empty;
+        }
+
+        //View Congregation(Event): Search by Membership Number or Passport / ID
         protected void ViewCongregation_Click(object sender, EventArgs e)
         {
 
@@ -259,35 +550,58 @@ namespace ZAFMC
         //View Congregation (Method)
         private void CongregationView()
         {
-
-            string MG = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
-            SqlConnection CH = new SqlConnection(MG);
-            SqlCommand ZA = new SqlCommand(@"SELECT [CongTitle] as [Title],[CongName] as [Name],[CongSurname] as [Surname],(REPLACE(convert(nvarchar,[CongDOB],106),'','/')) as [D.O.B],[CongGender] as [Gender],[CongPassportID] as [Identity],[CongStatus] as [Status],[CongProfession] as [Profession],[CongKin] as [Kin],[CongKinContact] as [Kin Contact],[CongCell] as [Mobile],[CongAddress] as [Address],[CongEmail] as [Email],[CongPosition] as [Position],(REPLACE(convert(nvarchar,[CongDateAppointed],106),'','/')) as [Date Appointed],[CongManagerial] as [Managerial Post],(REPLACE(convert(nvarchar,[CongDateElected],106),'','/')) as [Date Elected],[CongProvince] as [Province],[CongDistrict] as [District],[CongZone] as [Zone],[CongSection] as [Section],[CongSnrLeader] as [Snr. Leader],[CongViceLeader] as [Vice-Leader],[CongPhoto] as [Photo],[CongPassID] as [Identity-Photo],[CongFingerprint] as [Fingerprint],[CongBarcode] as [Encrypted-Data] FROM [dbo].[Congregation] ORDER BY [CongPassportID] LIKE @FIND ", CH);
-
-            try
+            string term = (SearchCongregant.Text ?? string.Empty).Trim();
+            if (term.Length > CongregationRules.SearchMaxLength)
             {
-                ZA.Parameters.AddWithValue("@FIND", PassportID.Text + "%");
-                CH.Open();
-                SqlDataReader DB = ZA.ExecuteReader();
-                //MediaList.DataSource = DB; // Attach searched data to DataGridView
-                //MediaList.DataBind();  // Bind data to DataGridView
+                ShowValidationError("Search cannot be longer than " + CongregationRules.SearchMaxLength + " characters.");
+                return;
             }
-            catch (Exception FORD)
-            {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            }
-            finally
+            CongregantsList.PageIndex = 0;
+            CongregationConnection(); // Rebinds the grid; ZAFMCCong_Selecting applies the search
+            ShowCongregantsModal();
+        }
+
+        // Applies the search box to the grid's data source as a parameterised "starts with" filter
+        protected void ZAFMCCong_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        {
+            string term = (SearchCongregant.Text ?? string.Empty).Trim();
+            if (term.Length > CongregationRules.SearchMaxLength)
             {
-                ZA.Dispose(); //Clean up memory
-                CH.Close(); //Close DBase  connection
+                e.Cancel = true;
+                return;
             }
+            e.Command.Parameters["@FIND"].Value = CongregationRules.ToLikePrefix(term);
+        }
+
+        // Keeps the Congregants list open after paging / sorting
+        protected void CongregantsList_Changed(object sender, EventArgs e)
+        {
+            ShowCongregantsModal();
+        }
+
+        // Re-opens the Congregants modal after a postback by clicking the existing View link
+        private void ShowCongregantsModal()
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "ShowCongregants",
+                "window.addEventListener('load', function () { var v = document.getElementById('" + CongregaView.ClientID + "'); if (v) { v.click(); } });", true);
         }
 
         protected void ResetPage_Click(object sender, EventArgs e)
         {
-            ResetControls(Page); //Resets Web Controls
+            ResetForm(); //Resets Web Controls
         }
+
+        // Back to new-member mode: clears every field and the current member state
+        private void ResetForm()
+        {
+            ResetControls(Page); //Resets Web Controls
+            EditPassportID = null;
+            CurrentMembershipNumber = null;
+            ViewState["LegacyDropDowns"] = null;
+            PassportID.ReadOnly = false;
+        }
+
         // Resets all Controls on the Web Form
         private void ResetControls(System.Web.UI.Control JP)
         {
@@ -323,42 +637,51 @@ namespace ZAFMC
                     }
                 }
 
+                //RadioButtonList Control (Gender)
+                if (ctr is RadioButtonList RBL)   //Pattern Matching
+                {
+                    RBL.ClearSelection();
+                }
+
 
 
             }
 
 
         }
-        //Uploads Photos and ID
-        private void UpLoadsFiles()
+        //Uploads Photos and ID: returns a short summary that is appended to the Save message
+        private string UpLoadsFiles()
         {
+            string result = string.Empty;
             try
             {
                 if (PhotoUpload.HasFile)
                 {
                     PhotoUpload.SaveAs(Server.MapPath( @"~/ZION/Congregation/Photos/") + PhotoUpload.FileName);
-                    MessageBox.Show(PhotoUpload.FileName, "ZAFMC - Upload Photo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MessageBox.Show("Photo Name : " + PhotoUpload.PostedFile.FileName +  "\n\n"  + "Photo Size : " + ((PhotoUpload.PostedFile.ContentLength) / 1000) + "MB " + " \n\n" + "Content Type : " + PhotoUpload.PostedFile.ContentType,"ZAFMC - Photo Details",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    
+                    result += " Photo uploaded: " + PhotoUpload.FileName + " (" + (PhotoUpload.PostedFile.ContentLength / 1000) + " KB).";
+
                 }
                 if(IDPass.HasFile)
                 {
-                    
+
                     IDPass.SaveAs(Server.MapPath(@"~/ZION/Congregation/PassportID/") + IDPass.FileName);
-                    MessageBox.Show(IDPass.FileName, "ZAFMC - Upload Passport / Identity", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MessageBox.Show("Passport / Identity Name : " + IDPass.PostedFile.FileName + " \n\n " + "PassportID Size : " + ((IDPass.PostedFile.ContentLength) / 1000) + "MB "+ "\n\n" + "Content Type : " + IDPass.PostedFile.ContentType, "ZAFMC - PassportID Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    result += " Passport / ID uploaded: " + IDPass.FileName + " (" + (IDPass.PostedFile.ContentLength / 1000) + " KB).";
                 }
             }
             catch (Exception Upload)
             {
-                MessageBox.Show(Upload.Message.ToString(), "ZAFMC - (Photo / Identity) Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+                System.Diagnostics.Trace.TraceError(Upload.ToString());
+                result += " The photo / ID upload failed.";
+
             }
+            return result;
         }
 
         
 
     }
 }
+
+
 
 

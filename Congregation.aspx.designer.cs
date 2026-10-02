@@ -15,6 +15,24 @@ namespace ZAFMC
     {
 
         /// <summary>
+        /// CongAlert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel CongAlert;
+
+        /// <summary>
+        /// CongAlertText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CongAlertText;
+
+        /// <summary>
         /// DetailsOne control.
         /// </summary>
         /// <remarks>
@@ -22,6 +40,24 @@ namespace ZAFMC
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel DetailsOne;
+
+        /// <summary>
+        /// MemNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MemNo;
+
+        /// <summary>
+        /// MembershipNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox MembershipNumber;
 
         /// <summary>
         /// Tit control.
@@ -102,7 +138,7 @@ namespace ZAFMC
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList Gender;
+        protected global::System.Web.UI.WebControls.RadioButtonList Gender;
 
         /// <summary>
         /// PaID control.
@@ -598,6 +634,42 @@ namespace ZAFMC
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource ZAFMCCong;
+
+        /// <summary>
+        /// SearchPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel SearchPanel;
+
+        /// <summary>
+        /// SearchLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SearchLbl;
+
+        /// <summary>
+        /// SearchCongregant control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox SearchCongregant;
+
+        /// <summary>
+        /// CongregationSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton CongregationSearch;
 
         /// <summary>
         /// CongregantsList control.

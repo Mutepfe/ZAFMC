@@ -25,24 +25,30 @@
             $("#<%=ViceLeader.ClientID%>> option[value=VaVhangeri]").attr("disabled", "disabled")
         });
 
-        //Toggle Male & Female CheckBoxes
-      
-        $(function () {
-            //#Gender is for Mutually selecting CHECKBOX for Gender ONLY excluding GenerateBarcode checkbox
-                $("#Gender input[type=checkbox]").change(function ()
-                {
-                           //One Checkbox is Selected, disables the other checkbox...
-                    $("#Gender input[type=checkbox]").not($(this)).prop('checked', false);
-                   
-                });
-            });
-        
+        //Blocks Save / Edit when the Date Of Birth is later than today (max is set server-side).
+        //LinkButton postbacks bypass the browser's own form validation, so check it here.
+        function zafmcCheckDob() {
+            var d = document.getElementById('<%=DOB.ClientID%>');
+            if (d && d.checkValidity && !d.checkValidity()) {
+                if (d.reportValidity) { d.reportValidity(); }
+                return false;
+            }
+            return true;
+        }
     </script>
     <div class="container">
+        <%-- On-page messages (success / warning / danger / info), filled by ShowMessage in the code-behind --%>
+        <asp:Panel ID="CongAlert" runat="server" Visible="false" ViewStateMode="Disabled" CssClass="alert alert-info alert-dismissible" role="alert" style="border:0.5px solid maroon">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <asp:Label ID="CongAlertText" runat="server" Font-Bold="True" Font-Size="Small"></asp:Label>
+        </asp:Panel>
         <div class="row">
             <%-- First Panel --%>
             <div class="col-md-4">
                 <asp:Panel ID="DetailsOne" runat="server" BorderStyle="None" Height="680px" ScrollBars="Auto" ToolTip="Capture details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
+                    &nbsp;<asp:Label ID="MemNo" runat="server" CssClass="text-danger" Font-Bold="True" Style="font-size: small" Text="Membership Number"></asp:Label>
+                    <br />
+                    <asp:TextBox ID="MembershipNumber" runat="server" ReadOnly="true" placeholder="Auto-generated.." MaxLength="20" Width="150px" Height="29px" style="border:0.5px solid maroon" CssClass="form-control text-uppercase" ToolTip="Generated automatically when the member is saved" BorderColor="Maroon"></asp:TextBox>
                     &nbsp;<asp:Label ID="Tit" runat="server" CssClass="text-danger" Font-Bold="True" Style="font-size: small" Text="Title"></asp:Label>
                     <asp:DropDownList ID="Titles" runat="server" style="border:0.5px solid maroon" AutoPostBack="False" CssClass="form-control" Height="29px" ToolTip="Salutation!!" Width="150px">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
@@ -66,10 +72,10 @@
                     <br />
                     <%--Gender Checkboxes with Script above--%>
                     <div id="GenderType">
-                    <asp:CheckBoxList ID="Gender" runat="server"  CssClass="text-danger" Font-Bold="True" Font-Size="Small" RepeatDirection="Horizontal" ToolTip="Select Gender!!" Width="150px">
-                        <asp:ListItem Text="Male" Value="Male" Type="checkbox"  ></asp:ListItem>
-                        <asp:ListItem Text="Female" Value="Female" Type="checkbox" ></asp:ListItem>
-                    </asp:CheckBoxList>
+                    <asp:RadioButtonList ID="Gender" runat="server"  CssClass="text-danger" Font-Bold="True" Font-Size="Small" RepeatDirection="Horizontal" ToolTip="Select Gender!!" Width="150px">
+                        <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
+                        <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
+                    </asp:RadioButtonList>
                         </div>
                     <asp:Label ID="PaID" runat="server" Font-Bold="True" Style="font-size: small" Text="Passport / ID" CssClass="text-danger"></asp:Label>
                     <br />
@@ -360,15 +366,15 @@
                     <%-- CRUD Controls --%>
                     <hr />
         
-                <asp:LinkButton ID="CongregationSave" CssClass="text-danger" ToolTip="Save data.." runat="server" OnClick="SaveCongregation_Click"><strong>Save</strong></asp:LinkButton>
+                <asp:LinkButton ID="CongregationSave" CssClass="text-danger" ToolTip="Save data.." runat="server" OnClick="SaveCongregation_Click" OnClientClick="return zafmcCheckDob();"><strong>Save</strong></asp:LinkButton>
                 |
                  <asp:LinkButton ID="CongregaView" CssClass="text-danger" ToolTip="View Data.." data-toggle="modal" data-target="#CongregationModal" runat="server"><strong>View</strong></asp:LinkButton>
                 |
-                 <asp:LinkButton ID="CongregationEdit" CssClass="text-danger" ToolTip="Edit data.." runat="server" OnClick="EditCongregation_Click"><strong>Edit</strong></asp:LinkButton>
+                 <asp:LinkButton ID="CongregationEdit" CssClass="text-danger" ToolTip="Edit data.." runat="server" OnClick="EditCongregation_Click" OnClientClick="return zafmcCheckDob() && confirm('Do you want to Update this Record..!!');"><strong>Edit</strong></asp:LinkButton>
                 |
                 <asp:LinkButton ID="CongregationRefresh" CssClass="text-danger" ToolTip="Refresh data.." runat="server" OnClick="RefreshCongregation_Click"><strong>Refresh</strong></asp:LinkButton>
                 |
-                 <asp:LinkButton ID="CongregationDel" CssClass="text-danger" ToolTip="Delete data.." runat="server" OnClick="DeleteCongregation_Click"><strong>Delete</strong></asp:LinkButton>
+                 <asp:LinkButton ID="CongregationDel" CssClass="text-danger" ToolTip="Delete data.." runat="server" OnClick="DeleteCongregation_Click" OnClientClick="return confirm('Do you want to Delete this Record..!!');"><strong>Delete</strong></asp:LinkButton>
                 |
                  <asp:LinkButton ID="CongregationsReset" CssClass="text-danger" ToolTip="Reset Fields.." runat="server" OnClick="ResetPage_Click"><strong>Reset</strong></asp:LinkButton>
                     <br />
@@ -382,7 +388,11 @@
     </div>
  <br />
     <%-- SQLDatasource to Bind data to Modal Form Grid View --%>
-    <asp:SqlDataSource ID="ZAFMCCong" runat="server" ConnectionString="<%$ ConnectionStrings:ZionCongregation %>" SelectCommand="SELECT [CongTitle] as [Title],[CongName] as [Name],[CongSurname] as [Surname],(REPLACE(convert(nvarchar,[CongDOB],106),'','/')) as [D.O.B],[CongGender] as [Gender],[CongPassportID] as [Identity],[CongStatus] as [Status],[CongProfession] as [Profession],[CongKin] as [Kin],[CongKinContact] as [Kin Contact],[CongCell] as [Mobile],[CongAddress] as [Address],[CongEmail] as [Email],[CongPosition] as [Position],(REPLACE(convert(nvarchar,[CongDateAppointed],106),'','/')) as [Date Appointed],[CongManagerial] as [Managerial Post],(REPLACE(convert(nvarchar,[CongDateElected],106),'','/')) as [Date Elected],[CongProvince] as [Province],[CongDistrict] as [District],[CongZone] as [Zone],[CongSection] as [Section],[CongSnrLeader] as [Snr. Leader],[CongViceLeader] as [Vice-Leader],[CongPhoto] as [Photo],[CongPassID] as [Identity-Photo],[CongFingerprint] as [Fingerprint],[CongBarcode] as [Encrypted-Data] FROM [dbo].[Congregation] ORDER BY [CongPassportID] ASC"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="ZAFMCCong" runat="server" ConnectionString="<%$ ConnectionStrings:ZionCongregation %>" SelectCommand="SELECT [CongMembershipNumber] as [Membership No],[CongTitle] as [Title],[CongName] as [Name],[CongSurname] as [Surname],(REPLACE(convert(nvarchar,[CongDOB],106),'','/')) as [D.O.B],[CongGender] as [Gender],[CongPassportID] as [Identity],[CongStatus] as [Status],[CongProfession] as [Profession],[CongKin] as [Kin],[CongKinContact] as [Kin Contact],[CongCell] as [Mobile],[CongAddress] as [Address],[CongEmail] as [Email],[CongPosition] as [Position],(REPLACE(convert(nvarchar,[CongDateAppointed],106),'','/')) as [Date Appointed],[CongManagerial] as [Managerial Post],(REPLACE(convert(nvarchar,[CongDateElected],106),'','/')) as [Date Elected],[CongProvince] as [Province],[CongDistrict] as [District],[CongZone] as [Zone],[CongSection] as [Section],[CongSnrLeader] as [Snr. Leader],[CongViceLeader] as [Vice-Leader],[CongPhoto] as [Photo],[CongPassID] as [Identity-Photo],[CongFingerprint] as [Fingerprint],[CongBarcode] as [Encrypted-Data] FROM [dbo].[Congregation] WHERE [CongMembershipNumber] LIKE @FIND OR [CongPassportID] LIKE @FIND ORDER BY [CongPassportID] ASC" OnSelecting="ZAFMCCong_Selecting">
+        <SelectParameters>
+            <asp:Parameter Name="FIND" Type="String" DefaultValue="%" ConvertEmptyStringToNull="false" />
+        </SelectParameters>
+    </asp:SqlDataSource>
      <br /> 
    
     <%--MODAL FORM(Congregation)--%>
@@ -399,16 +409,29 @@
                     </div>
                     <div class="modal-body ">
                         <div>
+                            <%-- Search by Membership Number or Passport / ID --%>
+                            <asp:Panel ID="SearchPanel" runat="server" DefaultButton="CongregationSearch" CssClass="form-inline">
+                                <asp:Label ID="SearchLbl" runat="server" AssociatedControlID="SearchCongregant" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Search (Membership No. / ID)"></asp:Label>
+                                <asp:TextBox ID="SearchCongregant" runat="server" MaxLength="20" placeholder="ZAFMC.. or ID.." CssClass="form-control text-uppercase" style="border:0.5px solid maroon" Width="180px" Height="29px" ToolTip="Search by Membership Number or Passport / ID!!"></asp:TextBox>
+                                <asp:LinkButton ID="CongregationSearch" CssClass="text-danger" ToolTip="Search Congregants.." runat="server" OnClick="ViewCongregation_Click"><strong>Search</strong></asp:LinkButton>
+                            </asp:Panel>
+                            <br />
                             <%--RESIZE OR APPLY SCROLL BARS TO GRIDVIEW--%>
                             <div style="overflow-y: scroll; height: auto; width: auto; word-spacing:normal; word-wrap:normal">
                                 <%--(Above)RESIZE OR APPLY SCROLL BARS TO GRIDVIEW--%>
-                                <asp:GridView ID="CongregantsList" runat="server" AllowSorting="True" ToolTip="Congregation List..." CellPadding="4" ForeColor="#333333" GridLines="Both" DataSourceID="ZAFMCCong" AllowPaging="True" ShowHeaderWhenEmpty="True">
+                                <asp:GridView ID="CongregantsList" runat="server" AllowSorting="True" ToolTip="Congregation List..." CellPadding="4" ForeColor="#333333" GridLines="Both" DataSourceID="ZAFMCCong" AllowPaging="True" ShowHeaderWhenEmpty="True" OnPageIndexChanged="CongregantsList_Changed" OnSorted="CongregantsList_Changed" OnRowCommand="CongregantsList_RowCommand">
                                     <%-- Insert Row Number --%>
                                     <Columns>
                                         <asp:TemplateField HeaderText="No." ItemStyle-Font-Bold="true" ItemStyle-ForeColor="Maroon" HeaderStyle-BackColor="White" HeaderStyle-ForeColor="Maroon">
                                             <ItemTemplate>
                                                 <%# Container.DataItemIndex + 1 %>
                                                 
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <%-- Loads the member into the form for editing --%>
+                                        <asp:TemplateField HeaderText="Select" ItemStyle-Font-Bold="true" ItemStyle-ForeColor="Maroon" HeaderStyle-BackColor="White" HeaderStyle-ForeColor="Maroon">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="LoadMember" runat="server" CommandName="LoadMember" CommandArgument='<%# Eval("Identity") %>' CssClass="text-danger" ToolTip="Load this member into the form for editing.."><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> <strong>Select</strong></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
