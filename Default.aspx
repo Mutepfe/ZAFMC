@@ -15,7 +15,7 @@
             <%-- Passport ID --%>
             <asp:Label ID="PassportID" runat="server" Font-Size="Small" Text="ID Number / Passport" Font-Bold="True" CssClass="text-danger"></asp:Label>
             <div class="input-group">
-                <i class="input-group-addon glyphicon glyphicon-user" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon; top: -20px; left: 3px; height: 15px;"></i>
+                <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon;"><i class="glyphicon glyphicon-user"></i></span>
                 <asp:TextBox ID="PassID" runat="server" placeholder="ID Number.." Height="30px" Width="158px"  AutoCompleteType="Disabled" BorderStyle="Groove" MaxLength="11" ViewStateMode="Disabled" CssClass="form-control text-uppercase" ToolTip="ID Number / Passport !!" BorderColor="Maroon"></asp:TextBox>
             </div>
             <br />
@@ -23,7 +23,7 @@
             <asp:Label ID="Pswd" runat="server" Font-Size="Small" Text="Password" Font-Bold="True" CssClass="text-danger"></asp:Label>
             <br />
             <div class="input-group">
-                <i class="input-group-addon glyphicon glyphicon-knight" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon; top: -20px; left: 3px; height: 15px; right: -3px;"></i>
+                <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon;"><i class="glyphicon glyphicon-knight"></i></span>
                 <asp:TextBox ID="Passwd" runat="server" type="password" placeholder="Password.." Height="30px" MaxLength="10" Width="158px" BorderStyle="Groove" ViewStateMode="Disabled" CssClass="form-control" ToolTip="Your Password!!" BorderColor="Maroon"></asp:TextBox>
             </div>
             <%-- Forgot Password --%>
@@ -39,7 +39,7 @@
                 <ContentTemplate>
                     <div class="input-group">
                        
-                        <i class="input-group-addon glyphicon glyphicon-log-in" style="border-color: maroon; background-color: darkgrey; top: -20px; left: 4px; height: 9px;"></i>
+                        <span class="input-group-addon" style="border-color: maroon; background-color: darkgrey;"><i class="glyphicon glyphicon-log-in"></i></span>
                         <asp:DropDownList ID="OTPList" runat="server" Font-Bold="True" AutoPostBack="true" OnSelectedIndexChanged="EmailedSMSed" Style="border: 0.5px solid maroon" Font-Size="Small" Height="30px" ToolTip="Receive through..." Width="85px" CssClass="form-control">
                             <asp:ListItem Text="Select" Value="-1"></asp:ListItem>
                             <asp:ListItem Text="SMS" Value="SMS"></asp:ListItem>
