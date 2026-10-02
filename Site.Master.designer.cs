@@ -123,6 +123,33 @@ namespace ZAFMC
         protected global::System.Web.UI.WebControls.Label LoggedUSer;
 
         /// <summary>
+        /// LOGOFF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LOGOFF;
+
+        /// <summary>
+        /// LOG control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LOG;
+
+        /// <summary>
+        /// KickOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl KickOut;
+
+        /// <summary>
         /// UserLogged control.
         /// </summary>
         /// <remarks>
@@ -168,31 +195,31 @@ namespace ZAFMC
         protected global::System.Web.UI.WebControls.Label Paswd;
 
         /// <summary>
-        /// PassWD control.
+        /// PasswordLock control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PassWD;
+        protected global::System.Web.UI.WebControls.TextBox PasswordLock;
 
         /// <summary>
-        /// UserLogIn control.
+        /// LogInBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton UserLogIn;
+        protected global::System.Web.UI.WebControls.CheckBox LogInBack;
 
         /// <summary>
-        /// UserLogOff control.
+        /// ExitAPP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton UserLogOff;
+        protected global::System.Web.UI.WebControls.CheckBox ExitAPP;
 
         /// <summary>
         /// PassptID control.

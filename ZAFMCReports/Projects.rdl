@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>18.0.11222.15</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>18.0.11222.15</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-12-06T12:01:12.4341287Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="ZAFMCProjects">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=MUTEPFE\SQL2018;Initial Catalog=ZION</ConnectString>
-      </ConnectionProperties>
+      <DataSourceReference>ZAFMCProjects</DataSourceReference>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>4ab17933-2e11-414e-9300-d1efd70a1810</rd:DataSourceID>
     </DataSource>
@@ -103,7 +111,8 @@ FROM            Projects</CommandText>
     <DataSet Name="Duration">
       <Query>
         <DataSourceName>ZAFMCProjects</DataSourceName>
-        <CommandText>SELECT      DISTINCT       [ProjectDuration]     FROM     [Projects]</CommandText>
+        <CommandText>SELECT DISTINCT ProjectDuration
+FROM            Projects</CommandText>
       </Query>
       <Fields>
         <Field Name="ProjectDuration">
@@ -751,6 +760,7 @@ FROM            Projects</CommandText>
                                   <Value>=Fields!ProjectExpecDate.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>d MMM yyyy</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -901,7 +911,6 @@ FROM            Projects</CommandText>
                                   <Value>=Fields!ProjectEstimCost.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <Format>'$' #,0,,,.00;('$' #,0,,,.00)</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>

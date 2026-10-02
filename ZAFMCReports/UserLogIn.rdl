@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>18.0.11222.15</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>18.0.11222.15</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-12-06T12:05:09.9380370Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="UserLogIn">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=MUTEPFE\SQL2018;Initial Catalog=ZION</ConnectString>
-      </ConnectionProperties>
+      <DataSourceReference>UserLogIn</DataSourceReference>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>2314c39f-ad02-4f43-96f3-3d9893078a1e</rd:DataSourceID>
     </DataSource>
@@ -105,7 +113,8 @@ FROM            LogIn</CommandText>
     <DataSet Name="Identity">
       <Query>
         <DataSourceName>UserLogIn</DataSourceName>
-        <CommandText>SELECT         DISTINCT        [LogInPassportID]       FROM        [LogIn]</CommandText>
+        <CommandText>SELECT DISTINCT LogInPassportID
+FROM            LogIn</CommandText>
       </Query>
       <Fields>
         <Field Name="LogInPassportID">
@@ -117,7 +126,8 @@ FROM            LogIn</CommandText>
     <DataSet Name="Firstname">
       <Query>
         <DataSourceName>UserLogIn</DataSourceName>
-        <CommandText>SELECT       DISTINCT           [LogInFirstname]     FROM      [LogIn]</CommandText>
+        <CommandText>SELECT DISTINCT LogInFirstname
+FROM            LogIn</CommandText>
       </Query>
       <Fields>
         <Field Name="LogInFirstname">
@@ -129,7 +139,8 @@ FROM            LogIn</CommandText>
     <DataSet Name="Surname">
       <Query>
         <DataSourceName>UserLogIn</DataSourceName>
-        <CommandText>SELECT         DISTINCT         [LogInSurname]       FROM       [LogIn]</CommandText>
+        <CommandText>SELECT DISTINCT LogInSurname
+FROM            LogIn</CommandText>
       </Query>
       <Fields>
         <Field Name="LogInSurname">
@@ -141,7 +152,8 @@ FROM            LogIn</CommandText>
     <DataSet Name="MobileNumber">
       <Query>
         <DataSourceName>UserLogIn</DataSourceName>
-        <CommandText>SELECT       DISTINCT      [LogInMobileNumber]   FROM     [LogIn]</CommandText>
+        <CommandText>SELECT DISTINCT LogInMobileNumber
+FROM            LogIn</CommandText>
       </Query>
       <Fields>
         <Field Name="LogInMobileNumber">
@@ -153,7 +165,8 @@ FROM            LogIn</CommandText>
     <DataSet Name="Position">
       <Query>
         <DataSourceName>UserLogIn</DataSourceName>
-        <CommandText>SELECT      DISTINCT          [LogInChurchPosition]        FROM      [LogIn]</CommandText>
+        <CommandText>SELECT DISTINCT LogInChurchPosition
+FROM            LogIn</CommandText>
       </Query>
       <Fields>
         <Field Name="LogInChurchPosition">
@@ -165,7 +178,8 @@ FROM            LogIn</CommandText>
     <DataSet Name="MacAddress">
       <Query>
         <DataSourceName>UserLogIn</DataSourceName>
-        <CommandText>SELECT DISTINCT     [LogInMacAddress]  FROM   [LOGIN]</CommandText>
+        <CommandText>SELECT        LogInMacAddress
+FROM            LogIn</CommandText>
       </Query>
       <Fields>
         <Field Name="LogInMacAddress">
@@ -227,7 +241,7 @@ FROM            LogIn</CommandText>
                   <Width>1.00694in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.00694in</Width>
+                  <Width>1.25694in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.20312in</Width>
@@ -1078,7 +1092,7 @@ FROM            LogIn</CommandText>
             <DataSetName>UserAccount</DataSetName>
             <Top>0.43in</Top>
             <Height>0.43in</Height>
-            <Width>9.6979in</Width>
+            <Width>9.9479in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -1099,7 +1113,7 @@ FROM            LogIn</CommandText>
         <Height>1.22792in</Height>
         <Style />
       </Body>
-      <Width>9.69792in</Width>
+      <Width>9.9479in</Width>
       <Page>
         <PageFooter>
           <Height>0.46875in</Height>

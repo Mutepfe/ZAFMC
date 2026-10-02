@@ -63,10 +63,6 @@ namespace ZAFMC
                 Con.Close(); //Close DBase  connection
             }
 
-
-
-
-
         }
 
         //AddNew Record (Method)

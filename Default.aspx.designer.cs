@@ -51,13 +51,13 @@ namespace ZAFMC
         protected global::System.Web.UI.WebControls.TextBox Passwd;
 
         /// <summary>
-        /// HyperLink1 control.
+        /// ForgetPasswd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        protected global::System.Web.UI.WebControls.HyperLink ForgetPasswd;
 
         /// <summary>
         /// OTP control.
@@ -148,5 +148,14 @@ namespace ZAFMC
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label TimerCount;
+
+        /// <summary>
+        /// IdentityPassportDummy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label IdentityPassportDummy;
     }
 }

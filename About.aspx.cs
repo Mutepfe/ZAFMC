@@ -294,7 +294,6 @@ namespace ZAFMC
             ZAFMCDeceased.Visible = false;
         }
 
-
         //AddNew (Event)
         protected void SaveAdmin_Click(object sender, EventArgs e)
         {
@@ -409,7 +408,6 @@ namespace ZAFMC
 
             }
         }
-
 
         //View Record (Event)
         protected void ViewAdmin_Click(object sender, EventArgs e)
@@ -688,6 +686,5 @@ namespace ZAFMC
             AboutDeceasedConnection();
         }
     }
-
 
 }

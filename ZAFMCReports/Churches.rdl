@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>18.0.11222.15</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>18.0.11222.15</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-12-06T11:33:40.6322209Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="ZAFMCChurches">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=MUTEPFE\SQL2018;Initial Catalog=ZION</ConnectString>
-      </ConnectionProperties>
+      <DataSourceReference>ZAFMCChurches</DataSourceReference>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>fdd27c5c-ca66-4406-bd21-a615a90053b7</rd:DataSourceID>
     </DataSource>
@@ -18,9 +26,7 @@
         <DataSourceName>ZAFMCChurches</DataSourceName>
         <CommandText>SELECT        ChrchName, ChrchLeader, ChrchLeaderCell, ChrchLeaderEmail, ChrchDateOpened, ChrchNumMembers, ChrchProvince, ChrchDistrict, ChrchZone, ChrchSection, ChrchPastor, ChrchEvangelist, ChrchPreachers, ChrchProphets, 
                          ChrchDecons, ChrchMembers
-FROM            Churches
-
-</CommandText>
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchName">
@@ -179,8 +185,7 @@ FROM            Churches
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
         <CommandText>SELECT DISTINCT ChrchName
-FROM            Churches
-</CommandText>
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchName">
@@ -192,7 +197,8 @@ FROM            Churches
     <DataSet Name="Leader">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT  [ChrchLeader] FROM [Churches]</CommandText>
+        <CommandText>SELECT DISTINCT ChrchLeader
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchLeader">
@@ -204,7 +210,8 @@ FROM            Churches
     <DataSet Name="DateOpened">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT  [ChrchDateOpened]  FROM [Churches]</CommandText>
+        <CommandText>SELECT DISTINCT ChrchDateOpened
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchDateOpened">
@@ -229,7 +236,7 @@ FROM            Churches</CommandText>
     <DataSet Name="District">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT [ChrchDistrict]
+        <CommandText>SELECT DISTINCT ChrchDistrict
 FROM            Churches</CommandText>
       </Query>
       <Fields>
@@ -242,7 +249,8 @@ FROM            Churches</CommandText>
     <DataSet Name="Zone">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT   [ChrchZone]  FROM [Churches]</CommandText>
+        <CommandText>SELECT DISTINCT ChrchZone
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchZone">
@@ -254,7 +262,8 @@ FROM            Churches</CommandText>
     <DataSet Name="Section">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT   [ChrchSection]  FROM [Churches]</CommandText>
+        <CommandText>SELECT DISTINCT ChrchSection
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchSection">
@@ -266,7 +275,8 @@ FROM            Churches</CommandText>
     <DataSet Name="Pastors">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT   [ChrchPastor]   FROM [Churches]</CommandText>
+        <CommandText>SELECT DISTINCT ChrchPastor
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchPastor">
@@ -278,7 +288,8 @@ FROM            Churches</CommandText>
     <DataSet Name="Evangelist">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT   [ChrchEvangelist]   FROM [Churches]</CommandText>
+        <CommandText>SELECT DISTINCT ChrchEvangelist
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchEvangelist">
@@ -290,7 +301,8 @@ FROM            Churches</CommandText>
     <DataSet Name="Preachers">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT     [ChrchPreachers]   FROM [Churches]</CommandText>
+        <CommandText>SELECT DISTINCT ChrchPreachers
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchPreachers">
@@ -302,7 +314,8 @@ FROM            Churches</CommandText>
     <DataSet Name="Prophets">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT      [ChrchProphets]    FROM          [Churches]</CommandText>
+        <CommandText>SELECT DISTINCT ChrchProphets
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchProphets">
@@ -314,7 +327,8 @@ FROM            Churches</CommandText>
     <DataSet Name="Decons">
       <Query>
         <DataSourceName>ZAFMCChurches</DataSourceName>
-        <CommandText>SELECT DISTINCT         [ChrchDecons]       FROM          [Churches]   </CommandText>
+        <CommandText>SELECT DISTINCT ChrchDecons
+FROM            Churches</CommandText>
       </Query>
       <Fields>
         <Field Name="ChrchDecons">
@@ -2007,6 +2021,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Leader">
       <DataType>String</DataType>
@@ -2025,6 +2040,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="DateOpened">
       <DataType>DateTime</DataType>
@@ -2034,6 +2050,7 @@ FROM            Churches</CommandText>
         </Values>
       </DefaultValue>
       <Prompt>DateOpened</Prompt>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Province">
       <DataType>String</DataType>
@@ -2052,6 +2069,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="District">
       <DataType>String</DataType>
@@ -2070,6 +2088,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Zone">
       <DataType>String</DataType>
@@ -2088,6 +2107,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Section">
       <DataType>String</DataType>
@@ -2106,6 +2126,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Pastors">
       <DataType>String</DataType>
@@ -2124,6 +2145,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Evangelist">
       <DataType>String</DataType>
@@ -2142,6 +2164,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Preachers">
       <DataType>String</DataType>
@@ -2160,6 +2183,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Prophets">
       <DataType>String</DataType>
@@ -2178,6 +2202,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Decons">
       <DataType>String</DataType>
@@ -2196,6 +2221,7 @@ FROM            Churches</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>

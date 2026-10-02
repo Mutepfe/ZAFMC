@@ -1,0 +1,28 @@
+# Visual Studio user/IDE state
+.vs/
+.vsBBBB/
+JJ.vs(OLD)/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# NuGet packages (restored on build)
+packages/
+!packages/build/
+
+# Large installers (exceed GitHub 100MB limit)
+ZAFMCReports/Setup File/
+
+# Agent working files
+.agents/
+
+# OS files
+desktop.ini
+Thumbs.db

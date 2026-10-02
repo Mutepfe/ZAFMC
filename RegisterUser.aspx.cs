@@ -25,9 +25,54 @@ namespace ZAFMC
             Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetNoStore();
-
+            DisableDefaultMenus();
             ResetControls(Page); //Resets Controls
         }
+        //Disable Default Menus!!!
+        public void DisableDefaultMenus()
+        {
+            //Congregation
+            System.Web.UI.HtmlControls.HtmlAnchor CONG = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Congregation");
+            CONG.Visible = false;
+            //Churches
+            System.Web.UI.HtmlControls.HtmlAnchor CHR = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Churches");
+            CHR.Visible = false;
+            //Media
+            System.Web.UI.HtmlControls.HtmlAnchor MED = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Media");
+            MED.Visible = false;
+            //Events
+            System.Web.UI.HtmlControls.HtmlAnchor EVE = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Events");
+            EVE.Visible = false;
+            //Passovers
+            System.Web.UI.HtmlControls.HtmlAnchor PAS = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Passovers");
+            PAS.Visible = false;
+            //Projects
+            System.Web.UI.HtmlControls.HtmlAnchor PRO = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Projects");
+            PRO.Visible = false;
+            //Finance
+            System.Web.UI.HtmlControls.HtmlAnchor FIN = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Finance");
+            FIN.Visible = false;
+            //Reports
+            System.Web.UI.HtmlControls.HtmlAnchor REP = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Reports");
+            REP.Visible = false;
+            //Contact
+            System.Web.UI.HtmlControls.HtmlAnchor CONT = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Contact");
+            CONT.Visible = false;
+            //LoggedInUSer Details
+            System.Web.UI.WebControls.Label LU = (System.Web.UI.WebControls.Label)Master.FindControl("LoggedUSer");
+            LU.Visible = false;
+
+            //Show  "Logged" Caption
+            System.Web.UI.HtmlControls.HtmlGenericControl LGF = (System.Web.UI.HtmlControls.HtmlGenericControl)Master.FindControl("LOGOFF");
+            LGF.InnerHtml = "Logged";
+
+            //LoggedIn USER - Modal Dropdown
+            System.Web.UI.HtmlControls.HtmlAnchor UAL = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Mutepfe");
+            UAL.Visible = false;
+
+        }
+
+
 
         //Delete(LogIn)  RegisteredUser (Event)
         protected void DeleteRegisterUser_Click(object sender, EventArgs e)

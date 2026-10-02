@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="ZAFMCMediaNews">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=MUTEPFE\SQLEXPRESS2025;Initial Catalog=ZION</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>3915f3ca-6c80-4812-9a2e-6760611bf8a8</DataSourceID>
+</RptDataSource>

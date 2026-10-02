@@ -21,6 +21,7 @@
     <form runat="server">
         <%-- SCRIPTS --%>
         <asp:ScriptManager runat="server">
+            
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -45,7 +46,7 @@
             </Scripts>
 
         </asp:ScriptManager>
-
+        
         <%-- NAVBAR --%>
         <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: maroon;">
             <div class="container">
@@ -59,24 +60,27 @@
                     <a class="navbar-brand" runat="server" href="~/"><strong>ZAFMC</strong></a>
                 </div>
                 <%-- APP MENUS  --%>
+              
                 <div class="navbar-collapse collapse">
+                    
                     <ul class="nav navbar-nav" style="text-decoration-color: white;">
-                        <li><a runat="server" href="~/" id="Home">Home</a></li>
-                        <li><a runat="server" href="~/Congregation" id="Congregation" visible="false" title="Congregants..">Congregation</a></li>
-                        <li><a runat="server" href="~/Churches" id="Churches" visible="false" title="ZAFMC Churches...">Churches</a></li>
-                        <li><a runat="server" href="~/MediaCentre" id="Media" visible="false" title="News/Sermons/Videos...">Media</a></li>
-                        <li><a runat="server" href="~/EventsCentre" id="Events" visible="false" title="ZAFMC Events...">Events</a></li>
-                        <li><a runat="server" href="~/Passovers" id="Passovers" visible="false" title="Memorials/Big Sundays/Meetings...">Passovers</a></li>
-                        <li><a runat="server" href="~/Projects" id="Projects" visible="false" title="ZAFMC Projects...">Projects</a></li>
-                        <li><a runat="server" href="~/Finance" id="Finance" visible="false" title="ZAFMC Finance...">Finance</a></li>
-                        <li><a runat="server" href="~/Reports" id="Reports" visible="false" title="ZAFMC Reports...">Reports</a></li>
-                        <li><a runat="server" href="~/About" id="Contact" visible="false" title="Leaders/Admin/Deceased... ">Contact</a></li>
+                        
+                        <li><a runat="server" href="~/" id="Home"><strong>Home</strong></a></li>
+                        <li><a runat="server" href="~/Congregation" id="Congregation"   visible="true" title="Congregants..">Congregation</a></li>
+                        <li><a runat="server" href="~/Churches" id="Churches" visible="true"  title="ZAFMC Churches...">Churches</a></li>
+                        <li><a runat="server" href="~/MediaCentre" id="Media" visible="true"  title="News/Sermons/Videos...">Media</a></li>
+                        <li><a runat="server" href="~/EventsCentre" id="Events" visible="true"  title="ZAFMC Events...">Events</a></li>
+                        <li><a runat="server" href="~/Passovers" id="Passovers" visible="true"  title="Memorials/Big Sundays/Meetings...">Passovers</a></li>
+                        <li><a runat="server" href="~/Projects" id="Projects" visible="true"  title="ZAFMC Projects...">Projects</a></li>
+                        <li><a runat="server" href="~/Finance" id="Finance" visible="true"  title="ZAFMC Finance...">Finance</a></li>
+                        <li><a runat="server" href="~/Reports" id="Reports" visible="true"  title="ZAFMC Reports...">Reports</a></li>
+                        <li><a runat="server" href="~/About" id="Contact" visible="true"   title="Leaders/Admin/Deceased... ">Contact</a></li>
                         <li><a runat="server" href="~/RegisterUser" visible="false">Register User</a></li>
                         <%--User Account(Logged)--%>
                         <li><a runat="server" href="#" data-toggle="dropdown" id="Mutepfe" style="background-color: maroon" onload="LoggedInUser_Load">
-                            <asp:Label ID="LoggedUSer" runat="server" Text="Jacob" Visible="true"></asp:Label>
-                            <span class="badge badge-pill" style="background-color: maroon; border: 1.5px solid white" id="LOGOFF" aria-hidden="true" title="LogOff/Lock/Exit...">Logged In</span> <b class="caret"></b></a>
-                            <ul class="dropdown-menu" id="LOG">
+                            <asp:Label ID="LoggedUSer" runat="server" Font-Bold="true" ForeColor="Yellow" Text="ZAFMC" Visible="true"></asp:Label>
+                            <span class="badge badge-pill" style="background-color: maroon;  border: 3.5px solid white" id="LOGOFF" runat="server" aria-hidden="true" title="LogOff/Lock/Exit...">Logged In</span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu" id="LOG" runat="server">
                                 <li class="text-danger"><a runat="server" href="#" data-toggle="modal" data-target="#UserAccountInfo">
                                     <h5 class="text-danger glyphicon glyphicon-knight"  title="Info..."><strong>-Account-Info</strong></h5>
                                 </a></li>
@@ -84,16 +88,18 @@
                                     <h5 class="text-danger glyphicon glyphicon-link" title="Lock..."><strong>-Lock</strong></h5>
                                 </a></li>
                                 <li><a runat="server" href="~/Default">
-                                    <h5 class="text-danger glyphicon glyphicon-road" title="Log-Off..."><strong>-Log-Off </strong></h5>
-                                    <asp:Label ID="UserLogged" CssClass="text-danger" runat="server" Text="Jacob"></asp:Label></a></li>
+                                    <h5 class="text-danger glyphicon glyphicon-road" runat="server" id="KickOut" title="Log-Off..."  ><strong>-Log-Off </strong></h5>
+                                    <asp:Label ID="UserLogged" CssClass="text-danger" runat="server"  Text="Jacob"></asp:Label></a></li>
                                 <li class="divider"></li>
-                                <li><a runat="server" href="~/Default">
-                                    <h5 class="text-danger glyphicon glyphicon-signal" title="Exit..."><strong>-Exit</strong></h5>
+                                <li><a runat="server">
+                                    <h5 class="text-danger glyphicon glyphicon-signal" runat="server"  onclick="ExitZAFMC"  title="Exit..."><strong>-Exit</strong></h5>
                                 </a></li>
                             </ul>
 
                     </ul>
+                        
                 </div>
+             
             </div>
         </div>
         <%-- FOOTER --%>
@@ -130,15 +136,21 @@
                             <asp:Label ID="Paswd" runat="server" Font-Size="Small" Text=" Enter Password" Font-Bold="True" CssClass="text-danger"></asp:Label>
                             <div class="input-group">
                                 <i class="input-group-addon glyphicon glyphicon-knight" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
-                                <asp:TextBox ID="PassWD" runat="server" type="password" placeholder="Password..." Height="30px" MaxLength="20" Width="155px" BorderStyle="Groove" ViewStateMode="Disabled" CssClass="form-control" ToolTip="Your Password!!" BorderColor="Maroon"></asp:TextBox>
+                                <asp:TextBox ID="PasswordLock" runat="server" type="password" placeholder="Password..." Height="30px" MaxLength="20" Width="155px" BorderStyle="Groove" ViewStateMode="Disabled" CssClass="form-control" ToolTip="Your Password!!" BorderColor="Maroon"></asp:TextBox>
 
                             </div>
 
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer" style="text-align: left">
 
-                        <asp:LinkButton ID="UserLogIn" data-dismiss="modal" CssClass="text-danger" runat="server" ToolTip="Get back into the system.."><span class="glyphicon glyphicon-log-in pull-left "><strong> Log-In</strong></span>    </asp:LinkButton><asp:LinkButton ID="UserLogOff" data-dismiss="modal" CssClass="text-danger" OnLoad="LoggedUserAccount_Load" runat="server" ToolTip="Close System.."><span class="glyphicon glyphicon-tower pull-right"><strong> Exit</strong></span></asp:LinkButton>
+                        <%--One of the Properties (UseSubmitBehavior="false") inside these CHECKBOXES below, it must be present, it fixes MODAL Forms to allow firing Click events--%>
+
+                        <asp:CheckBox ID="LogInBack" runat="server" AutoPostBack="true" OnCheckedChanged="ReturnBack" CssClass="text-danger" UseSubmitBehavior="false" Font-Size="Small"  Text=" LogIn" ToolTip="Click to LogIn" Checked="False" />                        
+                        <%--Below characters insert SPACE between  (or separate) these two checkboxes --%>  
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <%--Exit Checkbox--%>
+                        <asp:CheckBox ID="ExitAPP"  runat="server" AutoPostBack="true" OnCheckedChanged="ExitApplication" CssClass="text-danger" UseSubmitBehavior="false" Font-Size="Small" Text=" Exit" ToolTip="Close Application" Checked="False" />                        
 
                     </div>
                 </div>
@@ -147,9 +159,9 @@
         <!--End Modal Form-->
 
         <%--MODAL FORM USER ACCOUNT-INFO (LOGIN)--%>
-        <%-- JACOB JACOB JACOB JACOB JACOB --%>
+           <%-- JACOB JACOB JACOB JACOB JACOB --%>
 
-        <div class="modal modal-wide  fade " id="UserAccountInfo" tabindex="-1" role="dialog" aria-labelledby="UserAccInfoTitle" aria-hidden="true">
+             <div class="modal modal-wide  fade " id="UserAccountInfo" tabindex="-1" role="dialog" aria-labelledby="UserAccInfoTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-md modal-content">
                     <div class="modal-header">

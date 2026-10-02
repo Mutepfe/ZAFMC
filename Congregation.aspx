@@ -44,7 +44,7 @@
             <div class="col-md-4">
                 <asp:Panel ID="DetailsOne" runat="server" BorderStyle="None" Height="680px" ScrollBars="Auto" ToolTip="Capture details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
                     &nbsp;<asp:Label ID="Tit" runat="server" CssClass="text-danger" Font-Bold="True" Style="font-size: small" Text="Title"></asp:Label>
-                    <asp:DropDownList ID="Titles" runat="server" style="border:0.5px solid maroon" AutoPostBack="True" CssClass="form-control" Height="29px" ToolTip="Salutation!!" Width="150px">
+                    <asp:DropDownList ID="Titles" runat="server" style="border:0.5px solid maroon" AutoPostBack="False" CssClass="form-control" Height="29px" ToolTip="Salutation!!" Width="150px">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                         <asp:ListItem Text="Mr." Value="Mr."></asp:ListItem>
                         <asp:ListItem Text="Mrs" Value="Mrs"></asp:ListItem>
@@ -75,7 +75,7 @@
                     <br />
                     <asp:TextBox ID="PassportID" runat="server" placeholder="ID Number.." CssClass="form-control text-uppercase" Height="29px" Width="150px" MaxLength="15" ToolTip="Identity!!" BorderColor="Maroon"></asp:TextBox>
                     <asp:Label ID="MSt" runat="server" Font-Bold="True" Font-Size="Small" Text="Marital Status" CssClass="text-danger"></asp:Label>
-                    <asp:DropDownList ID="MaritalStatus" runat="server" AutoPostBack="True" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Status!!">
+                    <asp:DropDownList ID="MaritalStatus" runat="server" AutoPostBack="False" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Status!!">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                         <asp:ListItem Text="Single" Value="Single"></asp:ListItem>
                         <asp:ListItem Text="Married" Value="Married"></asp:ListItem>
@@ -103,7 +103,7 @@
                     <asp:Label ID="Mail" runat="server" Text="Email Address" CssClass="text-danger" Font-Bold="True" Font-Size="Small"></asp:Label>
                     <asp:TextBox ID="EmailAdd" runat="server" BorderColor="Maroon" placeholder="Email.." CssClass="form-control text-uppercase" Height="29px" MaxLength="40" ToolTip="Contact Email!!" Width="150px" TextMode="Email"></asp:TextBox>
                     <asp:Label ID="RP" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Rank / Position"></asp:Label>
-                    <asp:DropDownList ID="RankPosition" runat="server" AutoPostBack="True" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" ToolTip="Church Position!!" Width="150px">
+                    <asp:DropDownList ID="RankPosition" runat="server" AutoPostBack="False" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" ToolTip="Church Position!!" Width="150px">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                         <asp:ListItem Text="Bishop" Value="Bishop"></asp:ListItem>
                         <asp:ListItem Text="Vice-Bishop" Value="Vice-Bishop"></asp:ListItem>
@@ -121,7 +121,7 @@
                     <br />
                     <asp:TextBox ID="DateAppointed" runat="server" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" MaxLength="30" TextMode="Date" ToolTip="Appointed Date!!" Width="150px">Appointment</asp:TextBox>
                     <asp:Label ID="MP" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Managerial Post"></asp:Label>
-                    <asp:DropDownList ID="ManagerialPost" AutoPostBack="True" runat="server" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" ToolTip="Management!!" Width="150px">
+                    <asp:DropDownList ID="ManagerialPost" AutoPostBack="False" runat="server" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" ToolTip="Management!!" Width="150px">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                         <asp:ListItem Text="Secretary General" Value="Secretary General"></asp:ListItem>
                         <asp:ListItem Text="Projects Development" Value="Projects Development"></asp:ListItem>
@@ -141,7 +141,7 @@
                     <br />
                     <asp:TextBox ID="DateElected" runat="server" CssClass="form-control" style="border:0.5px solid maroon" Font-Bold="False" Font-Size="Small" Height="29px" MaxLength="30" TextMode="Date" ToolTip="Elected!!" Width="150px">Elected</asp:TextBox>
                     <asp:Label ID="Prov" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Province"></asp:Label>
-                    <asp:DropDownList ID="Province" runat="server" AutoPostBack="True" style="border:0.5px solid maroon" CssClass="form-control" Font-Bold="False" Font-Size="Small" Height="29px" Width="150px" ToolTip="Province!!">
+                    <asp:DropDownList ID="Province" runat="server" AutoPostBack="False" style="border:0.5px solid maroon" CssClass="form-control" Font-Bold="False" Font-Size="Small" Height="29px" Width="150px" ToolTip="Province!!">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                          <asp:ListItem class="text-danger">Zimbabwe</asp:ListItem>
                         <asp:ListItem Text="Harare" Value="Harare"></asp:ListItem>
@@ -164,7 +164,7 @@
                         <asp:ListItem Text="Limpopo" Value="Limpopo"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:Label ID="Dist" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="District"></asp:Label>
-                    <asp:DropDownList ID="District" runat="server" AutoPostBack="True" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="District!!">
+                    <asp:DropDownList ID="District" runat="server" AutoPostBack="False" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="District!!">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                          <asp:ListItem class="text-danger">Zimbabwe</asp:ListItem>
                         <asp:ListItem Text="Bulawayo" Value="Bulawayo"></asp:ListItem>
@@ -247,7 +247,7 @@
                     </asp:DropDownList>
                     <asp:Label ID="Zn" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Zone"></asp:Label>
                     <br />
-                    <asp:DropDownList ID="Zones" runat="server" AutoPostBack="True" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Zone Area!!">
+                    <asp:DropDownList ID="Zones" runat="server" AutoPostBack="False" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Zone Area!!">
                          <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                         <asp:ListItem class="text-danger">Zimbabwe</asp:ListItem>
                         <asp:ListItem Text="Museva" Value="Museva"></asp:ListItem>
@@ -276,7 +276,7 @@
                         <asp:ListItem Text="Kathlehong" Value="Kathlehong"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:Label ID="St" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Section"></asp:Label>
-                    <asp:DropDownList ID="Sect" runat="server" AutoPostBack="True" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Section!!">
+                    <asp:DropDownList ID="Sect" runat="server" AutoPostBack="False" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Section!!">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                         <asp:ListItem class="text-danger">Zimbabwe</asp:ListItem>
                         <asp:ListItem Text="Mucheke" Value="Mucheke"></asp:ListItem>
@@ -299,7 +299,7 @@
                         <asp:ListItem Text="Kathlehong" Value="Kathlehong"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:Label ID="SL" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Snr. Leader"></asp:Label>
-                    <asp:DropDownList ID="SeniorLeader" AutoPostBack="True" runat="server" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Top Leader!!">
+                    <asp:DropDownList ID="SeniorLeader" AutoPostBack="False" runat="server" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Top Leader!!">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                         <asp:ListItem Text="Bishop Ezra" Value="Bishop Ezra"></asp:ListItem>
                         <asp:ListItem Text="J. Muzangwa" Value="J. Muzangwa"></asp:ListItem>
@@ -309,7 +309,7 @@
                         <asp:ListItem Text="J. Chidanga" Value="J. Chidanga"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:Label ID="VL" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Vice-Leader"></asp:Label>
-                    <asp:DropDownList ID="ViceLeader" runat="server" AutoPostBack="True" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Vice Leader!!">
+                    <asp:DropDownList ID="ViceLeader" runat="server" AutoPostBack="False" style="border:0.5px solid maroon" CssClass="form-control" Height="29px" Width="150px" ToolTip="Vice Leader!!">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
                         <asp:ListItem class="text-danger">Priests</asp:ListItem>
                         <asp:ListItem  Text="Mr Ziyambi" Value="Mr Ziyambi"></asp:ListItem>
@@ -318,7 +318,7 @@
                         <asp:ListItem>------</asp:ListItem>
                         <asp:ListItem class="text-danger">Vafundisi</asp:ListItem>
                         <asp:ListItem Text="Mr Chiworese" Value="Mr Chiworese"></asp:ListItem>
-                        <asp:ListItem Text="Mr Mashamanda" Value="Mr Mashamanda"></asp:ListItem>
+                        <asp:ListItem Text="Mr Mbizvo" Value="Mr Mbizvo"></asp:ListItem>
                         <asp:ListItem>------</asp:ListItem>
                         <asp:ListItem>------</asp:ListItem>
                         <asp:ListItem class="text-danger">VaVhangeri</asp:ListItem>

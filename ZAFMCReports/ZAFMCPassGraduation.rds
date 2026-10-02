@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="ZAFMCPassGraduation">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=MUTEPFE\SQLEXPRESS2025;Initial Catalog=ZION</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>c0eba1ed-adfc-43ff-83eb-cb0e6e25b65e</DataSourceID>
+</RptDataSource>

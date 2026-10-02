@@ -16,7 +16,7 @@
             <asp:Label ID="PassportID" runat="server" Font-Size="Small" Text="ID Number / Passport" Font-Bold="True" CssClass="text-danger"></asp:Label>
             <div class="input-group">
                 <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon;"><i class="glyphicon glyphicon-user"></i></span>
-                <asp:TextBox ID="PassID" runat="server" placeholder="ID Number.." Height="30px" Width="158px"  AutoCompleteType="Disabled" BorderStyle="Groove" MaxLength="11" ViewStateMode="Disabled" CssClass="form-control text-uppercase" ToolTip="ID Number / Passport !!" BorderColor="Maroon"></asp:TextBox>
+                <asp:TextBox ID="PassID" runat="server" placeholder="ID Number.." Height="30px" Width="158px" AutoCompleteType="Disabled" BorderStyle="Groove" MaxLength="11" ViewStateMode="Disabled" CssClass="form-control text-uppercase" ToolTip="ID Number / Passport !!" BorderColor="Maroon"></asp:TextBox>
             </div>
             <br />
             <%-- Password Field --%>
@@ -27,10 +27,10 @@
                 <asp:TextBox ID="Passwd" runat="server" type="password" placeholder="Password.." Height="30px" MaxLength="10" Width="158px" BorderStyle="Groove" ViewStateMode="Disabled" CssClass="form-control" ToolTip="Your Password!!" BorderColor="Maroon"></asp:TextBox>
             </div>
             <%-- Forgot Password --%>
-           <%--<asp:Label ID="ForgotPassword" runat="server" Style="margin-left: 105px" Font-Size="X-Small" Font-Italic="true" Font-Bold="true" CssClass="text-danger" Text=" <a href='RegisterUser.aspx' style= 'color:maroon' >(Forgot Password)</a>"></asp:Label>--%>
-           
+            <%--<asp:Label ID="ForgotPasswd" runat="server" Style="margin-left: 105px" Font-Size="X-Small" Font-Italic="true" Font-Bold="true" CssClass="text-danger" Text=" <a href='RegisterUser.aspx' style= 'color:maroon' >(Forgot Password)</a>"></asp:Label>
+            --%>
             <%--<asp:Label ID="Label2" runat="server" Style="margin-left: 105px" Font-Size="X-Small" Font-Italic="true" Font-Bold="true" CssClass="text-danger" Text=" <a href='RegisterUser.aspx' style= 'color:maroon' >(Forgot Password)</a>"></asp:Label>--%>
-            <asp:HyperLink ID="HyperLink1" runat="server" CssClass="text-danger" Font-Size="X-Small" Font-Italic="true" Font-Bold="true" style="margin-left:105px" NavigateUrl="~/RegisterUser.aspx" Text="(Forgot Password)"></asp:HyperLink>
+            <asp:HyperLink ID="ForgetPasswd" runat="server" CssClass="text-danger" Font-Size="X-Small" Font-Italic="true" Font-Bold="true" Style="margin-left: 105px" NavigateUrl="~/RegisterUser.aspx" Text="(Forgot Password)" Target="_blank"></asp:HyperLink>
             <br />
             <asp:Label ID="OTP" runat="server" Font-Bold="True" Font-Size="Small" Text="OTP" CssClass="text-danger"></asp:Label>
             <br />
@@ -38,17 +38,17 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="input-group">
-                       
+
                         <span class="input-group-addon" style="border-color: maroon; background-color: darkgrey;"><i class="glyphicon glyphicon-log-in"></i></span>
                         <asp:DropDownList ID="OTPList" runat="server" Font-Bold="True" AutoPostBack="true" OnSelectedIndexChanged="EmailedSMSed" Style="border: 0.5px solid maroon" Font-Size="Small" Height="30px" ToolTip="Receive through..." Width="85px" CssClass="form-control">
                             <asp:ListItem Text="Select" Value="-1"></asp:ListItem>
                             <asp:ListItem Text="SMS" Value="SMS"></asp:ListItem>
                             <asp:ListItem Text="Email" Value="Email"></asp:ListItem>
                         </asp:DropDownList>
-                        <asp:TextBox ID="OTPNumber" runat="server" Style="border: 0.5px solid maroon" placeholder="PIN.." Height="30px" MaxLength="5" ViewStateMode="Disabled" Width="68px" BorderStyle="Groove" ToolTip="Enter OTP!!" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="OTPNumber" runat="server" Style="border: 0.5px solid maroon" Font-Size="Small" placeholder="PIN.." Height="30px" MaxLength="6" ViewStateMode="Disabled" Width="68px" BorderStyle="Groove" ToolTip="Enter OTP!!" CssClass="form-control"></asp:TextBox>
                     </div>
                 </ContentTemplate>
-               <%-- <Triggers>
+                <%-- <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="OTPList" EventName="SelectedIndexChanged" />
                 </Triggers>--%>
             </asp:UpdatePanel>
@@ -63,6 +63,8 @@
         <%-- Dummy Labels to hold OTP Variable & Timer ~ NOT visible on GUI --%>
         <asp:Label ID="OTPToken" runat="server" Visible="false" Text="TokenOTP"></asp:Label>
         <asp:Label ID="TimerCount" runat="server" Visible="false" Text="CountTime"></asp:Label>
+        <asp:Label ID="IdentityPassportDummy" runat="server" Visible="false" Text="IPD"></asp:Label>
+
     </div>
 
 </asp:Content>

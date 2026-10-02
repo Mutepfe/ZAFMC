@@ -4,7 +4,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-   
+
     <br />
 
 
@@ -29,57 +29,26 @@
                             <div id="Congregation" class="panel-collapse collapse">
                                 <div class="panel-body ">
 
-                                    <%-- Men Reports(Inner Panel) --%>
+                                    <%-- Congregation Reports(Inner Panel) --%>
 
-                                    <div class="panel-group" id="MenRep">
+                                    <div class="panel-group" id="CongregationRep">
                                         <div class="panel panel-danger">
                                             <div class="panel-heading ">
-                                                <a href="#Men" data-toggle="collapse" data-parent="#MenRep">
-                                                    <h4 class="panel-title" title="Men...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Mens' Reports </span>
+                                                <a href="#Cong" data-toggle="collapse" data-parent="#CongregationRep">
+                                                    <h4 class="panel-title" title="Congregation...">
+                                                        <span class="glyphicon glyphicon-grain  text-danger">~Congregants </span>
                                                     </h4>
                                                 </a>
                                             </div>
-                                            <div id="Men" class="panel-collapse collapse">
-                                                <asp:LinkButton ID="MenReports" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalMenReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                            <div id="Cong" class="panel-collapse collapse">
+
+                                                <asp:LinkButton ID="ConReports" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalCongReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <%-- Women Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="WomRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#WOM" data-toggle="collapse" data-parent="#WomRep">
-                                                    <h4 class="panel-title" title="Women...">
-                                                        <span class="glyphicon glyphicon-grain   text-danger">Womens' Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="WOM" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="WomenRep" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Children Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="ChildRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#KID" data-toggle="collapse" data-parent="#ChildRep">
-                                                    <h2 class="panel-title" title="Children...">
-                                                        <span class="glyphicon glyphicon-grain   text-danger">Childrens' Reports </span>
-                                                    </h2>
-                                                </a>
-                                            </div>
-                                            <div id="KID" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="KidsReport" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
                             </div>
@@ -91,193 +60,29 @@
                             <div class="panel-heading ">
                                 <a href="#Churches" data-toggle="collapse" data-parent="#accordion">
                                     <h4 class="panel-title" title="Churches...">
-                                        <span class="glyphicon glyphicon-download text-danger">~Churches Reports </span>
+                                        <span class="glyphicon glyphicon-tower text-danger">~Churches Reports </span>
                                     </h4>
                                 </a>
                             </div>
                             <div id="Churches" class="panel-collapse collapse">
                                 <div class="panel-body ">
-                                    <%-- Province Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="ProvRep">
+                                    <%-- Churches Reports(Inner Panel) --%>
+                                    <div class="panel-group" id="CHRep">
                                         <div class="panel  panel-danger">
                                             <div class="panel-heading ">
-                                                <a href="#Province" data-toggle="collapse" data-parent="#ProvRep">
-                                                    <h4 class="panel-title" title="Province...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Province Reports </span>
+                                                <a href="#Church" data-toggle="collapse" data-parent="#CHRep">
+                                                    <h4 class="panel-title" title="Churches...">
+                                                        <span class="glyphicon glyphicon-grain  text-danger">~Churches</span>
                                                     </h4>
                                                 </a>
                                             </div>
-                                            <div id="Province" class="panel-collapse collapse">
+                                            <div id="Church" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="ProvRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                                <asp:LinkButton ID="CHReports" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalChurchReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
                                             </div>
                                         </div>
                                     </div>
-                                    <%-- District Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="DistRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#District" data-toggle="collapse" data-parent="#DistRep">
-                                                    <h4 class="panel-title" title="District...">
-                                                        <span class="glyphicon glyphicon-grain text-danger">District Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="District" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="DistRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Zone Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="ZoneRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Zone" data-toggle="collapse" data-parent="#ZoneRep">
-                                                    <h4 class="panel-title" title="Zone...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Zone Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Zone" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="ZoneRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Section Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="SectRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Section" data-toggle="collapse" data-parent="#ZoneRep">
-                                                    <h4 class="panel-title" title="Section...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Section Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Section" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="SectRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <%-- Priest Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="PrstRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Priest" data-toggle="collapse" data-parent="#ZoneRep">
-                                                    <h4 class="panel-title" title="Priests...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Priest Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Priest" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="PriestRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <%-- Prophets Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="PhtRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Prophet" data-toggle="collapse" data-parent="#PhtRep">
-                                                    <h4 class="panel-title" title="Prophets...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Prophets Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Prophet" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="ProphetRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Pastor Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="PastRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Pastor" data-toggle="collapse" data-parent="#PastRep">
-                                                    <h4 class="panel-title" title="Pastors...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Pastors Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Pastor" class="panel-collapse collapse">
-                                                <asp:LinkButton ID="PastorRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Evangelist Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="EvRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Evangelist" data-toggle="collapse" data-parent="#EvRep">
-                                                    <h4 class="panel-title" title="Evangelists...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Evangelist Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Evangelist" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="EvangRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Preachers Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="PrRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Preachers" data-toggle="collapse" data-parent="#EvRep">
-                                                    <h4 class="panel-title" title="Preachers...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Preachers Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Preachers" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="PreachRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Decons Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="DecRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Decon" data-toggle="collapse" data-parent="#DecRep">
-                                                    <h4 class="panel-title" title="Decons...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Decons Reports </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Decon" class="panel-collapse collapse">
-                                                <asp:LinkButton ID="DeconRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Other Members Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="OMRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Members" data-toggle="collapse" data-parent="#OMRep">
-                                                    <h4 class="panel-title" title="Other...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Other Members </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Members" class="panel-collapse collapse">
-                                                <asp:LinkButton ID="MembersRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -293,7 +98,7 @@
                             </div>
                             <div id="Testimony" class="panel-collapse collapse">
                                 <div class="panel-body ">
-                                    <asp:LinkButton ID="TestmRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                    <asp:LinkButton ID="TestmRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalTestmReport"  Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
                                 </div>
                             </div>
                         </div>
@@ -308,7 +113,7 @@
                             </div>
                             <div id="Sermon" class="panel-collapse collapse">
                                 <div class="panel-body ">
-                                    <asp:LinkButton ID="SermRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                    <asp:LinkButton ID="SermRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalSermReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
                                 </div>
                             </div>
@@ -325,7 +130,7 @@
                             </div>
                             <div id="Events" class="panel-collapse collapse">
                                 <div class="panel-body ">
-                                    <asp:LinkButton ID="EventRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                    <asp:LinkButton ID="EventRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalEventsReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
 
                                 </div>
@@ -360,43 +165,7 @@
                                         </div>
                                     </div>
 
-                                    <%-- Big Sunday Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="BSRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#BigSund" data-toggle="collapse" data-parent="#BSRep">
-                                                    <h4 class="panel-title" title="Big Sundays...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Big Sundays </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="BigSund" class="panel-collapse collapse">
-                                                <asp:LinkButton ID="BigSundRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <%-- Funerals Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="FunRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Funeral" data-toggle="collapse" data-parent="#FunRep">
-                                                    <h4 class="panel-title" title="Funerals...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Funeral Contributions </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Funeral" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="FunRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    
                                     <%-- Construction Reports(Inner Panel) --%>
                                     <div class="panel-group" id="ConstRep">
                                         <div class="panel  panel-danger">
@@ -434,25 +203,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <%-- Ophanage Donation Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="OphRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Ophanage" data-toggle="collapse" data-parent="#OphRep">
-                                                    <h4 class="panel-title" title="Ophanage...">
-                                                        <span class="glyphicon glyphicon-grain text-danger">Ophanage Donations </span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Ophanage" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="OphanRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                  
                                     <%-- Bishop Cost Reports(Inner Panel) --%>
                                     <div class="panel-group" id="BERep">
                                         <div class="panel  panel-danger">
@@ -492,16 +243,14 @@
                                         <div class="panel  panel-danger">
                                             <div class="panel-heading ">
                                                 <a href="#Pass" data-toggle="collapse" data-parent="#PvRep">
-                                                    <h4 class="panel-title" title="Monthly...">
-                                                        <span class="glyphicon glyphicon-grain text-danger">Monthly Passovers </span>
+                                                    <h4 class="panel-title" title="Passovers...">
+                                                        <span class="glyphicon glyphicon-grain text-danger">Passovers </span>
                                                     </h4>
                                                 </a>
                                             </div>
                                             <div id="Pass" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="MonthPassRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-
+                                                <asp:LinkButton ID="MonthPassRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalPassoverReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
                                             </div>
                                         </div>
                                     </div>
@@ -517,7 +266,7 @@
                                             </div>
                                             <div id="Memorial" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="MemRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                                <asp:LinkButton ID="MemRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalMemorialReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
 
                                             </div>
@@ -534,8 +283,7 @@
                                                 </a>
                                             </div>
                                             <div id="BGS" class="panel-collapse collapse">
-                                                <asp:LinkButton ID="BGRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
+                                                <asp:LinkButton ID="BGRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalBigSundayReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
                                             </div>
                                         </div>
@@ -552,8 +300,7 @@
                                             </div>
                                             <div id="Wedding" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="WedRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
+                                                <asp:LinkButton ID="WedRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalWeddingReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
                                             </div>
                                         </div>
@@ -570,7 +317,7 @@
                                             </div>
                                             <div id="Grad" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="GrRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                                <asp:LinkButton ID="GrRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalGraduationReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
 
                                             </div>
@@ -588,7 +335,7 @@
                                             </div>
                                             <div id="Women" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="WomnRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                                <asp:LinkButton ID="WomnRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalWomenReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
 
                                             </div>
@@ -605,7 +352,7 @@
                                                 </a>
                                             </div>
                                             <div id="Gen" class="panel-collapse collapse">
-                                                <asp:LinkButton ID="GenRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                                <asp:LinkButton ID="GenRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalGenReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
 
                                             </div>
@@ -633,73 +380,19 @@
                                             <div class="panel-heading ">
                                                 <a href="#Scheduled" data-toggle="collapse" data-parent="#SchdRep">
                                                     <h4 class="panel-title" title="Scheduled Projects...">
-                                                        <span class="glyphicon glyphicon-grain text-danger">Scheduled Projects</span>
+                                                        <span class="glyphicon glyphicon-grain text-danger">Projects</span>
                                                     </h4>
                                                 </a>
                                             </div>
                                             <div id="Scheduled" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="SchdRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Inprogress Projects Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="InPRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Inprogress" data-toggle="collapse" data-parent="#InPRep">
-                                                    <h4 class="panel-title" title="Inprogress Projects...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Inprogress Projects</span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Inprogress" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="ProgRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
+                                                <asp:LinkButton ID="SchdRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalProjectReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
                                             </div>
                                         </div>
                                     </div>
-                                    <%-- Completed Projects Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="CompRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Completed" data-toggle="collapse" data-parent="#CompRep">
-                                                    <h4 class="panel-title" title="Completed Projects...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Completed Projects</span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Completed" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="CompRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <%-- Abandoned Projects Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="AbdRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Abandoned" data-toggle="collapse" data-parent="#AbdRep">
-                                                    <h4 class="panel-title" title="Abandoned Projects...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">Abandoned Projects</span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Abandoned" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="AbnRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
+                                                            
+                              
 
 
                                 </div>
@@ -729,7 +422,7 @@
                                             </div>
                                             <div id="Leadership" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="LeadRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                                <asp:LinkButton ID="LeadRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalLeadershipReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
 
                                             </div>
@@ -748,7 +441,7 @@
                                             </div>
                                             <div id="Administration" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="AdmRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                                <asp:LinkButton ID="AdmRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger"  data-toggle="modal" data-target="#ModalAdminReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
 
                                             </div>
@@ -767,7 +460,7 @@
                                             </div>
                                             <div id="Deceased" class="panel-collapse collapse">
 
-                                                <asp:LinkButton ID="DecRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
+                                                <asp:LinkButton ID="DecRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" data-toggle="modal" data-target="#ModalDeceasedReport" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
 
 
                                             </div>
@@ -845,26 +538,6 @@
                                     </div>
 
 
-
-                                    <%-- Log Reports(Inner Panel) --%>
-                                    <div class="panel-group" id="SysLogRep">
-                                        <div class="panel  panel-danger">
-                                            <div class="panel-heading ">
-                                                <a href="#Sys" data-toggle="collapse" data-parent="#SysLogRep">
-                                                    <h4 class="panel-title" title="System Log...">
-                                                        <span class="glyphicon glyphicon-grain  text-danger">System Log Report</span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="Sys" class="panel-collapse collapse">
-
-                                                <asp:LinkButton ID="SytAdmnRpt" runat="server" BorderStyle="None" CssClass="form-control text-danger" Font-Bold="True" Font-Size="Small" Width="180px" ToolTip="Report..">Report</asp:LinkButton>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -883,33 +556,22 @@
     </div>
     <br />
     <hr />
-    <%-- Modal(Mens' Reports) --%>
+    <%-- Modal(Congregation Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalCongReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
 
-    <div class="modal modal-wide  fade " id="ModalMenReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-lg modal-content">
+            <div class="modal-sm modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ModalMensReport"><span class="text-danger"></span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body " onload="ShowMenReport()">
+                <div class="modal-body ">
                     <div>
-                        <h5 class="text-danger"><strong>ZAFMC - Mens' Report  </strong><strong></strong></h5>
+                        <h5 class="text-danger"><strong>ZAFMC - Congregation Report  </strong></h5>
                         <hr />
-                        
-                       
-                        <rsweb:ReportViewer id="MenReportViewer" showprintbutton="false" runat="server" width="100%" height="800%" asyncrendering="true" zoommode="Percent" keepsessionalive="true" sizetoreportcontent="false">
-                            <%--<ServerReport
-                                ReportServerUrl="~/ZAFMCReports/Reports"
-                                ReportPath="/Male.rdl"
-                                DisplayName="ZAFMC - Mens' Report" />--%>
-                            <LocalReport ReportPath="~/ZAFMCReports/Reports/Male.rdl" DisplayName="Men's Report" EnableExternalImages="true" > 
-                                 
-                            </LocalReport>
-                        </rsweb:ReportViewer>
-
+                        <asp:HyperLink ID="CongReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Congregation" Target="_blank">Congregants</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -919,6 +581,395 @@
         </div>
     </div>
 
-    <%-- Modal(Womens' Reports) --%>
-    <%-- Modal(Childrens' Reports) --%>
+    <%-- Modal(Church Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalChurchReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalChrchReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Church Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="CHRCReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Churches" Target="_blank">Churches</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(Testimony Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalTestmReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalTestReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Testimony Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="TestmReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/MediaTestimony" Target="_blank">Testimonies</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(Sermon Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalSermReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalSmnReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Sermon Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="SMNReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/MediaSermon" Target="_blank">Sermon</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(Events Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalEventsReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalEvtReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Events Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="EVTReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Events" Target="_blank">Events</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(Passover Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalPassoverReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalPassReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Passover Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="PassReports" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Passovers" Target="_blank">Passovers</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(Memorial Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalMemorialReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalMemReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Memorial Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="MemReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassMemorial" Target="_blank">Memorials</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(Big Sundays Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalBigSundayReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalBGSReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Big Sundays Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="BigSundayReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassBigSunday" Target="_blank">Big Sundays</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+     <%-- Modal(Weddings Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalWeddingReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalWEDDReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Weddings Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="WeddReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassWedding" Target="_blank">Weddings</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+     <%-- Modal(Graduation Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalGraduationReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalGradReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Graduation Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="GradReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassGraduation" Target="_blank">Graduation</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+ <%-- Modal(Women Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalWomenReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalWOMReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Women Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="WOMReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassWomen" Target="_blank">Women</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(General Meetings Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalGenReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalGMReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - General Meetings Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="GMReports" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassGeneralMeeting" Target="_blank">General Meetings</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(Projects Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalProjectReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalProjReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Projects Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="PROJREport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Projects" Target="_blank">Projects</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(Leadership Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalLeadershipReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLEADReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Leadership Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="LEADReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Leadership" Target="_blank">Leadership</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%-- Modal(Administration Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalAdminReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalADMReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Administration Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="ADMReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Administration" Target="_blank">Administration</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+     <%-- Modal(Deceased Reports) --%>
+    <div class="modal modal-wide  fade" id="ModalDeceasedReport" tabindex="-1" role="dialog" aria-labelledby="ReportTitle" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-sm modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalDSDReport"><span class="text-danger"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    
+                    <div>
+                        <h5 class="text-danger"><strong>ZAFMC - Deceased Report  </strong></h5>
+                        <hr />
+                        <asp:HyperLink ID="DCDReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Deceased" Target="_blank">Deceased</asp:HyperLink>
+
+                        <hr />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </asp:Content>

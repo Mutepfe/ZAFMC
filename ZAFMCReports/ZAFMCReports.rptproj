@@ -8,11 +8,11 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>ZAFMCReports</TargetReportFolder>
+    <TargetReportFolder>ZAFMC/ZAFMCReports</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://localhost/ReportServer</TargetServerURL>
+    <TargetServerURL>http://mutepfe/ReportServer</TargetServerURL>
     <StartItem>Congregation.rdl</StartItem>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
@@ -23,7 +23,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>ZAFMCReports</TargetReportFolder>
+    <TargetReportFolder>ZAFMC\ZAFMCReports</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -37,7 +37,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>ZAFMCReports</TargetReportFolder>
+    <TargetReportFolder>ZAFMC\ZAFMCReports</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,6 +49,28 @@
     <DataSets>@(DataSet)</DataSets>
     <Reports>@(Report)</Reports>
   </PropertyGroup>
+  <ItemGroup>
+    <DataSource Include="AboutAdministration.rds" />
+    <DataSource Include="AboutDeceased.rds" />
+    <DataSource Include="UserLogIn.rds" />
+    <DataSource Include="ZAFMC.rds" />
+    <DataSource Include="ZAFMCAboutLeadership.rds" />
+    <DataSource Include="ZAFMCChurches.rds" />
+    <DataSource Include="ZAFMCEvents.rds" />
+    <DataSource Include="ZAFMCMediaNews.rds" />
+    <DataSource Include="ZAFMCMediaSermon.rds" />
+    <DataSource Include="ZAFMCMediaTestimony.rds" />
+    <DataSource Include="ZAFMCMediaVideo.rds" />
+    <DataSource Include="ZAFMCPassBigSunday.rds" />
+    <DataSource Include="ZAFMCPassGenMeeting.rds" />
+    <DataSource Include="ZAFMCPassGraduation.rds" />
+    <DataSource Include="ZAFMCPassMemorial.rds" />
+    <DataSource Include="ZAFMCPassovers.rds" />
+    <DataSource Include="ZAFMCPassWedding.rds" />
+    <DataSource Include="ZAFMCPassWomen.rds" />
+    <DataSource Include="ZAFMCPassYouth.rds" />
+    <DataSource Include="ZAFMCProjects.rds" />
+  </ItemGroup>
   <ItemGroup>
     <Report Include="Administration.rdl" />
     <Report Include="Churches.rdl" />

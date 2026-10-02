@@ -24,130 +24,22 @@ namespace ZAFMC
         protected global::System.Web.UI.WebControls.Panel ReportsOne;
 
         /// <summary>
-        /// MenReports control.
+        /// ConReports control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton MenReports;
+        protected global::System.Web.UI.WebControls.LinkButton ConReports;
 
         /// <summary>
-        /// WomenRep control.
+        /// CHReports control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton WomenRep;
-
-        /// <summary>
-        /// KidsReport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton KidsReport;
-
-        /// <summary>
-        /// ProvRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ProvRpt;
-
-        /// <summary>
-        /// DistRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton DistRpt;
-
-        /// <summary>
-        /// ZoneRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ZoneRpt;
-
-        /// <summary>
-        /// SectRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton SectRpt;
-
-        /// <summary>
-        /// PriestRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton PriestRpt;
-
-        /// <summary>
-        /// ProphetRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ProphetRpt;
-
-        /// <summary>
-        /// PastorRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton PastorRpt;
-
-        /// <summary>
-        /// EvangRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton EvangRpt;
-
-        /// <summary>
-        /// PreachRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton PreachRpt;
-
-        /// <summary>
-        /// DeconRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton DeconRpt;
-
-        /// <summary>
-        /// MembersRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton MembersRpt;
+        protected global::System.Web.UI.WebControls.LinkButton CHReports;
 
         /// <summary>
         /// TestmRpt control.
@@ -186,24 +78,6 @@ namespace ZAFMC
         protected global::System.Web.UI.WebControls.LinkButton PassRpt;
 
         /// <summary>
-        /// BigSundRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BigSundRpt;
-
-        /// <summary>
-        /// FunRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton FunRpt;
-
-        /// <summary>
         /// ConstRpt control.
         /// </summary>
         /// <remarks>
@@ -220,15 +94,6 @@ namespace ZAFMC
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton SchoolRpt;
-
-        /// <summary>
-        /// OphanRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton OphanRpt;
 
         /// <summary>
         /// BishRpt control.
@@ -312,33 +177,6 @@ namespace ZAFMC
         protected global::System.Web.UI.WebControls.LinkButton SchdRpt;
 
         /// <summary>
-        /// ProgRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ProgRpt;
-
-        /// <summary>
-        /// CompRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton CompRpt;
-
-        /// <summary>
-        /// AbnRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AbnRpt;
-
-        /// <summary>
         /// LeadRpt control.
         /// </summary>
         /// <remarks>
@@ -384,15 +222,6 @@ namespace ZAFMC
         protected global::System.Web.UI.WebControls.LinkButton SystAdminRpt;
 
         /// <summary>
-        /// SytAdmnRpt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton SytAdmnRpt;
-
-        /// <summary>
         /// ReportsTwo control.
         /// </summary>
         /// <remarks>
@@ -402,12 +231,147 @@ namespace ZAFMC
         protected global::System.Web.UI.WebControls.Panel ReportsTwo;
 
         /// <summary>
-        /// MenReportViewer control.
+        /// CongReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.Reporting.WebForms.ReportViewer MenReportViewer;
+        protected global::System.Web.UI.WebControls.HyperLink CongReport;
+
+        /// <summary>
+        /// CHRCReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink CHRCReport;
+
+        /// <summary>
+        /// TestmReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink TestmReport;
+
+        /// <summary>
+        /// SMNReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink SMNReport;
+
+        /// <summary>
+        /// EVTReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink EVTReport;
+
+        /// <summary>
+        /// PassReports control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink PassReports;
+
+        /// <summary>
+        /// MemReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink MemReport;
+
+        /// <summary>
+        /// BigSundayReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink BigSundayReport;
+
+        /// <summary>
+        /// WeddReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink WeddReport;
+
+        /// <summary>
+        /// GradReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink GradReport;
+
+        /// <summary>
+        /// WOMReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink WOMReport;
+
+        /// <summary>
+        /// GMReports control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink GMReports;
+
+        /// <summary>
+        /// PROJREport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink PROJREport;
+
+        /// <summary>
+        /// LEADReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink LEADReport;
+
+        /// <summary>
+        /// ADMReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ADMReport;
+
+        /// <summary>
+        /// DCDReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink DCDReport;
     }
 }

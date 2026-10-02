@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>18.0.11222.15</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>18.0.11222.15</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-12-06T11:31:17.8299790Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="AboutAdministration">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=MUTEPFE\SQL2018;Initial Catalog=ZION</ConnectString>
-      </ConnectionProperties>
+      <DataSourceReference>AboutAdministration</DataSourceReference>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>ad868e6a-de75-4692-aa3c-51dc0133c32c</rd:DataSourceID>
     </DataSource>
@@ -16,7 +24,7 @@
     <DataSet Name="Administration">
       <Query>
         <DataSourceName>AboutAdministration</DataSourceName>
-        <CommandText>SELECT        AdminName, AdminSurname, AdminAppntDate, AdminInternComm, AdminInternDir
+        <CommandText>SELECT  *
 FROM            AboutAdministration</CommandText>
       </Query>
       <Fields>
@@ -75,7 +83,8 @@ FROM            AboutAdministration</CommandText>
     <DataSet Name="Name">
       <Query>
         <DataSourceName>AboutAdministration</DataSourceName>
-        <CommandText>SELECT            DISTINCT       [AdminName]        FROM         [AboutAdministration]</CommandText>
+        <CommandText>SELECT DISTINCT AdminName
+FROM            AboutAdministration</CommandText>
       </Query>
       <Fields>
         <Field Name="AdminName">
@@ -87,7 +96,8 @@ FROM            AboutAdministration</CommandText>
     <DataSet Name="Committee">
       <Query>
         <DataSourceName>AboutAdministration</DataSourceName>
-        <CommandText>SELECT          DISTINCT      [AdminInternComm]     FROM         [AboutAdministration]</CommandText>
+        <CommandText>SELECT DISTINCT AdminInternComm
+FROM            AboutAdministration</CommandText>
       </Query>
       <Fields>
         <Field Name="AdminInternComm">
@@ -99,7 +109,8 @@ FROM            AboutAdministration</CommandText>
     <DataSet Name="Directors">
       <Query>
         <DataSourceName>AboutAdministration</DataSourceName>
-        <CommandText>SELECT          DISTINCT         [AdminInternDir]           FROM         [AboutAdministration]</CommandText>
+        <CommandText>SELECT DISTINCT AdminInternDir
+FROM            AboutAdministration</CommandText>
       </Query>
       <Fields>
         <Field Name="AdminInternDir">
@@ -111,7 +122,8 @@ FROM            AboutAdministration</CommandText>
     <DataSet Name="Date">
       <Query>
         <DataSourceName>AboutAdministration</DataSourceName>
-        <CommandText>SELECT      DISTINCT        [AdminAppntDate]        FROM        [AboutAdministration]</CommandText>
+        <CommandText>SELECT DISTINCT AdminAppntDate
+FROM            AboutAdministration</CommandText>
       </Query>
       <Fields>
         <Field Name="AdminAppntDate">
@@ -824,6 +836,7 @@ FROM            AboutAdministration</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Committee">
       <DataType>String</DataType>
@@ -842,6 +855,7 @@ FROM            AboutAdministration</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Directors">
       <DataType>String</DataType>
@@ -860,6 +874,7 @@ FROM            AboutAdministration</CommandText>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
     <ReportParameter Name="Date">
       <DataType>DateTime</DataType>
@@ -869,6 +884,7 @@ FROM            AboutAdministration</CommandText>
         </Values>
       </DefaultValue>
       <Prompt>Date</Prompt>
+      <UsedInQuery>True</UsedInQuery>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>

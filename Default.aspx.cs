@@ -14,19 +14,21 @@ namespace ZAFMC
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-            ClearBrowserHistory();
 
-            /* **-----------------------------**-------------------------------
-             Do Not RESET Controls in Page Load!!! It affects AutoPostback
-           --------------------------**-------------------------------------** */
-           
-          
+            ClearBrowserHistory();
+            DisableDefaultMenus();
+
+
+            /***------------*-----------------**------------------*---------------
+            Do Not RESET Controls within Page Load!!! It affects AutoPostback
+            -----------*-------------**----------------*---------------------***/
+
+
         }
         //Display todays date & time
         protected void CurDateTime_Load(object sender, EventArgs e)
         {
-            CurDateTime.Text = DateTime.Now.ToString("dd-MMMM-yy ~ HH:mm tt");
+            CurDateTime.Text = DateTime.Now.ToString("dd-MMMM-yyyy ~ HH:mm tt");
         }
         //Register a New System User
         protected void RegUser_CheckedChanged(object sender, EventArgs e)
@@ -35,18 +37,22 @@ namespace ZAFMC
             {
                 RegUser.Checked = false;
                 Exit.Checked = false;
+                
                 Response.Redirect("~/RegisterUser.aspx");
-
+                DisableDefaultMenus();
             }
-
+            
         }
 
         //Enable or Disable Site.Master NAVBAR after SUCCESSFUL LogIn
-       public void EnableDefaultMenus()
+        public void EnableDefaultMenus()
         {
             //Congregation
             System.Web.UI.HtmlControls.HtmlAnchor CONG = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Congregation");
             CONG.Visible = true;
+            //Churches
+            System.Web.UI.HtmlControls.HtmlAnchor CHR = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Churches");
+            CHR.Visible = true;
             //Media
             System.Web.UI.HtmlControls.HtmlAnchor MED = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Media");
             MED.Visible = true;
@@ -72,26 +78,96 @@ namespace ZAFMC
             System.Web.UI.WebControls.Label LU = (System.Web.UI.WebControls.Label)Master.FindControl("LoggedUSer");
             LU.Visible = true;
 
-           
+            //Show  "Logged In" Caption
+            System.Web.UI.HtmlControls.HtmlGenericControl LFF = (System.Web.UI.HtmlControls.HtmlGenericControl)Master.FindControl("LOGOFF");
+            LFF.InnerHtml = "Logged In";
 
+            //LoggedIn USER - Modal Dropdown
+            System.Web.UI.HtmlControls.HtmlAnchor UAL = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Mutepfe");
+            UAL.Visible = true;
 
         }
 
 
-        //Log into the system 
+        // The method below disables DEFAULT MENU under Site.Master, before the application starts Up
+        // Its invoked or called under PageLoad of the startup or Login page
+        // It automatically temporarily disables SiteMenus before USER-LOGIN
+        public void DisableDefaultMenus()
+        {
+            //Congregation
+            System.Web.UI.HtmlControls.HtmlAnchor CONG = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Congregation");
+            CONG.Visible = false;
+            //Churches
+            System.Web.UI.HtmlControls.HtmlAnchor CHR = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Churches");
+            CHR.Visible = false;
+            //Media
+            System.Web.UI.HtmlControls.HtmlAnchor MED = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Media");
+            MED.Visible = false;
+            //Events
+            System.Web.UI.HtmlControls.HtmlAnchor EVE = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Events");
+            EVE.Visible = false;
+            //Passovers
+            System.Web.UI.HtmlControls.HtmlAnchor PAS = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Passovers");
+            PAS.Visible = false;
+            //Projects
+            System.Web.UI.HtmlControls.HtmlAnchor PRO = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Projects");
+            PRO.Visible = false;
+            //Finance
+            System.Web.UI.HtmlControls.HtmlAnchor FIN = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Finance");
+            FIN.Visible = false;
+            //Reports
+            System.Web.UI.HtmlControls.HtmlAnchor REP = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Reports");
+            REP.Visible = false;
+            //Contact
+            System.Web.UI.HtmlControls.HtmlAnchor CONT = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Contact");
+            CONT.Visible = false;
+            //LoggedInUSer Details
+            System.Web.UI.WebControls.Label LU = (System.Web.UI.WebControls.Label)Master.FindControl("LoggedUSer");
+            LU.Visible = false;
+
+            //Show  "Logged" Caption
+            System.Web.UI.HtmlControls.HtmlGenericControl LGF = (System.Web.UI.HtmlControls.HtmlGenericControl)Master.FindControl("LOGOFF");
+            LGF.InnerHtml = "Logged";
+
+            //LoggedIn USER - Modal Dropdown
+            System.Web.UI.HtmlControls.HtmlAnchor UAL = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl("Mutepfe");
+            UAL.Visible= false; 
+
+        }
+
+
+        //Log into the system
         protected void LogIn_CheckedChanged(object sender, EventArgs e)
         {
             if (LogIn.Checked == true)
             {
                 RegUser.Checked = false;
                 Exit.Checked = false;
-                              
+
+                //Pass LoggedIn username
+                PassValueToSiteMaster();
+
                 // Login into the APP
                 LogOn();
-                             
-               
+
+                //Stop OTP CountDown Timers  
+                StopTimers();
+
+                //Go straight to Congregation Page
+                Response.Redirect("~/Congregation.aspx");                                                            
+                
             }
         }
+
+        //Pass LoggedIn user, USERNAME (i.e. PassportID.text) to Site.Master
+        private void PassValueToSiteMaster()
+        {
+
+            IdentityPassportDummy.Text = PassID.Text;
+
+            Session["IDPassportValue"] = IdentityPassportDummy.Text;
+        }
+        
         //Login method
         private void LogOn()
         {
@@ -99,7 +175,7 @@ namespace ZAFMC
             var OTV = OTPValidation();
             var ATP = AuthenticatePassword();
             var APD = AuthenticatePassportID();
-            
+
 
             var PD = Passwd.Text;
 
@@ -121,7 +197,7 @@ namespace ZAFMC
             }
             else
             //Password is wrong
-               if (!ATP)
+            if (!ATP)
             {
                 Passwd.Text = "";
                 OTPList.SelectedIndex = -1;
@@ -137,7 +213,7 @@ namespace ZAFMC
 
             else
             //OTP is missing
-                if ((!LIV && !OTV) || (!LIV && OTV) || (LIV && !OTV))
+            if ((!LIV && !OTV) || (!LIV && OTV) || (LIV && !OTV))
             {
                 OTPList.SelectedIndex = -1;
                 OTPNumber.Text = "";
@@ -150,42 +226,51 @@ namespace ZAFMC
             //Nothing is missing, all fields are correct
             if (LIV && OTV && APD)
             {
+
                 //Enable all the Menus and login
                 EnableDefaultMenus();
                 //Reset Controls First
                 ResetControls(Page);
                 //Clear LOGIN Checkbox
                 LogIn.Checked = false;
+                //Stop all TIMERS before login
+                StopTimers();
+
             }
 
         }
-        //Clear FORM HISTORY or Typed text on Exit
+        //Clear FORM HISTORY/Typed text on Exit
         protected void ClearBrowserHistory()
         {
-                                                                    ////Clear PageCache
-                                                                    //Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
-                                                                    //Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                                                                    //Response.Cache.SetNoStore();
-                                                                    //Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
-                                                                    //Response.CacheControl = "no-cache";
-                                                                    //Response.ExpiresAbsolute = DateTime.UtcNow.AddDays(-1d);
-                                                                    //Response.Expires = -1500; //Minutes
-                                                                    //Session.Contents.Clear();
-                                                                    //Session.Contents.RemoveAll();
-                                                                    //Session.Abandon();
+            ////Clear PageCache
+            //Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            //Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            //Response.Cache.SetNoStore();
+            //Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
+            //Response.CacheControl = "no-cache";
+            //Response.ExpiresAbsolute = DateTime.UtcNow.AddDays(-1d);
+            //Response.Expires = -1500; //Minutes
+            //Session.Contents.Clear();
+            //Session.Contents.RemoveAll();
+            //Session.Abandon();
 
-            ////Clear TextBox AUTOCOMPLETE --Because of CHROME Browser
+            //Clear TextBox AUTOCOMPLETE --Because of CHROME Browser
             PassID.Attributes.Add("AutoComplete", "Disabled");
             OTPNumber.Attributes.Add("AutoComplete", "Disabled");
-            
+
         }
+        
         //Close the Whole Application
         protected void Exit_CheckedChanged(object sender, EventArgs e)
         {
+            //Stop all TIMERS before exit
+            StopTimers();
+
             if (Exit.Checked == true)
             {
                 DialogResult Quit = MessageBox.Show("Do you want to close the Web APP", "ZAFMC", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                //Closing the APP
                 if (Quit == DialogResult.Yes)
                 {
                     ClearBrowserHistory();
@@ -197,7 +282,8 @@ namespace ZAFMC
                     Environment.Exit(0);
                 }
                 else
-                    if (Quit == DialogResult.No)
+                //Else you dont want to close the APP
+                if (Quit == DialogResult.No)
                 {
                     //Reset Controls First
                     ResetControls(Page);
@@ -211,11 +297,12 @@ namespace ZAFMC
         // Resets all Controls on the Web Form
         private void ResetControls(System.Web.UI.Control JP)
         {
+
             try
             {
                 foreach (System.Web.UI.Control ctr in JP.Controls)
                 {
-                    //TexBoxes Control
+                    //TextBoxes Control
                     if (ctr is System.Web.UI.WebControls.TextBox)
                     {
                         System.Web.UI.WebControls.TextBox TB = ctr as System.Web.UI.WebControls.TextBox;
@@ -242,7 +329,7 @@ namespace ZAFMC
                             DDL.SelectedValue = Convert.ToString(-1);
                         }
                         else
-                            if (ctr.Controls.Count > 0)
+                        if (ctr.Controls.Count > 0)
                         {
                             ResetControls(ctr);
                         }
@@ -268,6 +355,7 @@ namespace ZAFMC
 
                 bool IsPasswordValid = Regex.IsMatch(PD, PasswordRegex);
 
+                
                 if (IsPasswordValid == true)
                 {
                     // DisplayAlert("Password ", "Complexity requirements are correct.", "Valid");
@@ -421,7 +509,7 @@ namespace ZAFMC
             {
                 if (!(IDP == "ID Number..") || (!(IDP == string.Empty)))
                 {
-                    //  Response.Redirect("~/RegisterUser.aspx");
+                    // Response.Redirect("~/RegisterUser.aspx");
                     ResetControls(Page);
                 }
             }
@@ -448,7 +536,7 @@ namespace ZAFMC
             }
             else
 
-            //OTP Dropdown is not selected      
+            //OTP Dropdown is not selected
             if ((OTPList.SelectedIndex == -1) && Digits.IsMatch(OTPNumber.Text))
             {
                 MessageBox.Show("How did you get your OTP?", "OTP Query", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -481,7 +569,7 @@ namespace ZAFMC
             //Typed SMS OTP is correct
             if (OTPNumber.Text == OTPToken.Text)
             {
-                
+
                 CalculateExpiryTime();
                 return true;
             }
@@ -509,11 +597,11 @@ namespace ZAFMC
 
                 MessageBox.Show("Your OTP was SMSed to\n\n" + "(" + MJ + "). " + "And expires today\n\n" + TimerCount.Text + "\n\nValid for 3 minutes only!!", "OTP Validity ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                
+
             }
             else
-                //EMAIL option is Selected
-                if (Convert.ToString(OTPList.SelectedItem) == "Email")
+            //EMAIL option is Selected
+            if (Convert.ToString(OTPList.SelectedItem) == "Email")
             {
 
                 string EmailAddress = "bishop@zafmc.co.zw";//For now its Hard coded, this value must come from the Database
@@ -529,7 +617,7 @@ namespace ZAFMC
                 TimerCount.Text = RetrieveCountDownTimer(); // Simulate Time count towards expiry
 
                 MessageBox.Show("Your OTP was emailed to\n\n" + "(" + JJ + ")" + " .And expires today\n\n" + TimerCount.Text + "\n\nValid for 3 minutes only!!", "OTP Validity ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
 
             }
         }
@@ -541,24 +629,34 @@ namespace ZAFMC
         {
 
             const long ThreeMinutes = 180000;
-
+            
             Jakobe.Interval = ThreeMinutes; //Milliseconds
             Jakobe.Elapsed += Jakobe_Elapsed;
             Jakobe.Enabled = true;
-            
+
         }
         //Three Minutes event handler for OTP Expiry
         public void Jakobe_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Jakobe.Enabled=false;
+            Jakobe.Enabled = false;
             Jakobe.Stop();
-          
+
             //Message Box about OTP Expiry
             MessageBox.Show("Your OTP has Timed-Out,\n\nGenerate a new OTP.", "ReNew OTP", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //Reset Controls
             ResetControls(Page);
 
+        }
+
+        //Dispose all Timers execution
+        public void StopTimers()
+        {
+            //Stop executing COUNTDOWN Timer for OTP
+            CountTimer.Stop();
+            CountTimer.Dispose();
+            Jakobe.Stop();
+            Jakobe.Dispose();
         }
         #endregion
 
@@ -609,7 +707,7 @@ namespace ZAFMC
                     OTPList.SelectedIndex = -1;
                 }
                 else
-                //Special characters NOT allowed 
+                //Special characters NOT allowed
                 if (Symbols.IsMatch(OTPNumber.Text))
                 {
                     MessageBox.Show("Alphabetical letters are not allowed.", "OTP Letters", MessageBoxButtons.OK, MessageBoxIcon.Question);
@@ -626,7 +724,7 @@ namespace ZAFMC
 
                 }
                 else
-                //OTP Dropdown is not selected      
+                //OTP Dropdown is not selected
                 if ((OTPList.SelectedIndex == -1) || Digits.IsMatch(OTPNumber.Text))
                 {
                     MessageBox.Show("How did you get your OTP?", "OTP Query", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -653,16 +751,16 @@ namespace ZAFMC
                     OTPList.SelectedIndex = -1;
                 }
                 else
-                    //Special characters NOT allowed 
-                    if (Symbols.IsMatch(OTPNumber.Text))
+                //Special characters NOT allowed
+                if (Symbols.IsMatch(OTPNumber.Text))
                 {
                     MessageBox.Show("Alphabetical letters are not allowed.", "OTP Letters", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     OTPList.SelectedIndex = -1;
                     OTP.Text = "";
                 }
                 else
-                   //Wrong OTP typed
-                   if (OTPNumber.Text != OTPToken.Text.ToString())
+                //Wrong OTP typed
+                if (OTPNumber.Text != OTPToken.Text.ToString())
                 {
                     MessageBox.Show("Invalid OTP.", "OTP", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     OTPList.SelectedIndex = -1;
@@ -710,8 +808,8 @@ namespace ZAFMC
                                 return true;
                             }
                             else
-                                //Typed SMS OTP is wrong
-                                if (OTPNumber.Text != OTPToken.Text)
+                            //Typed SMS OTP is wrong
+                            if (OTPNumber.Text != OTPToken.Text)
                             {
                                 WrongOTPSMS();
                                 OTPNumber.Text = "";
@@ -733,7 +831,7 @@ namespace ZAFMC
                         }
                         break;
 
-                    //Email Option          
+                    //Email Option
                     case "Email":
                         try
                         {
@@ -746,8 +844,8 @@ namespace ZAFMC
                                 return true;
                             }
                             else
-                                //Typed Email OTP is wrong
-                                if (OTPNumber.Text != OTPToken.Text.ToString())
+                            //Typed Email OTP is wrong
+                            if (OTPNumber.Text != OTPToken.Text.ToString())
                             {
                                 WrongOTPEmail();
                                 return false;
@@ -789,11 +887,13 @@ namespace ZAFMC
 
             return GenerateOTP.Next(MinOTP, MaxOTP);
         }
-               
+
         //Email and SMS Selection
         protected void EmailedSMSed(object sender, EventArgs e)
         {
             // Let the TIMER for OTP Expiry start running, after 3 Miuntes the OTP will be EXPIRED. The code for "...CalculateExpiryTimer()... Function" will be triggered.
+
+           
             Jakobe.Start();
 
             // Either Send an SMS OR Email..."Trigger/Call SMSandEmail() Function"
@@ -812,7 +912,7 @@ namespace ZAFMC
                 //SMS is Selected
                 if (OTPList.SelectedValue == "SMS")
                 {
-
+                    
                     var SMSOTP = string.Concat(Zion, CreateOTP().ToString());
                     MessageBox.Show("Your OTP Number is \n\n" + SMSOTP + " ", "SMSed OTP", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     OTPNumber.Focus();
@@ -824,10 +924,10 @@ namespace ZAFMC
 
                 }
                 else
-                    //Email is selected
-                    if (OTPList.SelectedValue == "Email")
+                //Email is selected
+                if (OTPList.SelectedValue == "Email")
                 {
-
+                    
                     //var EmailOTP = string.Concat(Zion, CreateOTP().ToString());
 
                     var EmailOTP = string.Concat(Zion, EmailAlphaNumeric().ToString());
@@ -841,21 +941,21 @@ namespace ZAFMC
             }
         }
         #region
-        //Generate ALPHANUMERIC OTP Passcode - Only for the Email        
+        //Generate ALPHANUMERIC OTP Passcode - Only for the Email
         public static string EmailAlphaNumeric()
         {
             var AlphNum = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%";
             var OTPChar = new char[5];
             var RandChars = new Random();
 
-            for ( int JP =0; JP < OTPChar.Length; JP++ )
+            for (int JP = 0; JP < OTPChar.Length; JP++)
             {
                 OTPChar[JP] = AlphNum[RandChars.Next(AlphNum.Length)];
 
             }
             var GenEmailOTP = new string(OTPChar);
             return GenEmailOTP;
-            
+
         }
 
         #endregion
@@ -915,6 +1015,7 @@ namespace ZAFMC
                 ResetControls(Page);
             }
 
+
         }
 
         public void ForgotPassword(object sender, EventArgs e)
@@ -931,7 +1032,7 @@ namespace ZAFMC
 
                 //Regex for Zimbabwean Passport Number (E.g JP450035)
                 string PassportRegex = @"^(((?=.*[^a-z!@#$% ^&*_+():\ <>,.?|]{0})(?=.*[A-Z]{2,2})(?=.*[0-9]{6,6}))[A-Z0-9]{8,8}$)";
-                //Regex for Zimbabwean ID-Number (e.g 99447589R75)
+                //Regex for Zimbabwean ID-Number (e.g 99447589W75)
                 string ZimIDRegex = @"^((((?=.*[^a-z!@#$% ^&*_+(): <>,.?\|]{0})(?=.*[0-9]{8,8})(?=.*[A-Z]){1,1}(?=.*[0-9]{2,2})))[0-9A-Z]{11,11}$)";
 
                 //Validate Passport Characters

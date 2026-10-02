@@ -100,7 +100,7 @@ hr {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  height: -42px;
+  height: 0;
 }
 pre {
   overflow: auto;
@@ -3893,10 +3893,6 @@ tbody.collapse.in {
   position: relative;
   display: table;
   border-collapse: separate;
-    top: 18px;
-    left: -2px;
-    width: 362px;
-    height: 18px;
 }
 .input-group[class*="col-"] {
   float: none;
@@ -3963,9 +3959,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .input-group-btn,
 .input-group .form-control {
   display: table-cell;
-    top: -20px;
-    left: 1px;
-    height: 22px;
 }
 .input-group-addon:not(:first-child):not(:last-child),
 .input-group-btn:not(:first-child):not(:last-child),

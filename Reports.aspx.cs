@@ -1,7 +1,12 @@
-﻿using System;
+﻿using Microsoft.Reporting.WebForms;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,14 +20,16 @@ namespace ZAFMC
             Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetNoStore();
+
             
+
+        }
+        protected void CongregationView_Click()
+        {
+           
         }
 
-        
-        
-
-
-
-
     }
+
+
 }
