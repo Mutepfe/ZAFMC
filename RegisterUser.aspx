@@ -10,37 +10,37 @@
         <hr />
         <asp:Label ID="FName" runat="server" Font-Size="Small" Text="Firstname" Font-Bold="True" CssClass="text-danger"></asp:Label>
         <div class="input-group">
-            <i class="input-group-addon glyphicon glyphicon-user" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon; top: -20px; left: 1px; height: 13px;"></i>
+            <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon;"><i class="glyphicon glyphicon-user"></i></span>
             <asp:TextBox ID="LogInFirstname" runat="server" placeholder="Firstname.." Height="30px" Width="144px" BorderStyle="Groove" MaxLength="20" ViewStateMode="Disabled" CssClass="form-control text-capitalize" ToolTip="Firstname !!" BorderColor="Maroon"></asp:TextBox>
         </div>
         <asp:Label ID="SName" runat="server" Font-Size="Small" Text="Surname" Font-Bold="True" CssClass="text-danger"></asp:Label>
         <div class="input-group">
-            <i class="input-group-addon glyphicon glyphicon-signal" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
+            <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon;"><i class="glyphicon glyphicon-signal"></i></span>
             <asp:TextBox ID="LogInSurname" runat="server" placeholder="Surname.." Height="30px" Width="144px" BorderStyle="Groove" MaxLength="20" ViewStateMode="Disabled" CssClass="form-control text-capitalize" ToolTip="Surname !!" BorderColor="Maroon"></asp:TextBox>
         </div>
         <asp:Label ID="PassID" runat="server" Font-Size="Small" Text="ID Number / Passport" Font-Bold="True" CssClass="text-danger"></asp:Label>
             <div class="input-group">
-                <i class="input-group-addon glyphicon glyphicon-road" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
+                <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon;"><i class="glyphicon glyphicon-road"></i></span>
                 <asp:TextBox ID="PassportID" runat="server"  placeholder="ID Number.." Height="30px" Width="144px" BorderStyle="Groove" MaxLength="20" ViewStateMode="Disabled" CssClass="form-control text-uppercase" ToolTip="ID Number / Passport !!" BorderColor="Maroon"></asp:TextBox>
            </div>
          <asp:Label ID="Paswd" runat="server" Font-Size="Small" Text="Password" Font-Bold="True" CssClass="text-danger"></asp:Label>
             <div class="input-group">
-                <i class="input-group-addon glyphicon glyphicon-knight" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon; top: -21px; left: 2px; height: 12px;"></i>
+                <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon; padding-top: 5px; padding-bottom: 5px;"><i class="glyphicon glyphicon-knight"></i></span>
                 <asp:TextBox ID="PassWD" runat="server" type="password"  placeholder="Password..." Height="28px" MaxLength="20" Width="144px" BorderStyle="Groove" ViewStateMode="Disabled" CssClass="form-control" ToolTip="Your Password!!" BorderColor="Maroon"></asp:TextBox>
            </div>
         <asp:Label ID="MobNum" runat="server" Font-Size="Small" Text="Mobile" Font-Bold="True" CssClass="text-danger"></asp:Label>
         <div class="input-group">
-            <i class="input-group-addon glyphicon glyphicon-phone" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon; top: -21px; left: 1px; height: 12px;"></i>
+            <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon;"><i class="glyphicon glyphicon-phone"></i></span>
             <asp:TextBox ID="LogInMobile" runat="server" placeholder="Mobile.." Height="30px" Width="144px" BorderStyle="Groove" MaxLength="15" ViewStateMode="Disabled" CssClass="form-control text-capitalize" ToolTip="Mobile !!" BorderColor="Maroon"></asp:TextBox>
         </div>
         <asp:Label ID="LoMail" runat="server" Font-Size="Small" Text="Email" Font-Bold="True" CssClass="text-danger"></asp:Label>
         <div class="input-group">
-            <i class="input-group-addon glyphicon glyphicon-envelope" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon; top: -19px; left: 1px; height: 13px;"></i>
+            <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon;"><i class="glyphicon glyphicon-envelope"></i></span>
             <asp:TextBox ID="LogInEmail" runat="server" placeholder="Email.." Height="30px" Width="144px" BorderStyle="Groove" MaxLength="50" ViewStateMode="Disabled" CssClass="form-control text-capitalize" ToolTip="Email !!" BorderColor="Maroon"></asp:TextBox>
         </div>
         <asp:Label ID="RankPost" runat="server" Font-Bold="True" Font-Size="Small" Text="Church Position" CssClass="text-danger"></asp:Label>
         <div class="input-group">
-                <i class="input-group-addon glyphicon glyphicon-education" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon;  border-bottom-color: maroon; border-right-color: maroon"></i>
+                <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon;  border-bottom-color: maroon; border-right-color: maroon"><i class="glyphicon glyphicon-education"></i></span>
                 <asp:DropDownList ID="RankPosition" runat="server" Font-Bold="True" style="border:0.5px solid maroon"  Font-Size="Small" Height="30px" ToolTip="Select Position!!" Width="144px" ViewStateMode="Disabled" CssClass="form-control">
                     <asp:ListItem Text="Select" Value="-1"></asp:ListItem>
                     <asp:ListItem Text="Bishop" Value="Bishop"></asp:ListItem>
