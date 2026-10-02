@@ -26,3 +26,7 @@ ZAFMCReports/Setup File/
 # OS files
 desktop.ini
 Thumbs.db
+
+# Large project archives (exceed GitHub 100MB limit)
+ZAFMC.zip
+ZAFMC.rar
