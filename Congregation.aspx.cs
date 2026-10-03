@@ -192,6 +192,7 @@ namespace ZAFMC
             CongregationConnection(); // Refresh Database
             CurrentMembershipNumber = number; // Show the generated Membership Number (re-applied in Page_PreRender)
             TopMostDialogs.ShowTopMost("Member saved. Membership Number: " + number + "." + uploads, "ZAFMC - Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MembershipNumber.Text = "ZAFMC Membership";
 
 
         }
@@ -232,7 +233,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                ShowDbError(P, "saved", "ZAFMC-Insert Error");
+                ShowDbError(P, "Saved", "ZAFMC-Insert Error");
                 return null;
             }
             finally
@@ -390,7 +391,7 @@ namespace ZAFMC
             }
             catch
             {
-                throw new Exception("Failed to connect to the database");
+                throw new Exception("Failed to connect to the Database");
             }
 
         }

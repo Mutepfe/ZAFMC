@@ -351,7 +351,7 @@ namespace ZAFMC
             }
             catch
             {
-                throw new Exception("Failed to connect to the database");
+                throw new Exception("Failed to connect to the ZAFMC Database");
             }
             finally
             {
