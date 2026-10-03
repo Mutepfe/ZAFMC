@@ -2,7 +2,8 @@
 <RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="ZAFMCProjects">
   <ConnectionProperties>
     <Extension>SQL</Extension>
-    <ConnectString>Data Source=MUTEPFE\SQLEXPRESS2025;Initial Catalog=ZION</ConnectString>
+    <ConnectString>Data Source=JACOB\SQLEXPRESS2025;Initial Catalog=ZION</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
   </ConnectionProperties>
   <DataSourceID>3f864c5c-7c43-4dab-930d-a21603d83107</DataSourceID>
 </RptDataSource>

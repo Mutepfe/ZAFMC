@@ -4,11 +4,8 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="ZAFMCMale">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=MUTEPFE\SQL2019;Initial Catalog=ZION</ConnectString>
-      </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
+      <DataSourceReference>ZAFMC</DataSourceReference>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>d4e18072-1dd1-4b1a-a105-370c708631be</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -54,12 +51,16 @@
             <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT        CongTitle, CongName, CongSurname, CongDOB, CongGender, CongPassportID, CongStatus, CongProfession, CongKin, CongKinContact, CongCell, CongAddress, CongEmail, CongPosition, CongDateAppointed, CongManagerial, 
+        <CommandText>SELECT        CongMembershipNumber, CongTitle, CongName, CongSurname, CongDOB, CongGender, CongPassportID, CongStatus, CongProfession, CongKin, CongKinContact, CongCell, CongAddress, CongEmail, CongPosition, CongDateAppointed, CongManagerial, 
                          CongDateElected, CongProvince, CongDistrict, CongZone, CongSection, CongSnrLeader, CongViceLeader
 FROM            Congregation
 WHERE       (CongGender ='Male')</CommandText>
       </Query>
       <Fields>
+        <Field Name="CongMembershipNumber">
+          <DataField>CongMembershipNumber</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
         <Field Name="CongTitle">
           <DataField>CongTitle</DataField>
           <rd:UserDefined>true</rd:UserDefined>
@@ -386,6 +387,9 @@ WHERE CongGender='Male'</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
+                  <Width>1.25in</Width>
+                </TablixColumn>
+                <TablixColumn>
                   <Width>1in</Width>
                 </TablixColumn>
                 <TablixColumn>
@@ -459,6 +463,55 @@ WHERE CongGender='Male'</CommandText>
                 <TablixRow>
                   <Height>0.22in</Height>
                   <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="MembershipNumber">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Membership Number</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>Maroon</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <TopBorder>
+                              <Color>Maroon</Color>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Maroon</Color>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <FontFamily />
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Title">
@@ -1595,6 +1648,47 @@ WHERE CongGender='Male'</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="CongMembershipNumber">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CongMembershipNumber.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CongMembershipNumber</rd:DefaultName>
+                          <ToolTip>Membership Number..</ToolTip>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="CongTitle">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2517,6 +2611,44 @@ WHERE CongGender='Male'</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="TotalMembershipNumber">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>TotalMembershipNumber</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="TotalRecords">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -3376,6 +3508,7 @@ WHERE CongGender='Male'</CommandText>
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -3406,7 +3539,7 @@ WHERE CongGender='Male'</CommandText>
             <DataSetName>MaleReport</DataSetName>
             <Top>0.43in</Top>
             <Height>0.68in</Height>
-            <Width>23in</Width>
+            <Width>24.25in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -3418,7 +3551,7 @@ WHERE CongGender='Male'</CommandText>
           </Border>
         </Style>
       </Body>
-      <Width>23in</Width>
+      <Width>24.25in</Width>
       <Page>
         <PageHeader>
           <Height>1.07042in</Height>
@@ -3682,7 +3815,7 @@ WHERE CongGender='Male'</CommandText>
             </Textbox>
             <Line Name="Line1">
               <Height>0in</Height>
-              <Width>23in</Width>
+              <Width>24.25in</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>

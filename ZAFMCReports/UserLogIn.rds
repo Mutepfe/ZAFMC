@@ -2,7 +2,8 @@
 <RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="UserLogIn">
   <ConnectionProperties>
     <Extension>SQL</Extension>
-    <ConnectString>Data Source=MUTEPFE\SQLEXPRESS2025;Initial Catalog=ZION</ConnectString>
+    <ConnectString>Data Source=JACOB\SQLEXPRESS2025;Initial Catalog=ZION</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
   </ConnectionProperties>
   <DataSourceID>d5466308-baf8-4284-882f-2fcddb8d2eb9</DataSourceID>
 </RptDataSource>

@@ -5,14 +5,14 @@
     <OutputPath>bin\Debug</OutputPath>
     <ErrorLevel>2</ErrorLevel>
     <OverwriteDatasets>False</OverwriteDatasets>
-    <OverwriteDataSources>False</OverwriteDataSources>
+    <OverwriteDataSources>True</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
     <TargetReportFolder>ZAFMC/ZAFMCReports</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://mutepfe/ReportServer</TargetServerURL>
+    <TargetServerURL>http://JACOB/ReportServer</TargetServerURL>
     <StartItem>Congregation.rdl</StartItem>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
@@ -20,10 +20,10 @@
     <OutputPath>bin\DebugLocal</OutputPath>
     <ErrorLevel>2</ErrorLevel>
     <OverwriteDatasets>False</OverwriteDatasets>
-    <OverwriteDataSources>False</OverwriteDataSources>
+    <OverwriteDataSources>True</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>ZAFMC\ZAFMCReports</TargetReportFolder>
+    <TargetReportFolder>ZAFMC/ZAFMCReports</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -34,10 +34,10 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorLevel>2</ErrorLevel>
     <OverwriteDatasets>False</OverwriteDatasets>
-    <OverwriteDataSources>False</OverwriteDataSources>
+    <OverwriteDataSources>True</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>ZAFMC\ZAFMCReports</TargetReportFolder>
+    <TargetReportFolder>ZAFMC/ZAFMCReports</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -73,11 +73,24 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Administration.rdl" />
+    <Report Include="Children.rdl" />
+    <Report Include="ChurchDecons.rdl" />
+    <Report Include="ChurchDistricts.rdl" />
     <Report Include="Churches.rdl" />
+    <Report Include="ChurchEvangelist.rdl" />
+    <Report Include="ChurchMembers.rdl" />
+    <Report Include="ChurchPastors.rdl" />
+    <Report Include="ChurchPreachers.rdl" />
+    <Report Include="ChurchProphets.rdl" />
+    <Report Include="ChurchProvince.rdl" />
+    <Report Include="ChurchSection.rdl" />
+    <Report Include="ChurchZones.rdl" />
     <Report Include="Congregation.rdl" />
     <Report Include="Deceased.rdl" />
     <Report Include="Events.rdl" />
+    <Report Include="Female.rdl" />
     <Report Include="Leadership.rdl" />
+    <Report Include="Male.rdl" />
     <Report Include="MediaNews.rdl" />
     <Report Include="MediaSermon.rdl" />
     <Report Include="MediaTestimony.rdl" />
@@ -91,6 +104,9 @@
     <Report Include="PassWomen.rdl" />
     <Report Include="PassYouth.rdl" />
     <Report Include="Projects.rdl" />
+    <Report Include="ProjectsCompleted.rdl" />
+    <Report Include="ProjectsInProgress.rdl" />
+    <Report Include="ProjectsOverdue.rdl" />
     <Report Include="UserLogIn.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />

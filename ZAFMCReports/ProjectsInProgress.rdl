@@ -4,11 +4,8 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="ZAFMCProjectsInProgress">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=MUTEPFE\SQL2019;Initial Catalog=ZION</ConnectString>
-      </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
+      <DataSourceReference>ZAFMCProjects</DataSourceReference>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>4ab17933-2e11-414e-9300-d1efd70a1810</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -125,11 +122,7 @@
         <DataSourceName>ZAFMCProjectsInProgress</DataSourceName>
         <CommandText>SELECT      DISTINCT          [ProjectName]    
 
- FROM         [Projects]
-
-  WHERE    
-         
-            ([ProjectCompDate] &gt; = getdate());</CommandText>
+ FROM         [Projects]</CommandText>
       </Query>
       <Fields>
         <Field Name="ProjectName">
@@ -143,11 +136,7 @@
         <DataSourceName>ZAFMCProjectsInProgress</DataSourceName>
         <CommandText>SELECT      DISTINCT       [ProjectDuration]   
 
-  FROM     [Projects] 
-
-  WHERE    
-         
-            ([ProjectCompDate] &gt; = getdate());</CommandText>
+  FROM     [Projects]</CommandText>
       </Query>
       <Fields>
         <Field Name="ProjectDuration">

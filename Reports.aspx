@@ -571,7 +571,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Congregation Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="CongReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Congregation" Target="_blank">Congregants</asp:HyperLink>
+                        <asp:HyperLink ID="CongReport" runat="server" Target="_blank">Congregants</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -597,7 +597,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Church Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="CHRCReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Churches" Target="_blank">Churches</asp:HyperLink>
+                        <asp:HyperLink ID="CHRCReport" runat="server" Target="_blank">Churches</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -623,7 +623,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Testimony Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="TestmReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/MediaTestimony" Target="_blank">Testimonies</asp:HyperLink>
+                        <asp:HyperLink ID="TestmReport" runat="server" Target="_blank">Testimonies</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -649,7 +649,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Sermon Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="SMNReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/MediaSermon" Target="_blank">Sermon</asp:HyperLink>
+                        <asp:HyperLink ID="SMNReport" runat="server" Target="_blank">Sermon</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -675,7 +675,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Events Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="EVTReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Events" Target="_blank">Events</asp:HyperLink>
+                        <asp:HyperLink ID="EVTReport" runat="server" Target="_blank">Events</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -701,7 +701,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Passover Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="PassReports" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Passovers" Target="_blank">Passovers</asp:HyperLink>
+                        <asp:HyperLink ID="PassReports" runat="server" Target="_blank">Passovers</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -727,7 +727,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Memorial Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="MemReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassMemorial" Target="_blank">Memorials</asp:HyperLink>
+                        <asp:HyperLink ID="MemReport" runat="server" Target="_blank">Memorials</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -753,7 +753,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Big Sundays Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="BigSundayReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassBigSunday" Target="_blank">Big Sundays</asp:HyperLink>
+                        <asp:HyperLink ID="BigSundayReport" runat="server" Target="_blank">Big Sundays</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -780,7 +780,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Weddings Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="WeddReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassWedding" Target="_blank">Weddings</asp:HyperLink>
+                        <asp:HyperLink ID="WeddReport" runat="server" Target="_blank">Weddings</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -806,7 +806,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Graduation Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="GradReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassGraduation" Target="_blank">Graduation</asp:HyperLink>
+                        <asp:HyperLink ID="GradReport" runat="server" Target="_blank">Graduation</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -832,7 +832,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Women Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="WOMReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassWomen" Target="_blank">Women</asp:HyperLink>
+                        <asp:HyperLink ID="WOMReport" runat="server" Target="_blank">Women</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -858,7 +858,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - General Meetings Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="GMReports" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/PassGeneralMeeting" Target="_blank">General Meetings</asp:HyperLink>
+                        <asp:HyperLink ID="GMReports" runat="server" Target="_blank">General Meetings</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -884,7 +884,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Projects Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="PROJREport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Projects" Target="_blank">Projects</asp:HyperLink>
+                        <asp:HyperLink ID="PROJREport" runat="server" Target="_blank">Projects</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -910,7 +910,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Leadership Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="LEADReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Leadership" Target="_blank">Leadership</asp:HyperLink>
+                        <asp:HyperLink ID="LEADReport" runat="server" Target="_blank">Leadership</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -936,7 +936,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Administration Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="ADMReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Administration" Target="_blank">Administration</asp:HyperLink>
+                        <asp:HyperLink ID="ADMReport" runat="server" Target="_blank">Administration</asp:HyperLink>
 
                         <hr />
                     </div>
@@ -962,7 +962,7 @@
                     <div>
                         <h5 class="text-danger"><strong>ZAFMC - Deceased Report  </strong></h5>
                         <hr />
-                        <asp:HyperLink ID="DCDReport" runat="server" NavigateUrl="http://mutepfe/Reports/report/ZAFMC/ZAFMCReports/Deceased" Target="_blank">Deceased</asp:HyperLink>
+                        <asp:HyperLink ID="DCDReport" runat="server" Target="_blank">Deceased</asp:HyperLink>
 
                         <hr />
                     </div>

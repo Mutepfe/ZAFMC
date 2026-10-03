@@ -4,11 +4,8 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="ZAFMCPastors">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=MUTEPFE\SQL2019;Initial Catalog=ZION</ConnectString>
-      </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
+      <DataSourceReference>ZAFMCChurches</DataSourceReference>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>fdd27c5c-ca66-4406-bd21-a615a90053b7</rd:DataSourceID>
     </DataSource>
   </DataSources>

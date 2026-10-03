@@ -25,12 +25,16 @@
       <Query>
         <DataSourceName>ZAFMC</DataSourceName>
         <CommandText>SELECT 
-                         CongTitle, CongName, CongSurname, CongDOB,CongGender,                                                    CongPassportID, CongStatus, CongProfession, CongKin, CongKinContact,                                   CongCell, CongAddress, CongEmail, CongPosition, CongDateAppointed,                                   CongManagerial, 
+                         CongMembershipNumber, CongTitle, CongName, CongSurname, CongDOB,CongGender,                                                    CongPassportID, CongStatus, CongProfession, CongKin, CongKinContact,                                   CongCell, CongAddress, CongEmail, CongPosition, CongDateAppointed,                                   CongManagerial, 
                          CongDateElected, CongProvince, CongDistrict, CongZone, CongSection,                                    CongSnrLeader, CongViceLeader
 FROM              Congregation
 </CommandText>
       </Query>
       <Fields>
+        <Field Name="CongMembershipNumber">
+          <DataField>CongMembershipNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="CongTitle">
           <DataField>CongTitle</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -338,6 +342,9 @@ FROM              Congregation
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
+                  <Width>1.25in</Width>
+                </TablixColumn>
+                <TablixColumn>
                   <Width>1in</Width>
                 </TablixColumn>
                 <TablixColumn>
@@ -411,6 +418,50 @@ FROM              Congregation
                 <TablixRow>
                   <Height>0.22in</Height>
                   <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="MembershipNumber">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Membership Number</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>Maroon</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <TopBorder>
+                              <Color>Maroon</Color>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Maroon</Color>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Title">
@@ -1436,6 +1487,46 @@ FROM              Congregation
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="CongMembershipNumber">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CongMembershipNumber.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CongMembershipNumber</rd:DefaultName>
+                          <ToolTip>Membership Number..</ToolTip>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="CongTitle">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2357,6 +2448,7 @@ FROM              Congregation
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -2384,14 +2476,14 @@ FROM              Congregation
             <DataSetName>Congregation</DataSetName>
             <Top>0.43in</Top>
             <Height>0.43in</Height>
-            <Width>23in</Width>
+            <Width>24.25in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
           <Line Name="Line1">
             <Top>1.26958in</Top>
             <Height>0in</Height>
-            <Width>23in</Width>
+            <Width>24.25in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -2409,7 +2501,7 @@ FROM              Congregation
           </Border>
         </Style>
       </Body>
-      <Width>23in</Width>
+      <Width>24.25in</Width>
       <Page>
         <PageFooter>
           <Height>1in</Height>
@@ -2473,7 +2565,7 @@ FROM              Congregation
               </Paragraphs>
               <rd:DefaultName>Textbox7</rd:DefaultName>
               <Top>0.06944in</Top>
-              <Left>10.81312in</Left>
+              <Left>11.43812in</Left>
               <Height>0.25in</Height>
               <Width>1.02542in</Width>
               <ZIndex>1</ZIndex>
@@ -2509,7 +2601,7 @@ FROM              Congregation
                 </Paragraph>
               </Paragraphs>
               <Top>0.06944in</Top>
-              <Left>21.35479in</Left>
+              <Left>22.60479in</Left>
               <Height>0.25in</Height>
               <Width>1.515in</Width>
               <ZIndex>2</ZIndex>
