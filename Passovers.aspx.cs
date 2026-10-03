@@ -107,7 +107,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -147,7 +147,7 @@ namespace ZAFMC
         protected void EditPassover_Click(object sender, EventArgs e)
         {
 
-            DialogResult EVT = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult EVT = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (EVT == DialogResult.Yes)
             {
                 UpdateEditedPassover(); // Update the Record
@@ -183,7 +183,7 @@ namespace ZAFMC
             }
             catch (Exception Mhofu)
             {
-                MessageBox.Show(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -218,7 +218,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -262,7 +262,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -309,7 +309,7 @@ namespace ZAFMC
         protected void EditPassMemorial_Click(object sender, EventArgs e)
         {
 
-            DialogResult EVT = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult EVT = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (EVT == DialogResult.Yes)
             {
                 UpdateEditedPassMemorial(); // Update the Record
@@ -346,7 +346,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -382,7 +382,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -430,7 +430,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -470,7 +470,7 @@ namespace ZAFMC
         protected void EditPassBG_Click(object sender, EventArgs e)
         {
             BigSund.Visible = true;
-            DialogResult MT = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult MT = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (MT == DialogResult.Yes)
             {
                 UpdateEditedPassBG(); // Update the Record
@@ -508,7 +508,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -544,7 +544,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -590,7 +590,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -630,7 +630,7 @@ namespace ZAFMC
         protected void EditPassGraduation_Click(object sender, EventArgs e)
         {
             Grad.Visible = true;
-            DialogResult YG = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult YG = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (YG == DialogResult.Yes)
             {
                 UpdateEditedPassGraduation(); // Update the Record
@@ -671,7 +671,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -709,7 +709,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -751,7 +751,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -765,7 +765,7 @@ namespace ZAFMC
         protected void EditPassYouth_Click(object sender, EventArgs e)
         {
             YTH.Visible = true;
-            DialogResult BC = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult BC = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (BC == DialogResult.Yes)
             {
                 UpdateEditedPassYouth(); // Update the Record
@@ -801,7 +801,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -844,7 +844,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -914,7 +914,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -929,7 +929,7 @@ namespace ZAFMC
         protected void EditPassWomen_Click(object sender, EventArgs e)
         {
             WomEv.Visible = true;
-            DialogResult WR = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult WR = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (WR == DialogResult.Yes)
             {
                 UpdateEditedPassWomen(); // Update the Record
@@ -965,7 +965,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -1013,7 +1013,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -1083,7 +1083,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -1123,7 +1123,7 @@ namespace ZAFMC
         protected void EditPassGeneralMeeting_Click(object sender, EventArgs e)
         {
             GenM.Visible = true;
-            DialogResult WB = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult WB = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (WB == DialogResult.Yes)
             {
                 UpdateEditedPassGeneralMeeting(); // Update the Record
@@ -1160,7 +1160,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -1202,7 +1202,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -1240,7 +1240,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -1254,7 +1254,7 @@ namespace ZAFMC
         protected void EditPassWedding_Click(object sender, EventArgs e)
         {
             Wedds.Visible = true;
-            DialogResult DR = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult DR = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (DR == DialogResult.Yes)
             {
                 UpdateEditedPassWedding(); // Update the Record
@@ -1295,7 +1295,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -1348,7 +1348,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {

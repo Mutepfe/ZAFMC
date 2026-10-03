@@ -111,7 +111,7 @@ namespace ZAFMC
                 return;
             }
 
-            DialogResult MPJ = MessageBox.Show("Do you want to Delete this Record..!!", "ZAFMC - Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult MPJ = TopMostDialogs.ShowTopMost("Do you want to Delete this Record..!!", "ZAFMC - Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (MPJ == DialogResult.Yes)
             {
                 int? rows = CongregationDelete(key);
@@ -121,12 +121,12 @@ namespace ZAFMC
                 }
                 if (rows == 0)
                 {
-                    MessageBox.Show("No member with Passport / ID '" + key + "' was found. Nothing was deleted.", "ZAFMC - Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TopMostDialogs.ShowTopMost("No member with Passport / ID '" + key + "' was found. Nothing was deleted.", "ZAFMC - Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 ResetForm(); //Resets Web Controls
                 CongregationConnection(); // Refresh the Database
-                MessageBox.Show("Member " + key + " deleted.", "ZAFMC - Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TopMostDialogs.ShowTopMost("Member " + key + " deleted.", "ZAFMC - Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
                if (MPJ == DialogResult.No)
@@ -177,7 +177,7 @@ namespace ZAFMC
         {
             if (EditPassportID != null)
             {
-                MessageBox.Show("You are editing an existing member. Use Edit to update it, or Reset for a new member.", "ZAFMC - Save Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost("You are editing an existing member. Use Edit to update it, or Reset for a new member.", "ZAFMC - Save Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -191,7 +191,7 @@ namespace ZAFMC
             ResetForm(); //Resets Web Controls
             CongregationConnection(); // Refresh Database
             CurrentMembershipNumber = number; // Show the generated Membership Number (re-applied in Page_PreRender)
-            MessageBox.Show("Member saved. Membership Number: " + number + "." + uploads, "ZAFMC - Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            TopMostDialogs.ShowTopMost("Member saved. Membership Number: " + number + "." + uploads, "ZAFMC - Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
         }
@@ -224,7 +224,7 @@ namespace ZAFMC
                 string number = Convert.ToString(membership.Value);
                 if (!CongregationRules.IsMembershipNumber(number))
                 {
-                    MessageBox.Show("The Membership Number could not be generated. Please contact the IT Department.", "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    TopMostDialogs.ShowTopMost("The Membership Number could not be generated. Please contact the IT Department.", "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
                 return number;
@@ -288,7 +288,7 @@ namespace ZAFMC
 
         private static void ShowValidationError(string message, string title)
         {
-            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            TopMostDialogs.ShowTopMost(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         // Logs the full error on the server and shows a friendly message (no SQL details)
@@ -298,10 +298,10 @@ namespace ZAFMC
             SqlException sql = ex as SqlException;
             if (sql != null && (sql.Number == 2627 || sql.Number == 2601))
             {
-                MessageBox.Show("A member with this Passport / ID already exists.", title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TopMostDialogs.ShowTopMost("A member with this Passport / ID already exists.", title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            MessageBox.Show("The record could not be " + action + ". Please contact the IT Department.", title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TopMostDialogs.ShowTopMost("The record could not be " + action + ". Please contact the IT Department.", title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         // Value of a member dropdown, including a remembered legacy value that was posted back
@@ -404,7 +404,7 @@ namespace ZAFMC
                 return;
             }
 
-            DialogResult MPJ = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult MPJ = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (MPJ == DialogResult.Yes)
             {
                 string key = EditPassportID ?? PassportID.Text;
@@ -415,12 +415,12 @@ namespace ZAFMC
                 }
                 if (rows == 0)
                 {
-                    MessageBox.Show("No member with Passport / ID '" + key + "' was found. Nothing was updated.", "ZAFMC - Update Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TopMostDialogs.ShowTopMost("No member with Passport / ID '" + key + "' was found. Nothing was updated.", "ZAFMC - Update Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 ResetForm(); //Resets Web Controls
                 CongregationConnection();  //Refresh the DBase
-                MessageBox.Show("Member " + key + " updated.", "ZAFMC - Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TopMostDialogs.ShowTopMost("Member " + key + " updated.", "ZAFMC - Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
                if (MPJ == DialogResult.No)
@@ -543,11 +543,11 @@ namespace ZAFMC
             // Shown after the connection is closed (MessageBox waits for OK)
             if (found)
             {
-                MessageBox.Show("Editing " + CurrentMembershipNumber + " (" + EditPassportID + "). Passport / ID is locked. Click Reset for a new member.", "ZAFMC - Select Member", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TopMostDialogs.ShowTopMost("Editing " + CurrentMembershipNumber + " (" + EditPassportID + "). Passport / ID is locked. Click Reset for a new member.", "ZAFMC - Select Member", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Member not found. It may have been deleted.", "ZAFMC - Select Member", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost("Member not found. It may have been deleted.", "ZAFMC - Select Member", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -694,7 +694,7 @@ namespace ZAFMC
             catch (Exception Upload)
             {
                 System.Diagnostics.Trace.TraceError(Upload.ToString());
-                MessageBox.Show("The photo / ID upload failed.", "ZAFMC - (Photo / Identity) Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TopMostDialogs.ShowTopMost("The photo / ID upload failed.", "ZAFMC - (Photo / Identity) Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             return result;

@@ -137,7 +137,7 @@ namespace ZAFMC
             }
             catch (Exception JP)
             {
-                MessageBox.Show(JP.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(JP.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -168,7 +168,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Projects", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Projects", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -205,7 +205,7 @@ namespace ZAFMC
             }
             catch (Exception Mhofu)
             {
-                MessageBox.Show(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -217,7 +217,7 @@ namespace ZAFMC
         //Edit or Update Project (Event)
         protected void EditProject_Click(object sender, EventArgs e)
         {
-            DialogResult Proj = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult Proj = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Proj == DialogResult.Yes)
             {
                 UpdateEditedProject(); // Update the Record

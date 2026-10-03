@@ -144,7 +144,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC - View Users", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC - View Users", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -159,7 +159,7 @@ namespace ZAFMC
         protected void EditRegisterUser_Click(object sender, EventArgs e)
         {
 
-            DialogResult CH = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult CH = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (CH == DialogResult.Yes)
             {
                 UpdateEditedRegisterUser(); // Update the Record
@@ -203,7 +203,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -250,7 +250,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -276,7 +276,7 @@ namespace ZAFMC
             }
             catch(Exception JM)
             {
-                MessageBox.Show(JM.Message.ToString(), "ZAFMC Connection Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                TopMostDialogs.ShowTopMost(JM.Message.ToString(), "ZAFMC Connection Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 
             }
             finally

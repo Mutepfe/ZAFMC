@@ -25,13 +25,6 @@ namespace ZAFMC
 
 
         }
-        //Show every Login screen MessageBox modal and on top of all windows (incl. the browser),
-        //so it never opens behind the browser or minimised. DefaultDesktopOnly shows the box on the
-        //active desktop as a topmost window; it needs no owner window, so it also works from Timer threads.
-        private static DialogResult ShowTopMost(string text, string caption = "", MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button1)
-        {
-            return MessageBox.Show(text, caption, buttons, icon, defaultButton, MessageBoxOptions.DefaultDesktopOnly);
-        }
 
         //Display todays date & time
         protected void CurDateTime_Load(object sender, EventArgs e)
@@ -276,7 +269,7 @@ namespace ZAFMC
 
             if (Exit.Checked == true)
             {
-                DialogResult Quit = ShowTopMost("Do you want to close the Web APP", "ZAFMC", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult Quit = TopMostDialogs.ShowTopMost("Do you want to close the Web APP", "ZAFMC", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 //Closing the APP
                 if (Quit == DialogResult.Yes)
@@ -398,7 +391,7 @@ namespace ZAFMC
             //Password Field is Empty
             if (string.IsNullOrEmpty(Theo) || string.IsNullOrWhiteSpace(Theo))
             {
-                ShowTopMost("Password field is empty.", "Enter Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TopMostDialogs.ShowTopMost("Password field is empty.", "Enter Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Clear LOGIN Checkbox
                 LogIn.Checked = false;
@@ -412,7 +405,7 @@ namespace ZAFMC
             //Password too Short
             if (Theo.Length < 6)
             {
-                ShowTopMost("Password is too short.", "Length", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost("Password is too short.", "Length", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 //Clear LOGIN Checkbox
                 LogIn.Checked = false;
 
@@ -424,7 +417,7 @@ namespace ZAFMC
             //Password too Long
             if (Theo.Length > 10)
             {
-                ShowTopMost("Password is too long.", "Length", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost("Password is too long.", "Length", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 //Clear LOGIN Checkbox
                 LogIn.Checked = false;
@@ -437,7 +430,7 @@ namespace ZAFMC
             //Password must have a Digit
             if (!Digit.IsMatch(Theo))
             {
-                ShowTopMost("Password must have a digit.", "Numbers", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                TopMostDialogs.ShowTopMost("Password must have a digit.", "Numbers", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
                 //Clear LOGIN Checkbox
                 LogIn.Checked = false;
@@ -451,7 +444,7 @@ namespace ZAFMC
 
             if (!MinMax.IsMatch(Theo))
             {
-                ShowTopMost("Minimum of (6) & Maximum of (10) Characters.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TopMostDialogs.ShowTopMost("Minimum of (6) & Maximum of (10) Characters.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //Clear LOGIN Checkbox
                 LogIn.Checked = false;
@@ -465,7 +458,7 @@ namespace ZAFMC
 
             if (!Lowercase.IsMatch(Theo))
             {
-                ShowTopMost("Small letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                TopMostDialogs.ShowTopMost("Small letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 
                 //Clear LOGIN Checkbox
                 LogIn.Checked = false;
@@ -479,7 +472,7 @@ namespace ZAFMC
 
             if (!Uppercase.IsMatch(Theo))
             {
-                ShowTopMost("Capital letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost("Capital letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Question);
 
                 //Clear LOGIN Checkbox
                 LogIn.Checked = false;
@@ -493,7 +486,7 @@ namespace ZAFMC
 
             if (!SpecialChar.IsMatch(Theo))
             {
-                ShowTopMost("Special characters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost("Special characters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 //Clear LOGIN Checkbox
                 LogIn.Checked = false;
@@ -536,7 +529,7 @@ namespace ZAFMC
             //Blank OTP
             if (string.IsNullOrEmpty(OTPNumber.Text) || string.IsNullOrWhiteSpace(OTPNumber.Text))
             {
-                ShowTopMost("OTP is required.", "OTP", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TopMostDialogs.ShowTopMost("OTP is required.", "OTP", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 OTPList.SelectedIndex = -1;
                 LogIn.Checked.Equals(false);
                 OTPNumber.Focus();
@@ -547,7 +540,7 @@ namespace ZAFMC
             //OTP Dropdown is not selected
             if ((OTPList.SelectedIndex == -1) && Digits.IsMatch(OTPNumber.Text))
             {
-                ShowTopMost("How did you get your OTP?", "OTP Query", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                TopMostDialogs.ShowTopMost("How did you get your OTP?", "OTP Query", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 OTPNumber.Text = "";
                 LogIn.Checked = false;
                 return false;
@@ -558,7 +551,7 @@ namespace ZAFMC
             //OTP is less than 5 digits
             if (OTPNumber.Text.Length < 5)
             {
-                ShowTopMost("OTP must be 5 digits long.", "OTP Length", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost("OTP must be 5 digits long.", "OTP Length", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 OTPNumber.Text = "";
                 LogIn.Checked = false;
                 OTPNumber.Focus();
@@ -568,7 +561,7 @@ namespace ZAFMC
             //Wrong OTP typed
             if (OTPNumber.Text != OTPToken.Text.ToString())
             {
-                ShowTopMost("Invalid OTP.", "OTP", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                TopMostDialogs.ShowTopMost("Invalid OTP.", "OTP", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 OTPNumber.Focus();
                 LogIn.Checked = false;
                 return false;
@@ -603,7 +596,7 @@ namespace ZAFMC
                 CountTimer.Elapsed += CountDownTimerElapsed; //Elapsed Timer Event
                 TimerCount.Text = RetrieveCountDownTimer(); // Simulate Time count towards expiry
 
-                ShowTopMost("Your OTP was SMSed to\n\n" + "(" + MJ + "). " + "And expires today\n\n" + TimerCount.Text + "\n\nValid for 3 minutes only!!", "OTP Validity ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TopMostDialogs.ShowTopMost("Your OTP was SMSed to\n\n" + "(" + MJ + "). " + "And expires today\n\n" + TimerCount.Text + "\n\nValid for 3 minutes only!!", "OTP Validity ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -624,7 +617,7 @@ namespace ZAFMC
                 CountTimer.Elapsed += CountDownTimerElapsed; //Elapsed Timer Event
                 TimerCount.Text = RetrieveCountDownTimer(); // Simulate Time count towards expiry
 
-                ShowTopMost("Your OTP was emailed to\n\n" + "(" + JJ + ")" + " .And expires today\n\n" + TimerCount.Text + "\n\nValid for 3 minutes only!!", "OTP Validity ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TopMostDialogs.ShowTopMost("Your OTP was emailed to\n\n" + "(" + JJ + ")" + " .And expires today\n\n" + TimerCount.Text + "\n\nValid for 3 minutes only!!", "OTP Validity ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -650,7 +643,7 @@ namespace ZAFMC
             Jakobe.Stop();
 
             //Message Box about OTP Expiry
-            ShowTopMost("Your OTP has Timed-Out,\n\nGenerate a new OTP.", "ReNew OTP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            TopMostDialogs.ShowTopMost("Your OTP has Timed-Out,\n\nGenerate a new OTP.", "ReNew OTP", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //Reset Controls
             ResetControls(Page);
@@ -711,14 +704,14 @@ namespace ZAFMC
                 //OTP less than 5 Digits
                 if (OTPNumber.Text.Length < 5)
                 {
-                    ShowTopMost("OTP must be 5 digits long.", "OTP Length", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    TopMostDialogs.ShowTopMost("OTP must be 5 digits long.", "OTP Length", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     OTPList.SelectedIndex = -1;
                 }
                 else
                 //Special characters NOT allowed
                 if (Symbols.IsMatch(OTPNumber.Text))
                 {
-                    ShowTopMost("Alphabetical letters are not allowed.", "OTP Letters", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    TopMostDialogs.ShowTopMost("Alphabetical letters are not allowed.", "OTP Letters", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     OTPList.SelectedIndex = -1;
                     OTPNumber.Text = "";
                 }
@@ -726,7 +719,7 @@ namespace ZAFMC
                 //Wrong OTP typed
                 if (OTPNumber.Text != OTPToken.Text.ToString())
                 {
-                    ShowTopMost("Invalid OTP.", "OTP", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    TopMostDialogs.ShowTopMost("Invalid OTP.", "OTP", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     OTPList.SelectedIndex = -1;
                     OTPNumber.Text = "";
 
@@ -735,7 +728,7 @@ namespace ZAFMC
                 //OTP Dropdown is not selected
                 if ((OTPList.SelectedIndex == -1) || Digits.IsMatch(OTPNumber.Text))
                 {
-                    ShowTopMost("How did you get your OTP?", "OTP Query", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    TopMostDialogs.ShowTopMost("How did you get your OTP?", "OTP Query", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     OTP.Text = "";
                 }
             }
@@ -755,14 +748,14 @@ namespace ZAFMC
                 //OTP less than 5 Digits
                 if (OTPNumber.Text.Length < 5)
                 {
-                    ShowTopMost("OTP must be 5 digits long.", "OTP Length", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    TopMostDialogs.ShowTopMost("OTP must be 5 digits long.", "OTP Length", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     OTPList.SelectedIndex = -1;
                 }
                 else
                 //Special characters NOT allowed
                 if (Symbols.IsMatch(OTPNumber.Text))
                 {
-                    ShowTopMost("Alphabetical letters are not allowed.", "OTP Letters", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    TopMostDialogs.ShowTopMost("Alphabetical letters are not allowed.", "OTP Letters", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     OTPList.SelectedIndex = -1;
                     OTP.Text = "";
                 }
@@ -770,7 +763,7 @@ namespace ZAFMC
                 //Wrong OTP typed
                 if (OTPNumber.Text != OTPToken.Text.ToString())
                 {
-                    ShowTopMost("Invalid OTP.", "OTP", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    TopMostDialogs.ShowTopMost("Invalid OTP.", "OTP", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     OTPList.SelectedIndex = -1;
                     OTP.Text = "";
                 }
@@ -794,7 +787,7 @@ namespace ZAFMC
                     case "Select":
                         try
                         {
-                            ShowTopMost("How did you receive your OTP?\n\nSelect OTP Dropdown.", "Email / SMS", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            TopMostDialogs.ShowTopMost("How did you receive your OTP?\n\nSelect OTP Dropdown.", "Email / SMS", MessageBoxButtons.OK, MessageBoxIcon.Question);
 
                             LogIn.Checked = false;
                             break;
@@ -922,7 +915,7 @@ namespace ZAFMC
                 {
                     
                     var SMSOTP = string.Concat(Zion, CreateOTP().ToString());
-                    ShowTopMost("Your OTP Number is \n\n" + SMSOTP + " ", "SMSed OTP", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    TopMostDialogs.ShowTopMost("Your OTP Number is \n\n" + SMSOTP + " ", "SMSed OTP", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     OTPNumber.Focus();
 
                     //Below ignores the "ZAFMC" text on the OTP
@@ -939,7 +932,7 @@ namespace ZAFMC
                     //var EmailOTP = string.Concat(Zion, CreateOTP().ToString());
 
                     var EmailOTP = string.Concat(Zion, EmailAlphaNumeric().ToString());
-                    ShowTopMost("Your OTP Passcode is \n\n" + EmailOTP + " ", "OTP Emailed", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    TopMostDialogs.ShowTopMost("Your OTP Passcode is \n\n" + EmailOTP + " ", "OTP Emailed", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     OTPNumber.Focus();
                     //Below ignores the "ZAFMC-" text on the OTP
                     OTPToken.Text = EmailOTP.Substring(Convert.ToChar(6));
@@ -975,7 +968,7 @@ namespace ZAFMC
             var JP = PassID.Text;
             //Security Check
 
-            string Security = ShowTopMost(Interaction.InputBox("Security Check (Question)", "What's your LogIn Username?", "Identity...")).ToString();
+            string Security = TopMostDialogs.ShowTopMost(TopMostDialogs.InputBox("Security Check (Question)", "What's your LogIn Username?", "Identity...")).ToString();
             try
             {
 
@@ -984,7 +977,7 @@ namespace ZAFMC
                 if (string.IsNullOrEmpty(JP) || string.IsNullOrEmpty(Security) || string.IsNullOrWhiteSpace(JP) || string.IsNullOrWhiteSpace(Security))
                 {
 
-                    ShowTopMost("Enter LogIn Username First.", "Username", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    TopMostDialogs.ShowTopMost("Enter LogIn Username First.", "Username", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     PassID.Focus();
                     return;
                 }
@@ -998,7 +991,7 @@ namespace ZAFMC
                 //Security & IDPassport Textbox texts don't match
                 if (!Security.Equals(JP, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    ShowTopMost("ID/Passport entered dosen't\nmatch with the system...", "Identity Mismatch", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    TopMostDialogs.ShowTopMost("ID/Passport entered dosen't\nmatch with the system...", "Identity Mismatch", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     ResetControls(Page);
                     PassID.Focus();
                 }
@@ -1068,7 +1061,7 @@ namespace ZAFMC
                 {
                     if (PassportNumber && PID.Contains(PassNum))
                     {
-                        ShowTopMost("Valid Zimbabwean Passport!", "Passport Number", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        TopMostDialogs.ShowTopMost("Valid Zimbabwean Passport!", "Passport Number", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
@@ -1079,7 +1072,7 @@ namespace ZAFMC
 
                     if ((!PassportNumber) && PID.Contains(PassNum) && (PID.Length < 8) && (PID.Length > 8))
                     {
-                        ShowTopMost("Invalid Zimbabwean Passport!", "Passport Number", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        TopMostDialogs.ShowTopMost("Invalid Zimbabwean Passport!", "Passport Number", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         PassID.Text = "";
                         PassID.Focus();
                         return false;
@@ -1091,7 +1084,7 @@ namespace ZAFMC
                 {
                     if (ZimID && PID.Contains(Chitupa))
                     {
-                        ShowTopMost("Valid Zimbabwean Identity!", "Zimbawean ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        TopMostDialogs.ShowTopMost("Valid Zimbabwean Identity!", "Zimbawean ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
@@ -1100,7 +1093,7 @@ namespace ZAFMC
                 {
                     if ((!ZimID) && PID.Contains(Chitupa) && (PID.Length < 11) && (PID.Length > 11))
                     {
-                        ShowTopMost("Invalid Zimbabwean Identity!", "Zimbawean ID", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        TopMostDialogs.ShowTopMost("Invalid Zimbabwean Identity!", "Zimbawean ID", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         PassID.Text = "";
                         PassID.Focus();
                         return false;

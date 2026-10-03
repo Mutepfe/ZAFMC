@@ -142,7 +142,7 @@ namespace ZAFMC
         protected void EditContact_Click(object sender, EventArgs e)
         {
             //HighSix.AutoGenerateEditButton = true;
-            DialogResult Reply = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult Reply = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Reply == DialogResult.Yes)
             {
                 UpdateEditedContact(); // Update the Record
@@ -179,7 +179,7 @@ namespace ZAFMC
             }
             catch (Exception HS)
             {
-                MessageBox.Show(HS.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(HS.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -256,7 +256,7 @@ namespace ZAFMC
             }
             catch (Exception HSV)
             {
-                MessageBox.Show(HSV.ToString(), "Viewing High Six", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(HSV.ToString(), "Viewing High Six", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -305,7 +305,7 @@ namespace ZAFMC
             }
             catch (Exception HS)
             {
-                MessageBox.Show(HS.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(HS.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {

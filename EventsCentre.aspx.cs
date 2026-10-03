@@ -99,7 +99,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -144,7 +144,7 @@ namespace ZAFMC
             }
             catch (Exception JP)
             {
-                MessageBox.Show(JP.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(JP.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -184,7 +184,7 @@ namespace ZAFMC
         protected void EditEvents_Click(object sender, EventArgs e)
         {
 
-            DialogResult EVT = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult EVT = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (EVT == DialogResult.Yes)
             {
                 UpdateEditedEvents(); // Update the Record
@@ -225,7 +225,7 @@ namespace ZAFMC
             }
             catch (Exception Mhofu)
             {
-                MessageBox.Show(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {

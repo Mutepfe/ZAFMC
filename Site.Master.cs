@@ -86,7 +86,7 @@ namespace ZAFMC
                 }
                 catch (Exception MG)
                 {
-                    MessageBox.Show(MG.Message, "ZAFMC- Failed to Retrieve Data (Account Info)", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    TopMostDialogs.ShowTopMost(MG.Message, "ZAFMC- Failed to Retrieve Data (Account Info)", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 finally
                 {
@@ -201,7 +201,7 @@ namespace ZAFMC
             //Password Field is Empty
             if (string.IsNullOrEmpty(Theo) || string.IsNullOrWhiteSpace(Theo))
             {
-                MessageBox.Show("Password field is empty.", "Enter Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TopMostDialogs.ShowTopMost("Password field is empty.", "Enter Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
                 LogInBack.Checked = false;  
@@ -212,7 +212,7 @@ namespace ZAFMC
             //Password too Short
             if (Theo.Length < 6)
             {
-                MessageBox.Show("Password is too short.", "Length", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost("Password is too short.", "Length", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 PasswordLock.Text = "";
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
@@ -223,7 +223,7 @@ namespace ZAFMC
             //Password too Long
             if (Theo.Length > 10)
             {
-                MessageBox.Show("Password is too long.", "Length", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost("Password is too long.", "Length", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 PasswordLock.Text = " ";
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
@@ -234,7 +234,7 @@ namespace ZAFMC
             //Password must have a Digit
             if (!Digit.IsMatch(Theo))
             {
-                MessageBox.Show("Password must have a digit.", "Numbers", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                TopMostDialogs.ShowTopMost("Password must have a digit.", "Numbers", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 PasswordLock.Text = " ";
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
@@ -246,7 +246,7 @@ namespace ZAFMC
 
             if (!MinMax.IsMatch(Theo))
             {
-                MessageBox.Show("Minimum of (6) & Maximum of (10) Characters.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TopMostDialogs.ShowTopMost("Minimum of (6) & Maximum of (10) Characters.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 PasswordLock.Text = " ";
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
@@ -258,7 +258,7 @@ namespace ZAFMC
 
             if (!Lowercase.IsMatch(Theo))
             {
-                MessageBox.Show("Small letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                TopMostDialogs.ShowTopMost("Small letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 PasswordLock.Text = " ";
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
@@ -270,7 +270,7 @@ namespace ZAFMC
 
             if (!Uppercase.IsMatch(Theo))
             {
-                MessageBox.Show("Capital letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost("Capital letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 PasswordLock.Text = " ";    
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
@@ -282,7 +282,7 @@ namespace ZAFMC
 
             if (!SpecialChar.IsMatch(Theo))
             {
-                MessageBox.Show("Special characters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost("Special characters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 PasswordLock.Text = " ";
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
@@ -301,7 +301,7 @@ namespace ZAFMC
         {
             if (ExitAPP.Checked == true)
             {
-                DialogResult Quit = MessageBox.Show("Do you want to close the Web APP", "ZAFMC", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult Quit = TopMostDialogs.ShowTopMost("Do you want to close the Web APP", "ZAFMC", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (Quit == DialogResult.Yes)
                 {
@@ -342,7 +342,7 @@ namespace ZAFMC
         //Close the whole Application / System
         protected void ExitZAFMC(object sender, EventArgs e)
         {
-            DialogResult Shutdown = MessageBox.Show("Do you want to close the Web APP", "ZAFMC", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult Shutdown = TopMostDialogs.ShowTopMost("Do you want to close the Web APP", "ZAFMC", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (Shutdown == DialogResult.Yes)
             {

@@ -115,7 +115,7 @@ namespace ZAFMC
             }
             catch (Exception AL)
             {
-                MessageBox.Show(AL.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(AL.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -174,7 +174,7 @@ namespace ZAFMC
             }
             catch (Exception VW)
             {
-                MessageBox.Show(VW.ToString(), "ZAFMC-Viewing Leadership", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(VW.ToString(), "ZAFMC-Viewing Leadership", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -187,7 +187,7 @@ namespace ZAFMC
         protected void EditLeader_Click(object sender, EventArgs e)
         {
             ZAFMCLeadership.Visible = true;
-            DialogResult Reply = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult Reply = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Reply == DialogResult.Yes)
             {
                 UpdateEditedLeadership(); // Update the Record
@@ -225,7 +225,7 @@ namespace ZAFMC
             }
             catch (Exception LeaUpd)
             {
-                MessageBox.Show(LeaUpd.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(LeaUpd.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -326,7 +326,7 @@ namespace ZAFMC
             }
             catch (Exception AL)
             {
-                MessageBox.Show(AL.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(AL.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -364,7 +364,7 @@ namespace ZAFMC
         protected void EditAdmin_Click(object sender, EventArgs e)
         {
             ZAFMCAdministration.Visible = true;
-            DialogResult ADM = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult ADM = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (ADM == DialogResult.Yes)
             {
                 UpdateEditedAdmin(); // Update the Record
@@ -399,7 +399,7 @@ namespace ZAFMC
             }
             catch (Exception Mhofu)
             {
-                MessageBox.Show(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -433,7 +433,7 @@ namespace ZAFMC
             }
             catch (Exception VA)
             {
-                MessageBox.Show(VA.ToString(), "ZAFMC-Viewing Administration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(VA.ToString(), "ZAFMC-Viewing Administration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -508,7 +508,7 @@ namespace ZAFMC
             }
             catch (Exception VA)
             {
-                MessageBox.Show(VA.ToString(), "ZAFMC-Viewing Deceased", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(VA.ToString(), "ZAFMC-Viewing Deceased", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -522,7 +522,7 @@ namespace ZAFMC
         protected void EditDeceased_Click(object sender, EventArgs e)
         {
 
-            DialogResult Dec = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult Dec = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Dec == DialogResult.Yes)
             {
                 UpdateEditedDeceased(); // Update the Record
@@ -560,7 +560,7 @@ namespace ZAFMC
             }
             catch (Exception Mhofu)
             {
-                MessageBox.Show(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(Mhofu.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -605,7 +605,7 @@ namespace ZAFMC
             }
             catch (Exception AL)
             {
-                MessageBox.Show(AL.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(AL.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {

@@ -62,7 +62,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -84,7 +84,7 @@ namespace ZAFMC
         protected void EditMediaNews_Click(object sender, EventArgs e)
         {
             MediaNews.Visible = true;
-            DialogResult YG = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult YG = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (YG == DialogResult.Yes)
             {
                 MediaNews.Visible = true;
@@ -125,7 +125,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -167,7 +167,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -277,7 +277,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -291,7 +291,7 @@ namespace ZAFMC
         protected void EditMediaSermon_Click(object sender, EventArgs e)
         {
             MediaSermons.Visible = true;
-            DialogResult YG = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult YG = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (YG == DialogResult.Yes)
             {
                 UpdateEditedMediaSermon(); // Update the Record
@@ -334,7 +334,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -435,7 +435,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -558,7 +558,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -604,7 +604,7 @@ namespace ZAFMC
         protected void EditMediaVideo_Click(object sender, EventArgs e)
         {
             MediaVideos.Visible = true;
-            DialogResult YG = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult YG = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (YG == DialogResult.Yes)
             {
                 UpdateEditedMediaVideo(); // Update the Record
@@ -642,7 +642,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -682,7 +682,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
@@ -768,7 +768,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                MessageBox.Show(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                TopMostDialogs.ShowTopMost(P.Message, "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             finally
             {
@@ -807,7 +807,7 @@ namespace ZAFMC
         protected void EditMediaTestimony_Click(object sender, EventArgs e)
         {
             MediaTestm.Visible = true;
-            DialogResult YG = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult YG = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (YG == DialogResult.Yes)
             {
                 UpdateEditedMediaTestimony(); // Update the Record
@@ -846,7 +846,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                MessageBox.Show(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                TopMostDialogs.ShowTopMost(ZIM.Message, "ZAFMC- Update Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {
@@ -884,7 +884,7 @@ namespace ZAFMC
             }
             catch (Exception FORD)
             {
-                MessageBox.Show(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TopMostDialogs.ShowTopMost(FORD.ToString(), "ZAFMC-Viewing Events", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             finally
