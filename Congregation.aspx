@@ -24,24 +24,8 @@
             $("#<%=ViceLeader.ClientID%>> option[value=Vafundisi]").attr("disabled", "disabled")
             $("#<%=ViceLeader.ClientID%>> option[value=VaVhangeri]").attr("disabled", "disabled")
         });
-
-        //Blocks Save / Edit when the Date Of Birth is later than today (max is set server-side).
-        //LinkButton postbacks bypass the browser's own form validation, so check it here.
-        function zafmcCheckDob() {
-            var d = document.getElementById('<%=DOB.ClientID%>');
-            if (d && d.checkValidity && !d.checkValidity()) {
-                if (d.reportValidity) { d.reportValidity(); }
-                return false;
-            }
-            return true;
-        }
     </script>
     <div class="container">
-        <%-- On-page messages (success / warning / danger / info), filled by ShowMessage in the code-behind --%>
-        <asp:Panel ID="CongAlert" runat="server" Visible="false" ViewStateMode="Disabled" CssClass="alert alert-info alert-dismissible" role="alert" style="border:0.5px solid maroon">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <asp:Label ID="CongAlertText" runat="server" Font-Bold="True" Font-Size="Small"></asp:Label>
-        </asp:Panel>
         <div class="row">
             <%-- First Panel --%>
             <div class="col-md-4">
@@ -366,15 +350,15 @@
                     <%-- CRUD Controls --%>
                     <hr />
         
-                <asp:LinkButton ID="CongregationSave" CssClass="text-danger" ToolTip="Save data.." runat="server" OnClick="SaveCongregation_Click" OnClientClick="return zafmcCheckDob();"><strong>Save</strong></asp:LinkButton>
+                <asp:LinkButton ID="CongregationSave" CssClass="text-danger" ToolTip="Save data.." runat="server" OnClick="SaveCongregation_Click"><strong>Save</strong></asp:LinkButton>
                 |
                  <asp:LinkButton ID="CongregaView" CssClass="text-danger" ToolTip="View Data.." data-toggle="modal" data-target="#CongregationModal" runat="server"><strong>View</strong></asp:LinkButton>
                 |
-                 <asp:LinkButton ID="CongregationEdit" CssClass="text-danger" ToolTip="Edit data.." runat="server" OnClick="EditCongregation_Click" OnClientClick="return zafmcCheckDob() && confirm('Do you want to Update this Record..!!');"><strong>Edit</strong></asp:LinkButton>
+                 <asp:LinkButton ID="CongregationEdit" CssClass="text-danger" ToolTip="Edit data.." runat="server" OnClick="EditCongregation_Click"><strong>Edit</strong></asp:LinkButton>
                 |
                 <asp:LinkButton ID="CongregationRefresh" CssClass="text-danger" ToolTip="Refresh data.." runat="server" OnClick="RefreshCongregation_Click"><strong>Refresh</strong></asp:LinkButton>
                 |
-                 <asp:LinkButton ID="CongregationDel" CssClass="text-danger" ToolTip="Delete data.." runat="server" OnClick="DeleteCongregation_Click" OnClientClick="return confirm('Do you want to Delete this Record..!!');"><strong>Delete</strong></asp:LinkButton>
+                 <asp:LinkButton ID="CongregationDel" CssClass="text-danger" ToolTip="Delete data.." runat="server" OnClick="DeleteCongregation_Click"><strong>Delete</strong></asp:LinkButton>
                 |
                  <asp:LinkButton ID="CongregationsReset" CssClass="text-danger" ToolTip="Reset Fields.." runat="server" OnClick="ResetPage_Click"><strong>Reset</strong></asp:LinkButton>
                     <br />

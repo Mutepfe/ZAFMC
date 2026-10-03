@@ -10,6 +10,7 @@ using System.Data.OleDb;
 using System.Data.Entity;
 using System.Data.Sql;
 using System.Configuration; //For DBase connection in the Web.Config
+using System.Windows.Forms;
 using System.Data;
 using System.Globalization;
 using System.Web.ModelBinding;
@@ -106,23 +107,33 @@ namespace ZAFMC
                 ?? CongregationRules.ValidateMaxLength(key, 15, "Passport / ID");
             if (error != null)
             {
-                ShowValidationError(error);
+                ShowValidationError(error, "ZAFMC - Delete Record");
                 return;
             }
 
-            int? rows = CongregationDelete(key);
-            if (rows == null)
+            DialogResult MPJ = MessageBox.Show("Do you want to Delete this Record..!!", "ZAFMC - Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (MPJ == DialogResult.Yes)
             {
-                return; // error already shown
+                int? rows = CongregationDelete(key);
+                if (rows == null)
+                {
+                    return; // error already shown
+                }
+                if (rows == 0)
+                {
+                    MessageBox.Show("No member with Passport / ID '" + key + "' was found. Nothing was deleted.", "ZAFMC - Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                ResetForm(); //Resets Web Controls
+                CongregationConnection(); // Refresh the Database
+                MessageBox.Show("Member " + key + " deleted.", "ZAFMC - Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            if (rows == 0)
+            else
+               if (MPJ == DialogResult.No)
             {
-                ShowMessage("No member with Passport / ID '" + key + "' was found. Nothing was deleted.", "warning");
-                return;
+                ResetForm(); //Resets Web Controls (also clears the search box)
+                CongregationConnection(); //Refresh the DBase
             }
-            ResetForm(); //Resets Web Controls
-            CongregationConnection(); // Refresh the Database
-            ShowMessage("Member " + key + " deleted.", "success");
 
         }
 
@@ -148,7 +159,7 @@ namespace ZAFMC
             }
             catch (Exception ex)
             {
-                ShowDbError(ex, "deleted");
+                ShowDbError(ex, "deleted", "ZAFMC - Delete Error");
                 return null;
             }
             finally
@@ -166,7 +177,7 @@ namespace ZAFMC
         {
             if (EditPassportID != null)
             {
-                ShowMessage("You are editing an existing member. Use Edit to update it, or Reset for a new member.", "warning");
+                MessageBox.Show("You are editing an existing member. Use Edit to update it, or Reset for a new member.", "ZAFMC - Save Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -180,7 +191,7 @@ namespace ZAFMC
             ResetForm(); //Resets Web Controls
             CongregationConnection(); // Refresh Database
             CurrentMembershipNumber = number; // Show the generated Membership Number (re-applied in Page_PreRender)
-            ShowMessage("Member saved. Membership Number: " + number + "." + uploads, "success");
+            MessageBox.Show("Member saved. Membership Number: " + number + "." + uploads, "ZAFMC - Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
         }
@@ -188,7 +199,7 @@ namespace ZAFMC
         private string CongregationAddNew()
         {
             DateTime? dob, appointed, elected;
-            if (!TryReadMemberForm(out dob, out appointed, out elected))
+            if (!TryReadMemberForm("ZAFMC - Save Record", out dob, out appointed, out elected))
             {
                 return null;
             }
@@ -213,7 +224,7 @@ namespace ZAFMC
                 string number = Convert.ToString(membership.Value);
                 if (!CongregationRules.IsMembershipNumber(number))
                 {
-                    ShowMessage("The Membership Number could not be generated. Please contact the IT Department.", "danger");
+                    MessageBox.Show("The Membership Number could not be generated. Please contact the IT Department.", "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
                 return number;
@@ -221,7 +232,7 @@ namespace ZAFMC
             }
             catch (Exception P)
             {
-                ShowDbError(P, "saved");
+                ShowDbError(P, "saved", "ZAFMC-Insert Error");
                 return null;
             }
             finally
@@ -232,8 +243,8 @@ namespace ZAFMC
             }
         }
 
-        // Validates the member form; shows the first problem and returns false when invalid
-        private bool TryReadMemberForm(out DateTime? dob, out DateTime? appointed, out DateTime? elected)
+        // Validates the member form; shows the first problem (title = the operation) and returns false when invalid
+        private bool TryReadMemberForm(string title, out DateTime? dob, out DateTime? appointed, out DateTime? elected)
         {
             dob = null;
             appointed = null;
@@ -269,36 +280,28 @@ namespace ZAFMC
 
             if (error != null)
             {
-                ShowValidationError(error);
+                ShowValidationError(error, title);
                 return false;
             }
             return true;
         }
 
-        private void ShowValidationError(string message)
+        private static void ShowValidationError(string message, string title)
         {
-            ShowMessage(message, "warning");
+            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        // Shows an on-page Bootstrap alert; kind = success | warning | danger | info
-        private void ShowMessage(string text, string kind)
-        {
-            CongAlert.CssClass = "alert alert-" + kind + " alert-dismissible";
-            CongAlertText.Text = HttpUtility.HtmlEncode(text);
-            CongAlert.Visible = true;
-        }
-
-        // Logs the full error on the server and shows a friendly message (no SQL details in the browser)
-        private void ShowDbError(Exception ex, string action)
+        // Logs the full error on the server and shows a friendly message (no SQL details)
+        private static void ShowDbError(Exception ex, string action, string title)
         {
             System.Diagnostics.Trace.TraceError(ex.ToString());
             SqlException sql = ex as SqlException;
             if (sql != null && (sql.Number == 2627 || sql.Number == 2601))
             {
-                ShowMessage("A member with this Passport / ID already exists.", "danger");
+                MessageBox.Show("A member with this Passport / ID already exists.", title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            ShowMessage("The record could not be " + action + ". Please contact the IT Department.", "danger");
+            MessageBox.Show("The record could not be " + action + ". Please contact the IT Department.", title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         // Value of a member dropdown, including a remembered legacy value that was posted back
@@ -392,29 +395,39 @@ namespace ZAFMC
 
         }
 
-        //Update Congregation(Event): the "are you sure?" confirmation runs in the browser (OnClientClick)
+        //Update Congregation(Event): validates first, then asks Yes / No
         protected void EditCongregation_Click(object sender, EventArgs e)
         {
             DateTime? dob, appointed, elected;
-            if (!TryReadMemberForm(out dob, out appointed, out elected))
+            if (!TryReadMemberForm("ZAFMC - Update Record", out dob, out appointed, out elected))
             {
                 return;
             }
 
-            string key = EditPassportID ?? PassportID.Text;
-            int? rows = UpdateEditedCongregation(dob, appointed, elected); // Update the Record
-            if (rows == null)
+            DialogResult MPJ = MessageBox.Show("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (MPJ == DialogResult.Yes)
             {
-                return; // error already shown, keep the entered values
+                string key = EditPassportID ?? PassportID.Text;
+                int? rows = UpdateEditedCongregation(dob, appointed, elected); // Update the Record
+                if (rows == null)
+                {
+                    return; // error already shown, keep the entered values
+                }
+                if (rows == 0)
+                {
+                    MessageBox.Show("No member with Passport / ID '" + key + "' was found. Nothing was updated.", "ZAFMC - Update Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                ResetForm(); //Resets Web Controls
+                CongregationConnection();  //Refresh the DBase
+                MessageBox.Show("Member " + key + " updated.", "ZAFMC - Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            if (rows == 0)
+            else
+               if (MPJ == DialogResult.No)
             {
-                ShowMessage("No member with Passport / ID '" + key + "' was found. Nothing was updated.", "warning");
-                return;
+                ResetForm(); //Resets Web Controls (also clears the search box)
+                CongregationConnection(); //Refresh the DBase
             }
-            ResetForm(); //Resets Web Controls
-            CongregationConnection();  //Refresh the DBase
-            ShowMessage("Member " + key + " updated.", "success");
 
         }
 
@@ -442,7 +455,7 @@ namespace ZAFMC
             }
             catch (Exception ZIM)
             {
-                ShowDbError(ZIM, "updated");
+                ShowDbError(ZIM, "updated", "ZAFMC- Update Error");
                 return null;
             }
             finally
@@ -470,6 +483,7 @@ namespace ZAFMC
             string cs = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
             const string sql = "SELECT TOP 1 [CongMembershipNumber],[CongTitle],[CongName],[CongSurname],[CongDOB],[CongGender],[CongPassportID],[CongStatus],[CongProfession],[CongKin],[CongKinContact],[CongCell],[CongAddress],[CongEmail],[CongPosition],[CongDateAppointed],[CongManagerial],[CongDateElected],[CongProvince],[CongDistrict],[CongZone],[CongSection],[CongSnrLeader],[CongViceLeader] FROM [dbo].[Congregation] WHERE [CongPassportID] = @id";
 
+            bool found = false;
             try
             {
                 using (SqlConnection cn = new SqlConnection(cs))
@@ -479,52 +493,61 @@ namespace ZAFMC
                     cn.Open();
                     using (SqlDataReader r = cmd.ExecuteReader())
                     {
-                        if (!r.Read())
+                        if (r.Read())
                         {
-                            ShowMessage("Member not found. It may have been deleted.", "warning");
-                            return;
+                            found = true;
+
+                            Firstname.Text = ReadString(r, "CongName");
+                            Surname.Text = ReadString(r, "CongSurname");
+                            Profession.Text = ReadString(r, "CongProfession");
+                            NextOfKin.Text = ReadString(r, "CongKin");
+                            KinContact.Text = ReadString(r, "CongKinContact");
+                            CellNumber.Text = ReadString(r, "CongCell");
+                            PhysAddress.Text = ReadString(r, "CongAddress");
+                            EmailAdd.Text = ReadString(r, "CongEmail");
+                            DOB.Text = ReadDate(r, "CongDOB");
+                            DateAppointed.Text = ReadDate(r, "CongDateAppointed");
+                            DateElected.Text = ReadDate(r, "CongDateElected");
+
+                            string gender = ReadString(r, "CongGender");
+                            Gender.ClearSelection();
+                            if (gender == "Male" || gender == "Female")
+                            {
+                                Gender.SelectedValue = gender;
+                            }
+
+                            SetDropDown(Titles, ReadString(r, "CongTitle"));
+                            SetDropDown(MaritalStatus, ReadString(r, "CongStatus"));
+                            SetDropDown(RankPosition, ReadString(r, "CongPosition"));
+                            SetDropDown(ManagerialPost, ReadString(r, "CongManagerial"));
+                            SetDropDown(Province, ReadString(r, "CongProvince"));
+                            SetDropDown(District, ReadString(r, "CongDistrict"));
+                            SetDropDown(Zones, ReadString(r, "CongZone"));
+                            SetDropDown(Sect, ReadString(r, "CongSection"));
+                            SetDropDown(SeniorLeader, ReadString(r, "CongSnrLeader"));
+                            SetDropDown(ViceLeader, ReadString(r, "CongViceLeader"));
+
+                            EditPassportID = ReadString(r, "CongPassportID");
+                            CurrentMembershipNumber = ReadString(r, "CongMembershipNumber");
                         }
-
-                        Firstname.Text = ReadString(r, "CongName");
-                        Surname.Text = ReadString(r, "CongSurname");
-                        Profession.Text = ReadString(r, "CongProfession");
-                        NextOfKin.Text = ReadString(r, "CongKin");
-                        KinContact.Text = ReadString(r, "CongKinContact");
-                        CellNumber.Text = ReadString(r, "CongCell");
-                        PhysAddress.Text = ReadString(r, "CongAddress");
-                        EmailAdd.Text = ReadString(r, "CongEmail");
-                        DOB.Text = ReadDate(r, "CongDOB");
-                        DateAppointed.Text = ReadDate(r, "CongDateAppointed");
-                        DateElected.Text = ReadDate(r, "CongDateElected");
-
-                        string gender = ReadString(r, "CongGender");
-                        Gender.ClearSelection();
-                        if (gender == "Male" || gender == "Female")
-                        {
-                            Gender.SelectedValue = gender;
-                        }
-
-                        SetDropDown(Titles, ReadString(r, "CongTitle"));
-                        SetDropDown(MaritalStatus, ReadString(r, "CongStatus"));
-                        SetDropDown(RankPosition, ReadString(r, "CongPosition"));
-                        SetDropDown(ManagerialPost, ReadString(r, "CongManagerial"));
-                        SetDropDown(Province, ReadString(r, "CongProvince"));
-                        SetDropDown(District, ReadString(r, "CongDistrict"));
-                        SetDropDown(Zones, ReadString(r, "CongZone"));
-                        SetDropDown(Sect, ReadString(r, "CongSection"));
-                        SetDropDown(SeniorLeader, ReadString(r, "CongSnrLeader"));
-                        SetDropDown(ViceLeader, ReadString(r, "CongViceLeader"));
-
-                        EditPassportID = ReadString(r, "CongPassportID");
-                        CurrentMembershipNumber = ReadString(r, "CongMembershipNumber");
-                        ShowMessage("Editing " + CurrentMembershipNumber + " (" + EditPassportID + "). Passport / ID is locked. Click Reset for a new member.", "info");
                     }
                 }
             }
             catch (Exception ex)
             {
                 ResetForm();
-                ShowDbError(ex, "loaded");
+                ShowDbError(ex, "loaded", "ZAFMC - Select Error");
+                return;
+            }
+
+            // Shown after the connection is closed (MessageBox waits for OK)
+            if (found)
+            {
+                MessageBox.Show("Editing " + CurrentMembershipNumber + " (" + EditPassportID + "). Passport / ID is locked. Click Reset for a new member.", "ZAFMC - Select Member", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Member not found. It may have been deleted.", "ZAFMC - Select Member", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -553,7 +576,7 @@ namespace ZAFMC
             string term = (SearchCongregant.Text ?? string.Empty).Trim();
             if (term.Length > CongregationRules.SearchMaxLength)
             {
-                ShowValidationError("Search cannot be longer than " + CongregationRules.SearchMaxLength + " characters.");
+                ShowValidationError("Search cannot be longer than " + CongregationRules.SearchMaxLength + " characters.", "ZAFMC-Viewing Events");
                 return;
             }
 
@@ -671,7 +694,7 @@ namespace ZAFMC
             catch (Exception Upload)
             {
                 System.Diagnostics.Trace.TraceError(Upload.ToString());
-                result += " The photo / ID upload failed.";
+                MessageBox.Show("The photo / ID upload failed.", "ZAFMC - (Photo / Identity) Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             return result;
