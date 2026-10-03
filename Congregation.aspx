@@ -32,7 +32,7 @@
                 <asp:Panel ID="DetailsOne" runat="server" BorderStyle="None" Height="680px" ScrollBars="Auto" ToolTip="Capture details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
                     &nbsp;<asp:Label ID="MemNo" runat="server" CssClass="text-danger" Font-Bold="True" Style="font-size: small" Text="Membership Number"></asp:Label>
                     <br />
-                    <asp:TextBox ID="MembershipNumber" runat="server" ReadOnly="true" placeholder="Auto-generated.." MaxLength="20" Width="150px" Height="29px" style="border:0.5px solid maroon" CssClass="form-control text-uppercase" ToolTip="Generated automatically when the member is saved" BorderColor="Maroon"></asp:TextBox>
+                    <asp:TextBox ID="MembershipNumber" runat="server" ReadOnly="true" placeholder="Auto-generated.." MaxLength="20" Width="150px" Height="29px" style="border:0.5px solid maroon" Font-Size="9pt" Font-Bold="True" CssClass="form-control text-uppercase" ToolTip="Generated automatically when the member is saved" BorderColor="Maroon"></asp:TextBox>
                     &nbsp;<asp:Label ID="Tit" runat="server" CssClass="text-danger" Font-Bold="True" Style="font-size: small" Text="Title"></asp:Label>
                     <asp:DropDownList ID="Titles" runat="server" style="border:0.5px solid maroon" AutoPostBack="False" CssClass="form-control" Height="29px" ToolTip="Salutation!!" Width="150px">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
