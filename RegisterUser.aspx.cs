@@ -167,12 +167,12 @@ namespace ZAFMC
                 ResetControls(Page); //Resets Controls
             }
             else
-               if (CH == DialogResult.No)
-            {
+                if (CH == DialogResult.No)
+                {
 
-                RegisterUserConnection();
-                ResetControls(Page); //Resets Controls
-            }
+                    RegisterUserConnection();
+                    ResetControls(Page); //Resets Controls
+                }
 
         }
 
@@ -274,10 +274,10 @@ namespace ZAFMC
                 //MediaList.DataSource = MHO;
                 //MediaList.DataBind();
             }
-            catch(Exception JM)
+            catch (Exception JM)
             {
-                TopMostDialogs.ShowTopMost(JM.Message.ToString(), "ZAFMC Connection Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                
+                TopMostDialogs.ShowTopMost(JM.Message.ToString(), "ZAFMC Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
             finally
             {
@@ -332,9 +332,9 @@ namespace ZAFMC
                     }
                     else
                         if (ctr.Controls.Count > 0)
-                    {
-                        ResetControls(ctr);
-                    }
+                        {
+                            ResetControls(ctr);
+                        }
                 }
 
 
@@ -355,28 +355,28 @@ namespace ZAFMC
         //    if (UserPassword.Length < 5)
         //    {
         //        MessageBox.Show("Password must be more than (5) Characters..", "Password Characters", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                
+
         //    }
         //    else
         //    // No White Space OR Empty Spaces
         //    if (UserPassword.Contains(" "))
         //    {
         //        MessageBox.Show("Space bar key is NOT allowed !!", "Password White Space", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                
+
         //    }
         //    else
         //    // At Least One Capital Letter
         //    if (!UserPassword.Any(char.IsUpper))
         //    {
         //        MessageBox.Show("Your password must have a Capital Letter", "Password Capital Letter", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-               
+
         //    }
         //    else
         //    // At Least One LowerCase Letter
         //    if (!UserPassword.Any(char.IsLower))
         //    {
         //        MessageBox.Show("Password must have a LowerCase Letter", "Password LowerCase Letter", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                
+
         //    }
 
         //    // No two Similar Characters
@@ -393,10 +393,10 @@ namespace ZAFMC
         //    foreach (char B in UC)
         //    {
         //        if (UserPassword.Contains(B)) ;
-                    
+
         //    }
         //    MessageBox.Show("Password must have a Special Character", "Password Special Character", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-           
+
 
         //}
 

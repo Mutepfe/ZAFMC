@@ -32,7 +32,7 @@
                 <asp:Panel ID="DetailsOne" runat="server" BorderStyle="None" Height="680px" ScrollBars="Auto" ToolTip="Capture details.." CssClass="form-control" ViewStateMode="Disabled" BorderColor="Maroon">
                     &nbsp;<asp:Label ID="MemNo" runat="server" CssClass="text-danger" Font-Bold="True" Style="font-size: small" Text="Membership Number"></asp:Label>
                     <br />
-                    <asp:TextBox ID="MembershipNumber" runat="server" ReadOnly="true" placeholder="ZAFMC Membership.." MaxLength="15" Width="150px" Height="29px" style="border:0.5px solid maroon" Font-Size="9pt" Font-Bold="True" CssClass="form-control text-uppercase" ToolTip="Generated automatically when the member is saved" BorderColor="Maroon"></asp:TextBox>
+                    <asp:TextBox ID="MembershipNumber" runat="server" ReadOnly="true" placeholder="ZAFMC Membership.." MaxLength="15" Width="150px" Height="29px" style="border:0.5px solid maroon" Font-Size="9pt" Font-Bold="True" CssClass="form-control text-uppercase" ToolTip="Generated automatically when Generate Barcode is ticked or the member is saved" BorderColor="Maroon"></asp:TextBox>
                     &nbsp;<asp:Label ID="Tit" runat="server" CssClass="text-danger" Font-Bold="True" Style="font-size: small" Text="Title"></asp:Label>
                     <asp:DropDownList ID="Titles" runat="server" style="border:0.5px solid maroon" AutoPostBack="False" CssClass="form-control" Height="29px" ToolTip="Salutation!!" Width="150px">
                         <asp:ListItem Text="Select.." Value="-1"></asp:ListItem>
@@ -337,15 +337,20 @@
                     <br />
                     <br />
                     <asp:FileUpload ID="IDPass" runat="server" style="border:0.5px solid maroon" CssClass="form-control" ForeColor="Maroon"  Font-Bold="True" Font-Size="Small" Height="30px" Width="350px" ToolTip="Upload Identity!!" />
+                    <%-- Shows the ID / Passport document stored for the loaded member (set from the code-behind) --%>
+                    <asp:Label ID="PassIDStored" runat="server" CssClass="text-danger" Font-Size="Small"></asp:Label>
                     <br />
                     <asp:Label ID="FNGT" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Fingerprint"></asp:Label>
                     <br /> <br />
                     <asp:Image ID="FingerPrint" runat="server" BorderColor="Maroon" style="border:0.5px solid maroon"  Height="70px" Width="150px"  />
                     <br />
                     <br />
-                    <asp:Image ID="Barcode" runat="server" BorderColor="Maroon" style="border:0.5px solid maroon"  Height="70px" Width="150px" />
+                    <%-- PDF417 barcode: set from the code-behind (generated on Save / Generate Barcode, loaded on Select) --%>
+                    <%-- Width / Height are set to the PNG's native pixel size when a barcode is shown; content-box keeps the
+                         border outside that size and pixelated rendering keeps the bars sharp (never scale a PDF417) --%>
+                    <asp:Image ID="Barcode" runat="server" BorderColor="Maroon" style="border:0.5px solid maroon; box-sizing:content-box; max-width:none !important; background-color:#fff; image-rendering:crisp-edges; image-rendering:pixelated; -ms-interpolation-mode:nearest-neighbor"  Height="70px" Width="150px" />
                     <br /> 
-                    <asp:CheckBox ID="GenerateBarcode" runat="server" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Generate Barcode" ToolTip="Unique Data Barcode!!" />
+                    <asp:CheckBox ID="GenerateBarcode" runat="server" AutoPostBack="true" OnCheckedChanged="GenerateBarcode_CheckedChanged" ViewStateMode="Enabled" CssClass="text-danger" Font-Bold="True" Font-Size="Small" Text="Generate Barcode" ToolTip="Unique Data Barcode!!" />
                     <br /><br />
                     <%-- CRUD Controls --%>
                     <hr />

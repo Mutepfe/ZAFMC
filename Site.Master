@@ -130,13 +130,14 @@
                             <hr />
                             <asp:Label ID="LUSER" runat="server" Font-Size="Small" Text="  Logged In User" Font-Bold="True" CssClass="text-danger"></asp:Label>
                             <div class="input-group">
-                                <i class="input-group-addon glyphicon glyphicon-user" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
+                                <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"><i class="glyphicon glyphicon-user"></i></span>
                                 <asp:TextBox ID="LogInUser" runat="server" ReadOnly="true" Height="30px" Width="155px" BorderStyle="Groove" MaxLength="20" CssClass="form-control text-uppercase" ToolTip="Logged User !!" BorderColor="Maroon"></asp:TextBox>
                             </div>
                             <asp:Label ID="Paswd" runat="server" Font-Size="Small" Text=" Enter Password" Font-Bold="True" CssClass="text-danger"></asp:Label>
                             <div class="input-group">
-                                <i class="input-group-addon glyphicon glyphicon-knight" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
-                                <asp:TextBox ID="PasswordLock" runat="server" type="password" placeholder="Password..." Height="30px" MaxLength="20" Width="155px" BorderStyle="Groove" ViewStateMode="Disabled" CssClass="form-control" ToolTip="Your Password!!" BorderColor="Maroon"></asp:TextBox>
+                                <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"><i class="glyphicon glyphicon-knight"></i></span>
+                                <%-- TextMode="Password": ASP.NET never writes the password back into the page; autocomplete="new-password" stops browser autofill --%>
+                                <asp:TextBox ID="PasswordLock" runat="server" TextMode="Password" autocomplete="new-password" placeholder="Password..." Height="30px" MaxLength="20" Width="155px" BorderStyle="Groove" ViewStateMode="Disabled" CssClass="form-control" ToolTip="Your Password!!" BorderColor="Maroon"></asp:TextBox>
 
                             </div>
 
@@ -177,32 +178,32 @@
                             <div style="overflow-y: scroll; height: 420px; width: auto;">
                                 <asp:Label ID="PassptID" runat="server" Font-Size="Small" Text="ID Number / Passport" Font-Bold="True" CssClass="text-danger"></asp:Label>
                                 <div class="input-group">
-                                    <i class="input-group-addon glyphicon glyphicon-road" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
+                                    <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"><i class="glyphicon glyphicon-road"></i></span>
                                     <asp:TextBox ID="PassportIdentity" runat="server" placeholder="ID Number.." ReadOnly="true" Height="30px" Width="144px" BorderStyle="Groove" MaxLength="20" ViewStateMode="Disabled" CssClass="form-control text-uppercase" ToolTip="ID Number / Passport !!" BorderColor="Maroon"></asp:TextBox>
                                 </div>
                                 <asp:Label ID="FNam" runat="server" Font-Size="Small" Text="Firstname" Font-Bold="True" CssClass="text-danger"></asp:Label>
                                 <div class="input-group">
-                                    <i class="input-group-addon glyphicon glyphicon-user" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
+                                    <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"><i class="glyphicon glyphicon-user"></i></span>
                                     <asp:TextBox ID="LogFirstname" runat="server" placeholder="Firstname.." ReadOnly="true" Height="30px" Width="144px" BorderStyle="Groove" MaxLength="20" ViewStateMode="Disabled" CssClass="form-control text-capitalize" ToolTip="Firstname !!" BorderColor="Maroon"></asp:TextBox>
                                 </div>
                                 <asp:Label ID="SNam" runat="server" Font-Size="Small" Text="Surname" Font-Bold="True" CssClass="text-danger"></asp:Label>
                                 <div class="input-group">
-                                    <i class="input-group-addon glyphicon glyphicon-signal" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
+                                    <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"><i class="glyphicon glyphicon-signal"></i></span>
                                     <asp:TextBox ID="LogSurname" runat="server" placeholder="Surname.." ReadOnly="true" Height="30px" Width="144px" BorderStyle="Groove" MaxLength="20" ViewStateMode="Disabled" CssClass="form-control text-capitalize" ToolTip="Surname !!" BorderColor="Maroon"></asp:TextBox>
                                 </div>
                                 <asp:Label ID="MobNm" runat="server" Font-Size="Small" Text="Mobile" Font-Bold="True" CssClass="text-danger"></asp:Label>
                                 <div class="input-group">
-                                    <i class="input-group-addon glyphicon glyphicon-phone" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
+                                    <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"><i class="glyphicon glyphicon-phone"></i></span>
                                     <asp:TextBox ID="LogMobile" runat="server" placeholder="Mobile.." ReadOnly="true" Height="30px" Width="144px" BorderStyle="Groove" MaxLength="15" ViewStateMode="Disabled" CssClass="form-control text-capitalize" ToolTip="Mobile !!" BorderColor="Maroon"></asp:TextBox>
                                 </div>
                                 <asp:Label ID="LoMal" runat="server" Font-Size="Small" Text="Email" Font-Bold="True" CssClass="text-danger"></asp:Label>
                                 <div class="input-group">
-                                    <i class="input-group-addon glyphicon glyphicon-envelope" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
+                                    <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"><i class="glyphicon glyphicon-envelope"></i></span>
                                     <asp:TextBox ID="LogEmail" runat="server" placeholder="Email.." ReadOnly="true" Height="30px" Width="144px" BorderStyle="Groove" MaxLength="50" ViewStateMode="Disabled" CssClass="form-control" ToolTip="Email !!" BorderColor="Maroon"></asp:TextBox>
                                 </div>
                                 <asp:Label ID="RankPo" runat="server" Font-Size="Small" Text="Church Position" Font-Bold="True" CssClass="text-danger"></asp:Label>
                                 <div class="input-group">
-                                    <i class="input-group-addon glyphicon glyphicon-bishop" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"></i>
+                                    <span class="input-group-addon" style="background-color: darkgrey; border-left-color: maroon; border-top-color: maroon; border-bottom-color: maroon"><i class="glyphicon glyphicon-bishop"></i></span>
                                     <asp:TextBox ID="LogRankPost" runat="server" placeholder="Position.." Height="30px" Width="144px" ReadOnly="true" BorderStyle="Groove" MaxLength="20" ViewStateMode="Disabled" CssClass="form-control text-capitalize" ToolTip="Church Position !!" BorderColor="Maroon"></asp:TextBox>
                                 </div>
                                 <hr />
@@ -210,7 +211,12 @@
                                 <hr />
 
                                 <%-- SQLDatasource to Bind data to Modal Form Grid View --%>
-                                <asp:SqlDataSource ID="AccountInfoView" runat="server" ConnectionString="<%$ ConnectionStrings:ZionRegisterUser %>" SelectCommand="SELECT [LogInPassportID] as [Username],[LogInFirstname] as [Firstname],[LogInSurname] as [Surname],[LogInMacAddress] as [PC MacAddress],(REPLACE(convert(nvarchar,[LogInDateTime],106),'','/')) as [LoggedIn Date & Time] FROM .[LogIn] ORDER BY [LogInPassportID]"></asp:SqlDataSource>
+                                <%-- Only the logged in user's own logins; OnSelecting cancels the query when nobody is logged in --%>
+                                <asp:SqlDataSource ID="AccountInfoView" runat="server" ConnectionString="<%$ ConnectionStrings:ZionRegisterUser %>" OnSelecting="AccountInfoView_Selecting" SelectCommand="SELECT [Username],[Firstname],[Surname],[MacAddress] as [PC MacAddress],FORMAT([LoginDateTime],'dd MMM yyyy HH:mm','en-GB') as [LoggedIn Date & Time] FROM [dbo].[UserLoginHistory] WHERE [Username] = @Username ORDER BY [LoginDateTime] DESC, [Id] DESC">
+                                    <SelectParameters>
+                                        <asp:SessionParameter Name="Username" SessionField="LoggedInUsername" Type="String" Size="20" />
+                                    </SelectParameters>
+                                </asp:SqlDataSource>
 
                                 <%-- Grid View User Log In History --%>
                                 <asp:GridView ID="UserLogHistory" runat="server" ToolTip="User LogIn History..." CellPadding="4" ForeColor="#333333" GridLines="Both" DataSourceID="AccountInfoView" AllowPaging="True" ShowHeaderWhenEmpty="True">

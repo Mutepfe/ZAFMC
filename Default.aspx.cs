@@ -167,6 +167,9 @@ namespace ZAFMC
             IdentityPassportDummy.Text = PassID.Text;
 
             Session["IDPassportValue"] = IdentityPassportDummy.Text;
+
+            //A new login attempt: forget the previously verified user until this attempt fully succeeds (see LogOn)
+            Session.Remove("LoggedInUsername");
         }
         
         //Login method
@@ -227,6 +230,13 @@ namespace ZAFMC
             //Nothing is missing, all fields are correct
             if (LIV && OTV && APD)
             {
+                //Record the successful login in the User LogIn History (never blocks the login)
+                UserLoginHistory.Record(PassID.Text, Request.UserHostAddress);
+
+                //Username of the fully verified login (ID/Passport + Password + OTP), shown on the Lock modal in Site.Master
+                Session["LoggedInUsername"] = PassID.Text;
+                //A new login starts with no wrong Lock-screen passwords
+                Session.Remove(LockScreen.FailedAttemptsSessionKey);
 
                 //Enable all the Menus and login
                 EnableDefaultMenus();

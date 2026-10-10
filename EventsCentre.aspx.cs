@@ -45,14 +45,14 @@ namespace ZAFMC
 
             string EvtDel = ConfigurationManager.ConnectionStrings["ZionEvents"].ConnectionString; // ZionEvents From Web.Config under ConnectionString Settings
             SqlConnection EvCon = new SqlConnection(EvtDel);
-            SqlCommand RUDO = new SqlCommand("DeleteEvent", EvCon);
+            SqlCommand Connie = new SqlCommand("DeleteEvent", EvCon);
 
             try
             {
-                RUDO.Parameters.AddWithValue("@DelEVT", EventName.Text); //@DelEVT StoredProcedure actual parameter passed in the DB
-                RUDO.CommandType = System.Data.CommandType.StoredProcedure;
+                Connie.Parameters.AddWithValue("@DelEVT", EventName.Text); //@DelEVT StoredProcedure actual parameter passed in the DB
+                Connie.CommandType = System.Data.CommandType.StoredProcedure;
                 EvCon.Open();
-                RUDO.ExecuteNonQuery();
+                Connie.ExecuteNonQuery();
                 EventsConnection(); // Refresh the Database
 
             }
@@ -62,7 +62,7 @@ namespace ZAFMC
             }
             finally
             {
-                RUDO.Dispose(); //Clean up memory
+                Connie.Dispose(); //Clean up memory
                 EvCon.Close(); //Close DBase  connection
             }
 

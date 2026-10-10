@@ -35,6 +35,37 @@ namespace ZAFMC
             set { ViewState["CurrentMembershipNumber"] = value; }
         }
 
+        // PDF417 barcode (PNG, Base64) shown in the Barcode Image box while that member / preview is current.
+        private string CurrentBarcodePng
+        {
+            get { return ViewState["CurrentBarcodePng"] as string; }
+            set { ViewState["CurrentBarcodePng"] = value; }
+        }
+
+        // New member: Membership Number reserved by Generate Barcode / Save (dbo.ReserveMembershipNumber).
+        // Server-side only (MAC-protected ViewState); the read-only box is never read back. Reused until the
+        // member is saved, and cleared by Reset / Select (the number stays burned in the registry).
+        private string ReservedMembershipNumber
+        {
+            get { return ViewState["ReservedMembershipNumber"] as string; }
+            set { ViewState["ReservedMembershipNumber"] = value; }
+        }
+
+        // New member: payload of the barcode shown in CurrentBarcodePng (Save regenerates it only when this changed)
+        private string GeneratedBarcodePayload
+        {
+            get { return ViewState["GeneratedBarcodePayload"] as string; }
+            set { ViewState["GeneratedBarcodePayload"] = value; }
+        }
+
+        // Barcode payload built from the loaded member's saved values (null = new-member mode).
+        // Used to tell whether Update changed an encoded field, and to refuse encoding unsaved edits.
+        private string LoadedBarcodePayload
+        {
+            get { return ViewState["LoadedBarcodePayload"] as string; }
+            set { ViewState["LoadedBarcodePayload"] = value; }
+        }
+
         // Stored dropdown values of the loaded member that are not in the dropdown's list
         // (control ID -> value). Re-added on every request so Update does not lose them.
         private Hashtable LegacyDropDowns
@@ -72,6 +103,17 @@ namespace ZAFMC
         protected void Page_PreRender(object sender, EventArgs e)
         {
             MembershipNumber.Text = CurrentMembershipNumber ?? string.Empty;
+
+            string barcode = CurrentBarcodePng;
+            Barcode.ImageUrl = barcode == null ? string.Empty : "data:image/png;base64," + barcode;
+            Barcode.AlternateText = barcode == null ? string.Empty : "PDF417 barcode of the member";
+            // Show the barcode at its exact pixel size: a scaled PDF417 (e.g. squeezed into the 150 x 70 box)
+            // blurs its narrow bars and cannot be scanned. The empty box keeps its 150 x 70 placeholder size.
+            var barcodeSize = barcode == null ? null : CongregationBarcode.PngSize(Convert.FromBase64String(barcode));
+            Barcode.Width = Unit.Pixel(barcodeSize.HasValue ? barcodeSize.Value.Width : 150);
+            Barcode.Height = Unit.Pixel(barcodeSize.HasValue ? barcodeSize.Value.Height : 70);
+
+            ShowStoredFiles(EditPassportID);
 
             if (EditPassportID != null)
             {
@@ -181,30 +223,80 @@ namespace ZAFMC
                 return;
             }
 
-            CurrentMembershipNumber = null; // a new member is being created
-            string number = CongregationAddNew(); // Add or Save Record
+            // Every barcode detail is required: Save generates the barcode when it was not generated yet
+            string missing = CongregationRules.ValidateSaveFields(GetDropDownValue(Titles), Firstname.Text, Surname.Text,
+                DOB.Text, Gender.SelectedValue, PassportID.Text);
+            if (missing != null)
+            {
+                ShowValidationError(missing, "ZAFMC - Save Record");
+                return; // nothing saved, no number reserved
+            }
+            DateTime? dob, appointed, elected;
+            if (!TryReadMemberForm("ZAFMC - Save Record", out dob, out appointed, out elected))
+            {
+                return;
+            }
+            MemberUploads files = ReadUploads("ZAFMC - Save Record");
+            if (files == null)
+            {
+                return;
+            }
+
+            // Same as ticking Generate Barcode: the page's reserved number (reserved now if not yet) and its barcode
+            string reserved = EnsureReservedMembershipNumber();
+            if (reserved == null)
+            {
+                TopMostDialogs.ShowTopMost("The Membership Number could not be generated. Please contact the IT Department.", "ZAFMC-Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            byte[] barcode = NewMemberBarcode(reserved);
+            if (barcode != null)
+            {
+                GenerateBarcode.Checked = true;
+            }
+
+            string number = CongregationAddNew(dob, appointed, elected, files, reserved, barcode); // Add or Save Record (barcode in the same INSERT)
             if (number == null)
             {
-                return; // Validation or insert failed: keep the entered values
+                return; // Insert failed: keep the entered values and the reservation (a corrected Save reuses it)
+            }
+            bool newNumber = number != reserved;
+            if (newNumber)
+            {
+                // The reserved number was taken meanwhile: AddNewCongregation saved the member WITHOUT a barcode
+                // (CongBarcode NULL, migration 006), because the one passed in encodes the reserved number.
+                // Store a barcode with the number actually saved. A failure here never undoes the save: the member
+                // is kept without a barcode, the on-screen barcode (reserved number) is cleared and a warning is shown.
+                barcode = GenerateFormBarcode(number);
+                if (barcode == null || StoreBarcode(PassportID.Text, barcode) != 1)
+                {
+                    barcode = null;
+                }
             }
             string uploads = UpLoadsFiles();       //Save Photo
             ResetForm(); //Resets Web Controls
             CongregationConnection(); // Refresh Database
-            CurrentMembershipNumber = number; // Show the generated Membership Number (re-applied in Page_PreRender)
+            CurrentMembershipNumber = number; // Show the saved Membership Number (re-applied in Page_PreRender)
+            CurrentBarcodePng = barcode == null ? null : Convert.ToBase64String(barcode); // Show the stored barcode (none when the member has none)
+            if (newNumber)
+            {
+                TopMostDialogs.ShowTopMost("The reserved Membership Number " + reserved + " was already used, so the member was saved with a new Membership Number: " + number + ".", "ZAFMC - Save Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             TopMostDialogs.ShowTopMost("Member saved. Membership Number: " + number + "." + uploads, "ZAFMC - Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (barcode == null)
+            {
+                // The row has no barcode (CongBarcode NULL): generating or storing it failed
+                TopMostDialogs.ShowTopMost("Member " + number + " was saved without a barcode, because the barcode could not be generated or saved. Select the member and tick Generate Barcode to try again.", "ZAFMC - Barcode", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             MembershipNumber.Text = "ZAFMC Membership";
 
 
         }
-        //AddNew Congregation (Method): returns the generated Membership Number, or null when nothing was saved
-        private string CongregationAddNew()
+        //AddNew Congregation (Method): inserts the validated form with its barcode (CongBarcode).
+        //reserved: the page's reserved number, used when still free; otherwise the database issues a fresh one.
+        //Returns the Membership Number actually saved, or null when nothing was saved.
+        private string CongregationAddNew(DateTime? dob, DateTime? appointed, DateTime? elected, MemberUploads files, string reserved, byte[] barcode)
         {
-            DateTime? dob, appointed, elected;
-            if (!TryReadMemberForm("ZAFMC - Save Record", out dob, out appointed, out elected))
-            {
-                return null;
-            }
-
             string CongInsert = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
             SqlConnection CID = new SqlConnection(CongInsert);
             SqlCommand Prosper = new SqlCommand("AddNewCongregation", CID);
@@ -214,8 +306,10 @@ namespace ZAFMC
 
                 Prosper.CommandType = CommandType.StoredProcedure;
 
-                AddMemberParameters(Prosper, dob, appointed, elected);
-                // Generated by the database; any value typed or posted for it is ignored
+                AddMemberParameters(Prosper, dob, appointed, elected, barcode, files);
+                // Server-side reservation only (never the posted box); the database checks it is still free
+                Prosper.Parameters.Add(new SqlParameter("@ReservedMembershipNumber", SqlDbType.NVarChar, 20) { Value = (object)reserved ?? DBNull.Value });
+                // Number actually saved (the reserved one, or a fresh one); any value typed or posted for it is ignored
                 SqlParameter membership = new SqlParameter("@CongMembershipNumber", SqlDbType.NVarChar, 20) { Direction = ParameterDirection.Output };
                 Prosper.Parameters.Add(membership);
 
@@ -242,6 +336,41 @@ namespace ZAFMC
                 CID.Close(); //Close DBase  connection
 
             }
+        }
+
+        // Uploaded photo / ID document of this request, checked by file signature (stored as bytes on the member's row)
+        private sealed class MemberUploads
+        {
+            public byte[] Photo;
+            public string PhotoType;
+            public byte[] PassID;
+            public string PassIDType;
+            public string PassIDFileName;
+        }
+
+        // Reads and checks the uploads; shows a Warning (title = the operation) and returns null when a file is rejected
+        private MemberUploads ReadUploads(string title)
+        {
+            MemberUploads files = new MemberUploads();
+            if (PhotoUpload.HasFile)
+            {
+                files.Photo = PhotoUpload.FileBytes;
+            }
+            if (IDPass.HasFile)
+            {
+                files.PassID = IDPass.FileBytes;
+                files.PassIDFileName = System.IO.Path.GetFileName(IDPass.FileName);
+            }
+
+            string error = CongregationRules.ValidateUpload(files.Photo, "The photo", false, out files.PhotoType)
+                ?? CongregationRules.ValidateUpload(files.PassID, "The ID / Passport document", true, out files.PassIDType)
+                ?? CongregationRules.ValidateMaxLength(files.PassIDFileName, 260, "The ID / Passport file name");
+            if (error != null)
+            {
+                ShowValidationError(error + "\n\nNothing was saved.", title);
+                return null;
+            }
+            return files;
         }
 
         // Validates the member form; shows the first problem (title = the operation) and returns false when invalid
@@ -343,7 +472,9 @@ namespace ZAFMC
         }
 
         // Parameters shared by AddNewCongregation and UpdateCongregation (names match the procs)
-        private void AddMemberParameters(SqlCommand cmd, DateTime? dob, DateTime? appointed, DateTime? elected)
+        // barcode: PNG for @CongBarcode, or null (Add: set after the insert; Update: keeps the stored barcode)
+        // files: uploaded photo / ID bytes; a file that was not uploaded is sent as NULL (Update keeps the stored one)
+        private void AddMemberParameters(SqlCommand cmd, DateTime? dob, DateTime? appointed, DateTime? elected, byte[] barcode, MemberUploads files)
         {
             cmd.Parameters.AddWithValue("@CongTitle", GetDropDownValue(Titles));
             cmd.Parameters.AddWithValue("@CongName", Firstname.Text);
@@ -368,12 +499,18 @@ namespace ZAFMC
             cmd.Parameters.AddWithValue("@CongSection", GetDropDownValue(Sect));
             cmd.Parameters.AddWithValue("@CongSnrLeader", GetDropDownValue(SeniorLeader));
             cmd.Parameters.AddWithValue("@CongViceLeader", GetDropDownValue(ViceLeader));
-            cmd.Parameters.AddWithValue("@CongPhoto", PersonPhoto.ImageUrl);
+            // The photo box may show the stored photo as an inline data: URL; that is never a path to store
+            cmd.Parameters.AddWithValue("@CongPhoto", PersonPhoto.ImageUrl.StartsWith("data:", StringComparison.Ordinal) ? string.Empty : PersonPhoto.ImageUrl);
             cmd.Parameters.AddWithValue("@CongPassID", PassID.ImageUrl);
             cmd.Parameters.AddWithValue("@CongregationID", DBNull.Value);
             // image columns: must be typed as Image (an nvarchar value clashes with image)
             cmd.Parameters.Add(new SqlParameter("@CongFingerprint", SqlDbType.Image) { Value = DBNull.Value });
-            cmd.Parameters.Add(new SqlParameter("@CongBarcode", SqlDbType.Image) { Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@CongBarcode", SqlDbType.Image) { Value = (object)barcode ?? DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@CongPhotoData", SqlDbType.VarBinary, -1) { Value = (object)files.Photo ?? DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@CongPhotoContentType", SqlDbType.NVarChar, 100) { Value = (object)files.PhotoType ?? DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@CongPassIDData", SqlDbType.VarBinary, -1) { Value = (object)files.PassID ?? DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@CongPassIDContentType", SqlDbType.NVarChar, 100) { Value = (object)files.PassIDType ?? DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@CongPassIDFileName", SqlDbType.NVarChar, 260) { Value = (object)files.PassIDFileName ?? DBNull.Value });
         }
 
         //Refresh Congregation(Event): clear the form and the search box first, then rebind the full list
@@ -404,12 +541,27 @@ namespace ZAFMC
             {
                 return;
             }
+            MemberUploads files = ReadUploads("ZAFMC - Update Record");
+            if (files == null)
+            {
+                return;
+            }
 
             DialogResult MPJ = TopMostDialogs.ShowTopMost("Do you want to Update this Record..!!", "ZAFMC - Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (MPJ == DialogResult.Yes)
             {
                 string key = EditPassportID ?? PassportID.Text;
-                int? rows = UpdateEditedCongregation(dob, appointed, elected); // Update the Record
+                // Keep the barcode in sync: regenerate it (saved in the same UPDATE) when an encoded field
+                // of the loaded member changed. Membership Number and Passport / ID never change.
+                byte[] barcode = null;
+                bool barcodeFailed = false;
+                // A member without a stored barcode also gets one.
+                if (EditPassportID != null && (BuildFormPayload(CurrentMembershipNumber) != LoadedBarcodePayload || CurrentBarcodePng == null))
+                {
+                    barcode = GenerateFormBarcode(CurrentMembershipNumber);
+                    barcodeFailed = barcode == null;
+                }
+                int? rows = UpdateEditedCongregation(dob, appointed, elected, barcode, files); // Update the Record
                 if (rows == null)
                 {
                     return; // error already shown, keep the entered values
@@ -422,6 +574,10 @@ namespace ZAFMC
                 ResetForm(); //Resets Web Controls
                 CongregationConnection();  //Refresh the DBase
                 TopMostDialogs.ShowTopMost("Member " + key + " updated.", "ZAFMC - Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (barcodeFailed)
+                {
+                    TopMostDialogs.ShowTopMost("Member " + key + " was updated, but the barcode could not be regenerated. Select the member and tick Generate Barcode to try again.", "ZAFMC - Barcode", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
                if (MPJ == DialogResult.No)
@@ -434,7 +590,7 @@ namespace ZAFMC
 
         //Update Congregation(Method): the Membership Number is permanent and is never sent.
         //Returns the number of updated rows, or null on error.
-        private int? UpdateEditedCongregation(DateTime? dob, DateTime? appointed, DateTime? elected)
+        private int? UpdateEditedCongregation(DateTime? dob, DateTime? appointed, DateTime? elected, byte[] barcode, MemberUploads files)
         {
 
             string ALLAN = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
@@ -444,7 +600,7 @@ namespace ZAFMC
             try
             {
                 ANITA.CommandType = System.Data.CommandType.StoredProcedure;
-                AddMemberParameters(ANITA, dob, appointed, elected);
+                AddMemberParameters(ANITA, dob, appointed, elected, barcode, files);
                 SqlParameter rows = new SqlParameter("@RowsAffected", SqlDbType.Int) { Direction = ParameterDirection.Output };
                 ANITA.Parameters.Add(rows);
 
@@ -482,7 +638,7 @@ namespace ZAFMC
             ResetForm();
 
             string cs = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
-            const string sql = "SELECT TOP 1 [CongMembershipNumber],[CongTitle],[CongName],[CongSurname],[CongDOB],[CongGender],[CongPassportID],[CongStatus],[CongProfession],[CongKin],[CongKinContact],[CongCell],[CongAddress],[CongEmail],[CongPosition],[CongDateAppointed],[CongManagerial],[CongDateElected],[CongProvince],[CongDistrict],[CongZone],[CongSection],[CongSnrLeader],[CongViceLeader] FROM [dbo].[Congregation] WHERE [CongPassportID] = @id";
+            const string sql = "SELECT TOP 1 [CongMembershipNumber],[CongTitle],[CongName],[CongSurname],[CongDOB],[CongGender],[CongPassportID],[CongStatus],[CongProfession],[CongKin],[CongKinContact],[CongCell],[CongAddress],[CongEmail],[CongPosition],[CongDateAppointed],[CongManagerial],[CongDateElected],[CongProvince],[CongDistrict],[CongZone],[CongSection],[CongSnrLeader],[CongViceLeader],[CongBarcode] FROM [dbo].[Congregation] WHERE [CongPassportID] = @id";
 
             bool found = false;
             try
@@ -530,6 +686,11 @@ namespace ZAFMC
 
                             EditPassportID = ReadString(r, "CongPassportID");
                             CurrentMembershipNumber = ReadString(r, "CongMembershipNumber");
+
+                            // Stored PDF417 barcode, and the payload of the saved values (to detect edits)
+                            byte[] stored = r["CongBarcode"] as byte[];
+                            CurrentBarcodePng = stored != null && stored.Length > 0 ? Convert.ToBase64String(stored) : null;
+                            LoadedBarcodePayload = BuildFormPayload(CurrentMembershipNumber);
                         }
                     }
                 }
@@ -622,8 +783,236 @@ namespace ZAFMC
             ResetControls(Page); //Resets Web Controls
             EditPassportID = null;
             CurrentMembershipNumber = null;
+            CurrentBarcodePng = null;
+            LoadedBarcodePayload = null;
+            ReservedMembershipNumber = null; // never carried over to another member (stays burned in the registry)
+            GeneratedBarcodePayload = null;
+            GenerateBarcode.Checked = false;
             ViewState["LegacyDropDowns"] = null;
             PassportID.ReadOnly = false;
+        }
+
+        // "Generate Barcode" ticked: builds the PDF417 barcode from the captured details and shows it.
+        // Loaded member: the final barcode is stored on its row at once (dbo.SetCongregationBarcode).
+        // New member: reserves the Membership Number (once per record), shows it and encodes it; Save stores
+        // the member with that same number and this barcode.
+        protected void GenerateBarcode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!GenerateBarcode.Checked)
+            {
+                return; // unticked: nothing to do
+            }
+
+            string missing = CongregationRules.ValidateBarcodeFields(GetDropDownValue(Titles), Firstname.Text, Surname.Text,
+                DOB.Text, Gender.SelectedValue, EditPassportID ?? PassportID.Text);
+            DateTime? dob, appointed, elected;
+            if (missing != null)
+            {
+                GenerateBarcode.Checked = false;
+                ShowValidationError(missing, "ZAFMC - Generate Barcode");
+                return;
+            }
+            if (!TryReadMemberForm("ZAFMC - Generate Barcode", out dob, out appointed, out elected))
+            {
+                GenerateBarcode.Checked = false;
+                return;
+            }
+
+            if (EditPassportID == null)
+            {
+                string reserved = EnsureReservedMembershipNumber();
+                if (reserved == null)
+                {
+                    GenerateBarcode.Checked = false;
+                    TopMostDialogs.ShowTopMost("The Membership Number could not be generated. Please contact the IT Department.", "ZAFMC - Generate Barcode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (NewMemberBarcode(reserved) == null)
+                {
+                    GenerateBarcode.Checked = false;
+                    TopMostDialogs.ShowTopMost("The barcode could not be generated.", "ZAFMC - Generate Barcode", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                return;
+            }
+
+            // The stored barcode must match the stored row: encoded fields edited but not saved yet -> Edit first
+            if (BuildFormPayload(CurrentMembershipNumber) != LoadedBarcodePayload)
+            {
+                GenerateBarcode.Checked = false;
+                ShowValidationError("Title, Firstname, Surname, Date Of Birth or Male / Female was changed. Click Edit to update the member; the barcode is regenerated with the update.", "ZAFMC - Generate Barcode");
+                return;
+            }
+
+            byte[] barcode = GenerateFormBarcode(CurrentMembershipNumber);
+            int rows = barcode == null ? -1 : StoreBarcode(EditPassportID, barcode);
+            if (rows != 1)
+            {
+                GenerateBarcode.Checked = false;
+                TopMostDialogs.ShowTopMost(rows == 0
+                    ? "No member with Passport / ID '" + EditPassportID + "' was found. The barcode was not saved."
+                    : "The barcode could not be generated or saved.", "ZAFMC - Generate Barcode", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            CurrentBarcodePng = Convert.ToBase64String(barcode);
+        }
+
+        // New member: the page's reserved Membership Number, reserved on first use and reused for this record
+        // (re-ticking or a retried Save never burns another one). Shown in the read-only box.
+        // Returns null when the database could not reserve one (logged, never thrown).
+        private string EnsureReservedMembershipNumber()
+        {
+            if (ReservedMembershipNumber == null)
+            {
+                string number = ReserveMembershipNumber();
+                if (number == null)
+                {
+                    return null;
+                }
+                ReservedMembershipNumber = number;
+            }
+            CurrentMembershipNumber = ReservedMembershipNumber;
+            return ReservedMembershipNumber;
+        }
+
+        // New member: the barcode with the reserved number, shown in the Barcode Image box. The one already
+        // generated is kept while its encoded details are unchanged, otherwise a new one is generated.
+        // Returns null when it cannot be generated.
+        private byte[] NewMemberBarcode(string reserved)
+        {
+            string payload = BuildFormPayload(reserved);
+            if (CurrentBarcodePng != null && GeneratedBarcodePayload == payload)
+            {
+                return Convert.FromBase64String(CurrentBarcodePng);
+            }
+            byte[] barcode = GenerateFormBarcode(reserved);
+            CurrentBarcodePng = barcode == null ? null : Convert.ToBase64String(barcode);
+            GeneratedBarcodePayload = barcode == null ? null : payload;
+            return barcode;
+        }
+
+        // dbo.ReserveMembershipNumber: a new, never-used number recorded in the registry as reserved.
+        // Returns null on error (logged, never thrown).
+        private static string ReserveMembershipNumber()
+        {
+            string cs = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(cs))
+                using (SqlCommand cmd = new SqlCommand("ReserveMembershipNumber", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlParameter number = new SqlParameter("@MembershipNumber", SqlDbType.NVarChar, 20) { Direction = ParameterDirection.Output };
+                    cmd.Parameters.Add(number);
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                    string value = Convert.ToString(number.Value);
+                    return CongregationRules.IsMembershipNumber(value) ? value : null;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError(ex.ToString());
+                return null;
+            }
+        }
+
+        // Loaded member: shows the stored photo in the photo box and says which ID document is stored.
+        // Read on every request (not kept in ViewState: files are up to 5 MB). New-member mode: nothing shown.
+        private void ShowStoredFiles(string passportId)
+        {
+            PersonPhoto.ImageUrl = string.Empty;
+            PersonPhoto.AlternateText = string.Empty;
+            PassIDStored.Text = string.Empty;
+            if (passportId == null)
+            {
+                return;
+            }
+
+            string cs = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
+            const string sql = "SELECT [CongPhotoData],[CongPhotoContentType],[CongPassIDFileName],[CongPassIDContentType],DATALENGTH([CongPassIDData]) AS [PassIDBytes] FROM [dbo].[Congregation] WHERE [CongPassportID] = @id";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(cs))
+                using (SqlCommand cmd = new SqlCommand(sql, cn))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.NVarChar, 15) { Value = passportId });
+                    cn.Open();
+                    using (SqlDataReader r = cmd.ExecuteReader())
+                    {
+                        if (!r.Read())
+                        {
+                            return;
+                        }
+                        byte[] photo = r["CongPhotoData"] as byte[];
+                        string photoType = ReadString(r, "CongPhotoContentType");
+                        if (photo != null && photo.Length > 0 && (photoType == "image/jpeg" || photoType == "image/png"))
+                        {
+                            PersonPhoto.ImageUrl = "data:" + photoType + ";base64," + Convert.ToBase64String(photo);
+                            PersonPhoto.AlternateText = "Photo of the member";
+                        }
+                        object idBytes = r["PassIDBytes"];
+                        if (idBytes != DBNull.Value && Convert.ToInt64(idBytes) > 0)
+                        {
+                            PassIDStored.Text = "Stored: " + ReadString(r, "CongPassIDFileName") + " (" + ReadString(r, "CongPassIDContentType") + ", "
+                                + Math.Max(1, Convert.ToInt64(idBytes) / 1024) + " KB)";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError(ex.ToString()); // display only: never blocks the page
+            }
+        }
+
+        // Barcode payload of the details currently in the form
+        private string BuildFormPayload(string membershipNumber)
+        {
+            DateTime? dob;
+            CongregationRules.ValidateOptionalDate(DOB.Text, "Date Of Birth", out dob);
+            return CongregationBarcode.BuildPayload(membershipNumber, GetDropDownValue(Titles), Firstname.Text, Surname.Text,
+                dob, Gender.SelectedValue, EditPassportID ?? PassportID.Text);
+        }
+
+        // PDF417 PNG of the form details, or null when it cannot be generated (logged, never thrown)
+        private byte[] GenerateFormBarcode(string membershipNumber)
+        {
+            try
+            {
+                return CongregationBarcode.RenderPng(BuildFormPayload(membershipNumber));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError(ex.ToString());
+                return null;
+            }
+        }
+
+        // Stores the barcode in dbo.Congregation.CongBarcode of that member (null stores NULL).
+        // Returns the number of updated rows (1 = stored), or -1 on error (logged, never thrown).
+        private static int StoreBarcode(string passportId, byte[] png)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["ZionCongregation"].ConnectionString; // ZionCongregation From Web.Config under ConnectionString Settings
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(cs))
+                using (SqlCommand cmd = new SqlCommand("SetCongregationBarcode", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@CongPassportID", SqlDbType.NVarChar, 15) { Value = passportId });
+                    cmd.Parameters.Add(new SqlParameter("@CongBarcode", SqlDbType.VarBinary, -1) { Value = (object)png ?? DBNull.Value });
+                    SqlParameter rows = new SqlParameter("@RowsAffected", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                    cmd.Parameters.Add(rows);
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                    return rows.Value == DBNull.Value ? 0 : Convert.ToInt32(rows.Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError(ex.ToString());
+                return -1;
+            }
         }
 
         // Resets all Controls on the Web Form
@@ -695,7 +1084,7 @@ namespace ZAFMC
             catch (Exception Upload)
             {
                 System.Diagnostics.Trace.TraceError(Upload.ToString());
-                TopMostDialogs.ShowTopMost("The photo / ID upload failed.", "ZAFMC - (Photo / Identity) Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TopMostDialogs.ShowTopMost("The Photo / ID upload failed.", "ZAFMC - (Photo / Identity) Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             return result;

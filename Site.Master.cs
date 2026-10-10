@@ -44,8 +44,9 @@ namespace ZAFMC
             UserLogged.Font.Bold = true;
             UserLogged.Text = string.Concat("(", PV, ")");
 
-            //Pass string value to Locked-Modal Form Textbox
-            LogInUser.Text = PV;
+            //Pass the successfully logged in username to the Locked-Modal Form Textbox (empty when nobody is logged in).
+            //Set on every request because the textbox is ReadOnly. The password textbox is never populated.
+            LogInUser.Text = (string)Session["LoggedInUsername"] ?? string.Empty;
             LogInUser.Font.Bold = true;
             LogInUser.ForeColor = System.Drawing.Color.Blue;
 
@@ -55,15 +56,21 @@ namespace ZAFMC
         private void ViewAccountInfo()
         {
 
+            //Only the fully logged in user (ID/Passport + Password + OTP passed). Session["IDPassportValue"] is set
+            //before the login is checked, so it must not be used here. Anonymous visitors: the fields stay empty.
+            string IDP = (string)Session["LoggedInUsername"];
+            if (string.IsNullOrWhiteSpace(IDP))
+            {
+                return;
+            }
+
             string ACC = ConfigurationManager.ConnectionStrings["ZionRegisterUser"].ConnectionString; // ZionRegisterUser From Web.Config under ConnectionString Settings
             using (SqlConnection AccView = new SqlConnection(ACC))
             {
-                //Below Session takes ID-Passport Value from LogIn screen TextBox; the value is used to search in the Database
-                string IDP = (string)Session["IDPassportValue"];
                 PassportIdentity.Text = IDP;
 
-                //SqlCommand below must Select using the Logged in ID
-                SqlCommand Jacob = new SqlCommand(@"SELECT [LogInPassportID],[LogInFirstname],[LogInSurname],[LogInMobileNumber],[LogInEmailAddress],[LogInChurchPosition],[LogInDateTime] FROM [LogIn] WHERE [LogInPassportID] LIKE @SEARCH ", AccView);
+                //SqlCommand below must Select using the Logged in ID (exact match, no LIKE wildcards)
+                SqlCommand Jacob = new SqlCommand(@"SELECT [LogInPassportID],[LogInFirstname],[LogInSurname],[LogInMobileNumber],[LogInEmailAddress],[LogInChurchPosition],[LogInDateTime] FROM [LogIn] WHERE [LogInPassportID] = @SEARCH ", AccView);
                 Jacob.Parameters.AddWithValue("@SEARCH", PassportIdentity.Text);
 
 
@@ -149,11 +156,74 @@ namespace ZAFMC
 
         }
 
-        //LogIn back into the Application
+        //User LogIn History grid: only the fully logged in user's own logins; nothing is read for anonymous visitors
+        protected void AccountInfoView_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        {
+            string user = (string)Session["LoggedInUsername"];
+            if (string.IsNullOrWhiteSpace(user))
+            {
+                e.Cancel = true; //No query, no rows
+                return;
+            }
+            e.Command.Parameters["@Username"].Value = user;
+        }
+
+        //LogIn back into the Application: unlocks only with the stored password of the logged in user
         protected void ReturnBack(Object sender, EventArgs e)
         {
-            AuthenticatePassword();
-            
+            if (!LogInBack.Checked)
+            {
+                return;
+            }
+            LogInBack.Checked = false;
+
+            string user = (string)Session["LoggedInUsername"];
+            //Existing complexity pre-check (shows its own message); skipped when nobody is logged in
+            bool wellFormed = !string.IsNullOrWhiteSpace(user) && AuthenticatePassword();
+            int failed = Session[LockScreen.FailedAttemptsSessionKey] as int? ?? 0;
+            int failedAfter;
+            LockScreen.UnlockResult result = LockScreen.Check(user, PasswordLock.Text, wellFormed, failed, LockScreen.GetStoredPassword, out failedAfter);
+            Session[LockScreen.FailedAttemptsSessionKey] = failedAfter;
+            PasswordLock.Text = string.Empty; //The password is never kept
+
+            switch (result)
+            {
+                case LockScreen.UnlockResult.Unlocked:
+                    return; //The postback closes the Lock modal
+
+                case LockScreen.UnlockResult.NotLoggedIn:
+                    TopMostDialogs.ShowTopMost("Nobody is logged in. Log in on the Login screen first.", "ZAFMC - Lock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+
+                case LockScreen.UnlockResult.WrongPassword:
+                    if (wellFormed)
+                    {
+                        int left = LockScreen.MaxFailedAttempts - failedAfter;
+                        TopMostDialogs.ShowTopMost("Wrong password. " + left + (left == 1 ? " attempt" : " attempts") + " left.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    KeepLocked();
+                    return;
+
+                case LockScreen.UnlockResult.Error:
+                    TopMostDialogs.ShowTopMost("The password could not be checked. Please try again or contact the IT Department.", "ZAFMC - Lock", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    KeepLocked();
+                    return;
+
+                case LockScreen.UnlockResult.LockedOut:
+                    //Log the user out: clear the session and go back to the Login screen
+                    Session.Clear();
+                    Session.Abandon();
+                    TopMostDialogs.ShowTopMost("Too many wrong passwords. You have been logged out.", "ZAFMC - Lock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Response.Redirect("~/Default.aspx");
+                    return;
+            }
+        }
+
+        //Re-opens the Lock modal after the postback (clicks the existing -Lock menu link)
+        private void KeepLocked()
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "KeepUserLocked",
+                "window.addEventListener('load', function () { var l = document.querySelector('a[data-target=\"#UserLocked\"]'); if (l) { l.click(); } });", true);
         }
 
         //Validate Password
@@ -224,18 +294,19 @@ namespace ZAFMC
             if (Theo.Length > 10)
             {
                 TopMostDialogs.ShowTopMost("Password is too long.", "Length", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                PasswordLock.Text = " ";
+                PasswordLock.Text = string.Empty;
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
                 LogInBack.Checked = false;
                 return false;
+                       
             }
             else
             //Password must have a Digit
             if (!Digit.IsMatch(Theo))
             {
                 TopMostDialogs.ShowTopMost("Password must have a digit.", "Numbers", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                PasswordLock.Text = " ";
+                PasswordLock.Text = string.Empty;
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
                 LogInBack.Checked = false;
@@ -247,7 +318,7 @@ namespace ZAFMC
             if (!MinMax.IsMatch(Theo))
             {
                 TopMostDialogs.ShowTopMost("Minimum of (6) & Maximum of (10) Characters.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                PasswordLock.Text = " ";
+                PasswordLock.Text = string.Empty;
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
                 LogInBack.Checked = false;
@@ -259,7 +330,7 @@ namespace ZAFMC
             if (!Lowercase.IsMatch(Theo))
             {
                 TopMostDialogs.ShowTopMost("Small letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                PasswordLock.Text = " ";
+                PasswordLock.Text = string.Empty;
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
                 LogInBack.Checked = false;
@@ -271,7 +342,7 @@ namespace ZAFMC
             if (!Uppercase.IsMatch(Theo))
             {
                 TopMostDialogs.ShowTopMost("Capital letters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                PasswordLock.Text = " ";    
+                PasswordLock.Text = string.Empty;    
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
                 LogInBack.Checked = false;
@@ -283,7 +354,7 @@ namespace ZAFMC
             if (!SpecialChar.IsMatch(Theo))
             {
                 TopMostDialogs.ShowTopMost("Special characters are required.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                PasswordLock.Text = " ";
+                PasswordLock.Text = string.Empty;
                 //Set cursor on Password Textbox
                 PasswordLock.Focus();
                 LogInBack.Checked = false;
@@ -313,7 +384,7 @@ namespace ZAFMC
                 else
                 if (Quit == DialogResult.No)
                 {
-                    PasswordLock.Text = " ";
+                    PasswordLock.Text = string.Empty;
                     ExitAPP.Checked = false;
                 }
 

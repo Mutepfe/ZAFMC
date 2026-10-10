@@ -30,7 +30,7 @@ namespace ZAFMC
             {
                 baseUrl = configured;
             }
-            reportFolderUrl = baseUrl.TrimEnd('/') + "/report/ZAFMC/ZAFMCReports/";
+            reportFolderUrl = baseUrl.TrimEnd('/') + "/ZAFMC/ZAFMCReports/";
 
             SetReportLink(CongReport, "Congregation");
             SetReportLink(CHRCReport, "Churches");
@@ -52,7 +52,7 @@ namespace ZAFMC
         }
 
         //Used when ReportServerBaseUrl is missing or is not an absolute http(s) URL
-        private const string DefaultReportServerBaseUrl = "http://JACOB/Reports";
+        private const string DefaultReportServerBaseUrl = "http://JACOB:80/ZionReports";
 
         private string reportFolderUrl;
 

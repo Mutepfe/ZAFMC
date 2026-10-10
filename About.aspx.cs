@@ -381,20 +381,20 @@ namespace ZAFMC
         {
             string TM = ConfigurationManager.ConnectionStrings["ZionAboutAdmin"].ConnectionString; // ZionAboutAdmin From Web.Config under ConnectionString Settings
             SqlConnection AdminUpdate = new SqlConnection(TM);
-            SqlCommand RUDO = new SqlCommand("UpdateAdmin", AdminUpdate);
+            SqlCommand Connie = new SqlCommand("UpdateAdmin", AdminUpdate);
 
             try
             {
-                RUDO.CommandType = System.Data.CommandType.StoredProcedure;
-                RUDO.Parameters.AddWithValue("@AdminID", DBNull.Value);
-                RUDO.Parameters.AddWithValue("@AdminName", AdminName.Text);
-                RUDO.Parameters.AddWithValue("@AdminSurname", AdminSurname.Text);
-                RUDO.Parameters.AddWithValue("@AdminAppntDate", AdminAppDate.Text);
-                RUDO.Parameters.AddWithValue("@AdminInternComm", AdminIntCom.Text);
-                RUDO.Parameters.AddWithValue("@AdminInternDir", AdminIntDir.Text);
+                Connie.CommandType = System.Data.CommandType.StoredProcedure;
+                Connie.Parameters.AddWithValue("@AdminID", DBNull.Value);
+                Connie.Parameters.AddWithValue("@AdminName", AdminName.Text);
+                Connie.Parameters.AddWithValue("@AdminSurname", AdminSurname.Text);
+                Connie.Parameters.AddWithValue("@AdminAppntDate", AdminAppDate.Text);
+                Connie.Parameters.AddWithValue("@AdminInternComm", AdminIntCom.Text);
+                Connie.Parameters.AddWithValue("@AdminInternDir", AdminIntDir.Text);
 
                 AdminUpdate.Open();
-                RUDO.ExecuteNonQuery();
+                Connie.ExecuteNonQuery();
 
             }
             catch (Exception Mhofu)
@@ -403,7 +403,7 @@ namespace ZAFMC
             }
             finally
             {
-                RUDO.Dispose(); //Clean up memory
+                Connie.Dispose(); //Clean up memory
                 AdminUpdate.Close(); //Close DBase  connection
 
             }
