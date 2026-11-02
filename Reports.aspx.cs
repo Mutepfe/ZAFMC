@@ -21,7 +21,11 @@ namespace ZAFMC
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetNoStore();
 
-            //Report links: SSRS web portal base URL comes from Web.config (appSettings: ReportServerBaseUrl)
+            //Report links: Web.config appSettings ReportLinkMode = PowerBIDesktop (default) or SSRS
+            string mode = (ConfigurationManager.AppSettings["ReportLinkMode"] ?? string.Empty).Trim();
+            useSsrs = string.Equals(mode, "SSRS", StringComparison.OrdinalIgnoreCase);
+
+            //SSRS web portal base URL comes from Web.config (appSettings: ReportServerBaseUrl)
             string baseUrl = DefaultReportServerBaseUrl;
             string configured = (ConfigurationManager.AppSettings["ReportServerBaseUrl"] ?? string.Empty).Trim();
             Uri configuredUrl;
@@ -32,6 +36,7 @@ namespace ZAFMC
             }
             reportFolderUrl = baseUrl.TrimEnd('/') + "/ZAFMC/ZAFMCReports/";
 
+            //Each SSRS report name is also the name of its page in PowerBI\ZAFMCReports.pbip
             SetReportLink(CongReport, "Congregation");
             SetReportLink(CHRCReport, "Churches");
             SetReportLink(TestmReport, "MediaTestimony");
@@ -54,11 +59,23 @@ namespace ZAFMC
         //Used when ReportServerBaseUrl is missing or is not an absolute http(s) URL
         private const string DefaultReportServerBaseUrl = "http://JACOB:80/ZionReports";
 
+        //Custom URL protocol registered on this PC by PowerBI\Register-ZafmcReportLinks.ps1
+        private const string PowerBIDesktopScheme = "zafmc-pbi:";
+
         private string reportFolderUrl;
+        private bool useSsrs;
 
         private void SetReportLink(HyperLink link, string reportName)
         {
-            link.NavigateUrl = reportFolderUrl + reportName;
+            if (useSsrs)
+            {
+                link.NavigateUrl = reportFolderUrl + reportName;
+                return;
+            }
+
+            //Opens the Power BI Desktop page locally; a custom protocol must not open a blank tab
+            link.NavigateUrl = PowerBIDesktopScheme + reportName;
+            link.Target = string.Empty;
         }
         protected void CongregationView_Click()
         {

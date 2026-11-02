@@ -2,7 +2,7 @@
 
 ## What this is
 
-`ZAFMCReports.pbip` is one Power BI Desktop project that replaces the 36 SSRS reports in `ZAFMCReports\` for viewing on this PC. It has a Home page plus one page per SSRS report. Nothing is published: there is no Power BI Service, gateway or Report Server, and no data leaves the machine. The SSRS reports, `Reports.aspx` and `Web.config` are unchanged.
+`ZAFMCReports.pbip` is one Power BI Desktop project that replaces the 36 SSRS reports in `ZAFMCReports\` for viewing on this PC. It has a Home page plus one page per SSRS report. Nothing is published: there is no Power BI Service, gateway or Report Server, and no data leaves the machine. The SSRS reports are unchanged. The links on the website's Reports screen open these pages (see "Opening reports from the website").
 
 The project has two parts:
 
@@ -91,6 +91,35 @@ Click Transform data > Manage parameters. Set `SqlServer` (default `JACOB\SQLEXP
   ```
 
   Expected output: exactly 10 lines, each ending in `'Male'`, `'Female'`, `'Single'` or `true`. They are the hidden page filters on the Male, Female, Children and Projects* pages. If anything else appears, such as a name, ID or phone number, press **Clear filters** on that page in Desktop, save, and run the command again.
+
+## Opening reports from the website
+
+The report links on the website's Reports screen (`Reports.aspx`) open the matching page of this project in Power BI Desktop on this PC. A link looks like `zafmc-pbi:Congregation`. It only works on a PC where the links are registered.
+
+1. Register the links once per Windows user. In Windows PowerShell, from this folder, run:
+
+   ```powershell
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\Register-ZafmcReportLinks.ps1
+   ```
+
+   This writes only `HKCU\Software\Classes\zafmc-pbi` (no admin rights needed). Run it again if you move the repo folder.
+2. The first time you click a report link, Chrome or Edge asks "Open Windows PowerShell?". Tick **Always allow** and click **Open**.
+3. `Open-ZafmcReport.ps1` then opens the page. It accepts only the page names in this project and ignores anything else.
+
+How it works:
+
+- The repo files are never changed by a click. The launcher keeps a viewing copy in `%LOCALAPPDATA%\ZAFMC\PowerBI` and copies this project over it whenever the project in the repo has changed. The copy's `.pbi` folders are kept, so data you loaded (refreshed and saved) in the copy stays.
+- The launcher sets the copy's start page to the page you clicked and opens the copy in Power BI Desktop. Refresh and save in that window to keep the data for next time.
+- If Power BI Desktop already has the copy open, the launcher brings that window to the front and shows a message naming the page tab to click. It never closes Power BI Desktop. To have a link open straight on its page, close Power BI Desktop and click the link again.
+- A Power BI Desktop window you opened yourself on `ZAFMCReports.pbip` in this folder is a separate window. The links don't use it.
+
+To remove the links from this PC, run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Register-ZafmcReportLinks.ps1 -Unregister
+```
+
+To make the links point at the SSRS reports again, set `ReportLinkMode` to `SSRS` in the website's `Web.config` (`<appSettings>`). The links then use `ReportServerBaseUrl` and open in a new tab. `PowerBIDesktop` is the default.
 
 ## Differences from SSRS
 
