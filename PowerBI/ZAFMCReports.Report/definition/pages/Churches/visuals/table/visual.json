@@ -1,0 +1,279 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 196,
+    "z": 17000,
+    "width": 1240,
+    "height": 514,
+    "tabOrder": 17000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Name"
+                }
+              },
+              "queryRef": "Churches.Name",
+              "nativeQueryRef": "Name",
+              "displayName": "Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Leader"
+                }
+              },
+              "queryRef": "Churches.Leader",
+              "nativeQueryRef": "Leader",
+              "displayName": "Leader"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Leader Cell"
+                }
+              },
+              "queryRef": "Churches.Leader Cell",
+              "nativeQueryRef": "Leader Cell",
+              "displayName": "Leader Cell"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Leader Email"
+                }
+              },
+              "queryRef": "Churches.Leader Email",
+              "nativeQueryRef": "Leader Email",
+              "displayName": "Email"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Date Opened"
+                }
+              },
+              "queryRef": "Churches.Date Opened",
+              "nativeQueryRef": "Date Opened",
+              "displayName": "DateOpened"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Members"
+                }
+              },
+              "queryRef": "Churches.Members",
+              "nativeQueryRef": "Members",
+              "displayName": "Members"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Province"
+                }
+              },
+              "queryRef": "Churches.Province",
+              "nativeQueryRef": "Province",
+              "displayName": "Province"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "District"
+                }
+              },
+              "queryRef": "Churches.District",
+              "nativeQueryRef": "District",
+              "displayName": "District"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Zone"
+                }
+              },
+              "queryRef": "Churches.Zone",
+              "nativeQueryRef": "Zone",
+              "displayName": "Zone"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Section"
+                }
+              },
+              "queryRef": "Churches.Section",
+              "nativeQueryRef": "Section",
+              "displayName": "Section"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Pastors"
+                }
+              },
+              "queryRef": "Churches.Pastors",
+              "nativeQueryRef": "Pastors",
+              "displayName": "Pastor"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Evangelists"
+                }
+              },
+              "queryRef": "Churches.Evangelists",
+              "nativeQueryRef": "Evangelists",
+              "displayName": "Evangelist"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Preachers"
+                }
+              },
+              "queryRef": "Churches.Preachers",
+              "nativeQueryRef": "Preachers",
+              "displayName": "Preachers"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Prophets"
+                }
+              },
+              "queryRef": "Churches.Prophets",
+              "nativeQueryRef": "Prophets",
+              "displayName": "Prophets"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Decons"
+                }
+              },
+              "queryRef": "Churches.Decons",
+              "nativeQueryRef": "Decons",
+              "displayName": "Decons"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Churches"
+                    }
+                  },
+                  "Property": "Other Members"
+                }
+              },
+              "queryRef": "Churches.Other Members",
+              "nativeQueryRef": "Other Members",
+              "displayName": "Members"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Churches Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

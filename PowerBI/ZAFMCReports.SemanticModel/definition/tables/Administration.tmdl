@@ -1,0 +1,46 @@
+table Administration
+
+	measure 'Administration Count' = COUNTROWS('Administration')
+		formatString: #,0
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: AdminName
+
+	column Surname
+		dataType: string
+		summarizeBy: none
+		sourceColumn: AdminSurname
+
+	column 'Appointed Date'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: AdminAppntDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'International Committee'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: AdminInternComm
+
+	column 'International Director'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: AdminInternDir
+
+	partition Administration = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "AboutAdministration"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"AdminName", "AdminSurname", "AdminAppntDate", "AdminInternComm", "AdminInternDir"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

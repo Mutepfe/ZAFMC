@@ -1,0 +1,94 @@
+table Projects
+
+	measure 'Project Count' = COUNTROWS('Projects')
+		formatString: #,0
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProjectName
+
+	column 'Start Date'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: ProjectStartDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Duration
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ProjectDuration
+
+	column 'Expected Date'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: ProjectExpecDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Leader
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProjectLeader
+
+	column 'Leader Rank'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProjectLeaderRank
+
+	column Site
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProjectSite
+
+	column 'Estimated Cost'
+		dataType: double
+		formatString: #,0.00
+		summarizeBy: none
+		sourceColumn: ProjectEstimCost
+
+	column 'Completion Date'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: ProjectCompDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Is Completed' = NOT ISBLANK([Start Date]) && NOT ISBLANK([Expected Date]) && NOT ISBLANK([Completion Date]) && [Expected Date] <= TODAY() && [Completion Date] <= TODAY() && [Start Date] <= TODAY()
+		dataType: boolean
+		isHidden
+		summarizeBy: none
+
+	column 'Is In Progress' = NOT ISBLANK([Start Date]) && NOT ISBLANK([Completion Date]) && [Completion Date] > TODAY() && [Start Date] <> TODAY()
+		dataType: boolean
+		isHidden
+		summarizeBy: none
+
+	column 'Is Overdue' = NOT ISBLANK([Start Date]) && NOT ISBLANK([Completion Date]) && NOT ISBLANK([Duration]) && INT([Completion Date] - [Start Date]) > [Duration] && [Start Date] <= TODAY() && [Completion Date] <= TODAY()
+		dataType: boolean
+		isHidden
+		summarizeBy: none
+
+	column 'Project Status' = SWITCH(TRUE(), [Is Overdue], "Overdue", [Is Completed], "Completed", [Is In Progress], "In Progress", "Other")
+		dataType: string
+		summarizeBy: none
+
+	partition Projects = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "Projects"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"ProjectName", "ProjectStartDate", "ProjectDuration", "ProjectExpecDate", "ProjectLeader", "ProjectLeaderRank", "ProjectSite", "ProjectEstimCost", "ProjectCompDate"}),
+				    Typed = Table.TransformColumns(Selected, {{"ProjectEstimCost", each try Number.FromText(Text.Trim(_), "en-US") otherwise null, type nullable number}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

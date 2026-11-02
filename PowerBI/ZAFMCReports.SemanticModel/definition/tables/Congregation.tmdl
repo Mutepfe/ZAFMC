@@ -1,0 +1,163 @@
+table Congregation
+
+	measure 'Member Count' = COUNTROWS('Congregation')
+		formatString: #,0
+
+	column 'Membership Number'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongMembershipNumber
+
+	column Title
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongTitle
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongName
+
+	column Surname
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongSurname
+
+	column 'Date Of Birth'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: CongDOB
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Gender
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongGender
+
+	column 'Passport ID'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongPassportID
+
+	column 'Marital Status'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongStatus
+
+	column Profession
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongProfession
+
+	column 'Next Of Kin'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongKin
+
+	column 'Kin Contact'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongKinContact
+
+	column Cell
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongCell
+
+	column Address
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongAddress
+
+	column Email
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongEmail
+
+	column Position
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongPosition
+
+	column 'Date Appointed'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: CongDateAppointed
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Managerial Post'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongManagerial
+
+	column 'Date Elected'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: CongDateElected
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Province
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongProvince
+
+	column District
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongDistrict
+
+	column Zone
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongZone
+
+	column Section
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongSection
+
+	column 'Senior Leader'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongSnrLeader
+
+	column 'Vice Leader'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CongViceLeader
+
+	column Age = IF(ISBLANK([Date Of Birth]), BLANK(), INT((TODAY() - [Date Of Birth]) / 365.25))
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+
+	column 'Is Child' = NOT ISBLANK([Age]) && [Age] > 0 && [Age] < 23
+		dataType: boolean
+		isHidden
+		summarizeBy: none
+
+	column 'Appointed By Today' = NOT ISBLANK([Date Appointed]) && [Date Appointed] <= TODAY()
+		dataType: boolean
+		isHidden
+		summarizeBy: none
+
+	partition Congregation = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "Congregation"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"CongMembershipNumber", "CongTitle", "CongName", "CongSurname", "CongDOB", "CongGender", "CongPassportID", "CongStatus", "CongProfession", "CongKin", "CongKinContact", "CongCell", "CongAddress", "CongEmail", "CongPosition", "CongDateAppointed", "CongManagerial", "CongDateElected", "CongProvince", "CongDistrict", "CongZone", "CongSection", "CongSnrLeader", "CongViceLeader"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

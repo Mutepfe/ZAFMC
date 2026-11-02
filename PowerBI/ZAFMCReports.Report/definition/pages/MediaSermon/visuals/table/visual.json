@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 9000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media Sermon"
+                    }
+                  },
+                  "Property": "Preacher"
+                }
+              },
+              "queryRef": "Media Sermon.Preacher",
+              "nativeQueryRef": "Preacher",
+              "displayName": "Preacher"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media Sermon"
+                    }
+                  },
+                  "Property": "Event Name"
+                }
+              },
+              "queryRef": "Media Sermon.Event Name",
+              "nativeQueryRef": "Event Name",
+              "displayName": "Event Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media Sermon"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "Media Sermon.Date",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media Sermon"
+                    }
+                  },
+                  "Property": "Verse"
+                }
+              },
+              "queryRef": "Media Sermon.Verse",
+              "nativeQueryRef": "Verse",
+              "displayName": "Verse"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media Sermon"
+                    }
+                  },
+                  "Property": "Sermon File"
+                }
+              },
+              "queryRef": "Media Sermon.Sermon File",
+              "nativeQueryRef": "Sermon File",
+              "displayName": "Sermon File"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Media Sermon table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

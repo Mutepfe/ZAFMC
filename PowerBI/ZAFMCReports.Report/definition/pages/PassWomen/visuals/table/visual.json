@@ -1,0 +1,99 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 8000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Women"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "Women.Date",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Women"
+                    }
+                  },
+                  "Property": "Venue"
+                }
+              },
+              "queryRef": "Women.Venue",
+              "nativeQueryRef": "Venue",
+              "displayName": "Venue"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Women"
+                    }
+                  },
+                  "Property": "Leader"
+                }
+              },
+              "queryRef": "Women.Leader",
+              "nativeQueryRef": "Leader",
+              "displayName": "Leader"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Women"
+                    }
+                  },
+                  "Property": "Duration"
+                }
+              },
+              "queryRef": "Women.Duration",
+              "nativeQueryRef": "Duration",
+              "displayName": "Duration"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Women Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

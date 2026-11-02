@@ -1,0 +1,42 @@
+table Women
+
+	measure 'Women Event Count' = COUNTROWS('Women')
+		formatString: #,0
+
+	column Date
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: WomenDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Venue
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WomenVenue
+
+	column Leader
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WomenLeader
+
+	column Duration
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: WomenDuration
+
+	partition Women = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "PassWomen"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"WomenDate", "WomenVenue", "WomenLeader", "WomenDuration"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

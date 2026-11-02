@@ -1,0 +1,36 @@
+table 'Media News'
+
+	measure 'News Count' = COUNTROWS('Media News')
+		formatString: #,0
+
+	column 'News Name'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: NewsName
+
+	column 'News Date'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: NewsDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'News File'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: NewsFile
+
+	partition 'Media News' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "MediaNews"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"NewsName", "NewsDate", "NewsFile"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 8000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Leadership"
+                    }
+                  },
+                  "Property": "Name"
+                }
+              },
+              "queryRef": "Leadership.Name",
+              "nativeQueryRef": "Name",
+              "displayName": "Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Leadership"
+                    }
+                  },
+                  "Property": "Surname"
+                }
+              },
+              "queryRef": "Leadership.Surname",
+              "nativeQueryRef": "Surname",
+              "displayName": "Surname"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Leadership"
+                    }
+                  },
+                  "Property": "Date Of Birth"
+                }
+              },
+              "queryRef": "Leadership.Date Of Birth",
+              "nativeQueryRef": "Date Of Birth",
+              "displayName": "Date Of Birth"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Leadership"
+                    }
+                  },
+                  "Property": "Passport ID"
+                }
+              },
+              "queryRef": "Leadership.Passport ID",
+              "nativeQueryRef": "Passport ID",
+              "displayName": "PassportID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Leadership"
+                    }
+                  },
+                  "Property": "Position"
+                }
+              },
+              "queryRef": "Leadership.Position",
+              "nativeQueryRef": "Position",
+              "displayName": "Position"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Leadership Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

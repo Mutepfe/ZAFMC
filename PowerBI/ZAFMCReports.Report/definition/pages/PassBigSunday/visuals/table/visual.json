@@ -1,0 +1,99 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 7000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Big Sunday"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "Big Sunday.Date",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Big Sunday"
+                    }
+                  },
+                  "Property": "Venue"
+                }
+              },
+              "queryRef": "Big Sunday.Venue",
+              "nativeQueryRef": "Venue",
+              "displayName": "Venue"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Big Sunday"
+                    }
+                  },
+                  "Property": "Leader"
+                }
+              },
+              "queryRef": "Big Sunday.Leader",
+              "nativeQueryRef": "Leader",
+              "displayName": "Leader"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Big Sunday"
+                    }
+                  },
+                  "Property": "Leader Cell"
+                }
+              },
+              "queryRef": "Big Sunday.Leader Cell",
+              "nativeQueryRef": "Leader Cell",
+              "displayName": "Leader Cell"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Big Sundays Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

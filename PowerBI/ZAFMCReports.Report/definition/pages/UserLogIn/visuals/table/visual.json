@@ -1,0 +1,159 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 11000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "User Login"
+                    }
+                  },
+                  "Property": "Passport ID"
+                }
+              },
+              "queryRef": "User Login.Passport ID",
+              "nativeQueryRef": "Passport ID",
+              "displayName": "Passport ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "User Login"
+                    }
+                  },
+                  "Property": "Firstname"
+                }
+              },
+              "queryRef": "User Login.Firstname",
+              "nativeQueryRef": "Firstname",
+              "displayName": "Firstname"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "User Login"
+                    }
+                  },
+                  "Property": "Surname"
+                }
+              },
+              "queryRef": "User Login.Surname",
+              "nativeQueryRef": "Surname",
+              "displayName": "Surname"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "User Login"
+                    }
+                  },
+                  "Property": "Mac Address"
+                }
+              },
+              "queryRef": "User Login.Mac Address",
+              "nativeQueryRef": "Mac Address",
+              "displayName": "Mac Address"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "User Login"
+                    }
+                  },
+                  "Property": "Login Date"
+                }
+              },
+              "queryRef": "User Login.Login Date",
+              "nativeQueryRef": "Login Date",
+              "displayName": "Date Time"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "User Login"
+                    }
+                  },
+                  "Property": "Mobile Number"
+                }
+              },
+              "queryRef": "User Login.Mobile Number",
+              "nativeQueryRef": "Mobile Number",
+              "displayName": "Mobile Number"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "User Login"
+                    }
+                  },
+                  "Property": "Email Address"
+                }
+              },
+              "queryRef": "User Login.Email Address",
+              "nativeQueryRef": "Email Address",
+              "displayName": "Email Address"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "User Login"
+                    }
+                  },
+                  "Property": "Church Position"
+                }
+              },
+              "queryRef": "User Login.Church Position",
+              "nativeQueryRef": "Church Position",
+              "displayName": "Church Position"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'User LogIn Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

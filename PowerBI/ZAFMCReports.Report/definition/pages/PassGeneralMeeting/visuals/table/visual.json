@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 8000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Meeting"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "General Meeting.Date",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Meeting"
+                    }
+                  },
+                  "Property": "Description"
+                }
+              },
+              "queryRef": "General Meeting.Description",
+              "nativeQueryRef": "Description",
+              "displayName": "Description"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Meeting"
+                    }
+                  },
+                  "Property": "Venue"
+                }
+              },
+              "queryRef": "General Meeting.Venue",
+              "nativeQueryRef": "Venue",
+              "displayName": "Venue"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Meeting"
+                    }
+                  },
+                  "Property": "Leader"
+                }
+              },
+              "queryRef": "General Meeting.Leader",
+              "nativeQueryRef": "Leader",
+              "displayName": "Leader"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Meeting"
+                    }
+                  },
+                  "Property": "Duration"
+                }
+              },
+              "queryRef": "General Meeting.Duration",
+              "nativeQueryRef": "Duration",
+              "displayName": "Duration"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'General Meetings table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

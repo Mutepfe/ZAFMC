@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 8000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Memorial"
+                    }
+                  },
+                  "Property": "Memorial Date"
+                }
+              },
+              "queryRef": "Memorial.Memorial Date",
+              "nativeQueryRef": "Memorial Date",
+              "displayName": "Memorial Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Memorial"
+                    }
+                  },
+                  "Property": "Deceased Name"
+                }
+              },
+              "queryRef": "Memorial.Deceased Name",
+              "nativeQueryRef": "Deceased Name",
+              "displayName": "Deceased Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Memorial"
+                    }
+                  },
+                  "Property": "Memorial Venue"
+                }
+              },
+              "queryRef": "Memorial.Memorial Venue",
+              "nativeQueryRef": "Memorial Venue",
+              "displayName": "Memorial Venue"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Memorial"
+                    }
+                  },
+                  "Property": "Church Leader"
+                }
+              },
+              "queryRef": "Memorial.Church Leader",
+              "nativeQueryRef": "Church Leader",
+              "displayName": "Church Leader"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Memorial"
+                    }
+                  },
+                  "Property": "Relative Mobile"
+                }
+              },
+              "queryRef": "Memorial.Relative Mobile",
+              "nativeQueryRef": "Relative Mobile",
+              "displayName": "Relative Mobile"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Memorial Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

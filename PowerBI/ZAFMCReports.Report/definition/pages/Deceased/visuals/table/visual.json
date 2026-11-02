@@ -1,0 +1,144 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 10000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deceased"
+                    }
+                  },
+                  "Property": "Name"
+                }
+              },
+              "queryRef": "Deceased.Name",
+              "nativeQueryRef": "Name",
+              "displayName": "Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deceased"
+                    }
+                  },
+                  "Property": "Surname"
+                }
+              },
+              "queryRef": "Deceased.Surname",
+              "nativeQueryRef": "Surname",
+              "displayName": "Surname"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deceased"
+                    }
+                  },
+                  "Property": "Passport ID"
+                }
+              },
+              "queryRef": "Deceased.Passport ID",
+              "nativeQueryRef": "Passport ID",
+              "displayName": "Passport ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deceased"
+                    }
+                  },
+                  "Property": "Date Of Death"
+                }
+              },
+              "queryRef": "Deceased.Date Of Death",
+              "nativeQueryRef": "Date Of Death",
+              "displayName": "Date Of Death"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deceased"
+                    }
+                  },
+                  "Property": "Position"
+                }
+              },
+              "queryRef": "Deceased.Position",
+              "nativeQueryRef": "Position",
+              "displayName": "Position"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deceased"
+                    }
+                  },
+                  "Property": "Burial Place"
+                }
+              },
+              "queryRef": "Deceased.Burial Place",
+              "nativeQueryRef": "Burial Place",
+              "displayName": "Burial Place"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deceased"
+                    }
+                  },
+                  "Property": "Memorial Date"
+                }
+              },
+              "queryRef": "Deceased.Memorial Date",
+              "nativeQueryRef": "Memorial Date",
+              "displayName": "Memorial Date"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Deceased Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

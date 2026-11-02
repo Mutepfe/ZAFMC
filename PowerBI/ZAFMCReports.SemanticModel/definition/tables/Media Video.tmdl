@@ -1,0 +1,41 @@
+table 'Media Video'
+
+	measure 'Video Count' = COUNTROWS('Media Video')
+		formatString: #,0
+
+	column 'Video Name'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: VideoName
+
+	column 'Video Occasion'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: VideoOccassion
+
+	column 'Video Date'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: VideoDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Video File'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: VideoFile
+
+	partition 'Media Video' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "MediaVideo"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"VideoName", "VideoOccassion", "VideoDate", "VideoFile"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

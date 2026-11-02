@@ -1,0 +1,144 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 9000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Graduation"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "Graduation.Date",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Graduation"
+                    }
+                  },
+                  "Property": "Venue"
+                }
+              },
+              "queryRef": "Graduation.Venue",
+              "nativeQueryRef": "Venue",
+              "displayName": "Venue"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Graduation"
+                    }
+                  },
+                  "Property": "Graduate Name"
+                }
+              },
+              "queryRef": "Graduation.Graduate Name",
+              "nativeQueryRef": "Graduate Name",
+              "displayName": "Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Graduation"
+                    }
+                  },
+                  "Property": "Mobile"
+                }
+              },
+              "queryRef": "Graduation.Mobile",
+              "nativeQueryRef": "Mobile",
+              "displayName": "Mobile"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Graduation"
+                    }
+                  },
+                  "Property": "Degree Programme"
+                }
+              },
+              "queryRef": "Graduation.Degree Programme",
+              "nativeQueryRef": "Degree Programme",
+              "displayName": "Degree Programme"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Graduation"
+                    }
+                  },
+                  "Property": "Leader"
+                }
+              },
+              "queryRef": "Graduation.Leader",
+              "nativeQueryRef": "Leader",
+              "displayName": "Leader"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Graduation"
+                    }
+                  },
+                  "Property": "Leader Mobile"
+                }
+              },
+              "queryRef": "Graduation.Leader Mobile",
+              "nativeQueryRef": "Leader Mobile",
+              "displayName": "Leader Mobile"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Graduation Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

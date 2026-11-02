@@ -1,0 +1,399 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 196,
+    "z": 14000,
+    "width": 1240,
+    "height": 514,
+    "tabOrder": 14000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Membership Number"
+                }
+              },
+              "queryRef": "Congregation.Membership Number",
+              "nativeQueryRef": "Membership Number",
+              "displayName": "Membership Number"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Title"
+                }
+              },
+              "queryRef": "Congregation.Title",
+              "nativeQueryRef": "Title",
+              "displayName": "Title"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Name"
+                }
+              },
+              "queryRef": "Congregation.Name",
+              "nativeQueryRef": "Name",
+              "displayName": "Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Surname"
+                }
+              },
+              "queryRef": "Congregation.Surname",
+              "nativeQueryRef": "Surname",
+              "displayName": "Surname"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Date Of Birth"
+                }
+              },
+              "queryRef": "Congregation.Date Of Birth",
+              "nativeQueryRef": "Date Of Birth",
+              "displayName": "DOB"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Gender"
+                }
+              },
+              "queryRef": "Congregation.Gender",
+              "nativeQueryRef": "Gender",
+              "displayName": "Gender"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Passport ID"
+                }
+              },
+              "queryRef": "Congregation.Passport ID",
+              "nativeQueryRef": "Passport ID",
+              "displayName": "PassportID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Marital Status"
+                }
+              },
+              "queryRef": "Congregation.Marital Status",
+              "nativeQueryRef": "Marital Status",
+              "displayName": "Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Profession"
+                }
+              },
+              "queryRef": "Congregation.Profession",
+              "nativeQueryRef": "Profession",
+              "displayName": "Profession"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Next Of Kin"
+                }
+              },
+              "queryRef": "Congregation.Next Of Kin",
+              "nativeQueryRef": "Next Of Kin",
+              "displayName": "Kin"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Kin Contact"
+                }
+              },
+              "queryRef": "Congregation.Kin Contact",
+              "nativeQueryRef": "Kin Contact",
+              "displayName": "Kin Contact"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Cell"
+                }
+              },
+              "queryRef": "Congregation.Cell",
+              "nativeQueryRef": "Cell",
+              "displayName": "Cell"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Address"
+                }
+              },
+              "queryRef": "Congregation.Address",
+              "nativeQueryRef": "Address",
+              "displayName": "Address"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Email"
+                }
+              },
+              "queryRef": "Congregation.Email",
+              "nativeQueryRef": "Email",
+              "displayName": "Email"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Position"
+                }
+              },
+              "queryRef": "Congregation.Position",
+              "nativeQueryRef": "Position",
+              "displayName": "Position"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Date Appointed"
+                }
+              },
+              "queryRef": "Congregation.Date Appointed",
+              "nativeQueryRef": "Date Appointed",
+              "displayName": "Date Appointed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Managerial Post"
+                }
+              },
+              "queryRef": "Congregation.Managerial Post",
+              "nativeQueryRef": "Managerial Post",
+              "displayName": "Managerial"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Date Elected"
+                }
+              },
+              "queryRef": "Congregation.Date Elected",
+              "nativeQueryRef": "Date Elected",
+              "displayName": "Date Elected"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Province"
+                }
+              },
+              "queryRef": "Congregation.Province",
+              "nativeQueryRef": "Province",
+              "displayName": "Province"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "District"
+                }
+              },
+              "queryRef": "Congregation.District",
+              "nativeQueryRef": "District",
+              "displayName": "District"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Zone"
+                }
+              },
+              "queryRef": "Congregation.Zone",
+              "nativeQueryRef": "Zone",
+              "displayName": "Zone"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Section"
+                }
+              },
+              "queryRef": "Congregation.Section",
+              "nativeQueryRef": "Section",
+              "displayName": "Section"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Senior Leader"
+                }
+              },
+              "queryRef": "Congregation.Senior Leader",
+              "nativeQueryRef": "Senior Leader",
+              "displayName": "Snr Leader"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Congregation"
+                    }
+                  },
+                  "Property": "Vice Leader"
+                }
+              },
+              "queryRef": "Congregation.Vice Leader",
+              "nativeQueryRef": "Vice Leader",
+              "displayName": "Vice Leader"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Mens'' Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,33 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["SqlServer","SqlDatabase","Administration","Congregation","Churches","Deceased","Events","Leadership","Media News","Media Sermon","Media Testimony","Media Video","Big Sunday","General Meeting","Graduation","Memorial","Passover","Wedding","Women","Youth","Projects","User Login"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table Administration
+ref table Congregation
+ref table Churches
+ref table Deceased
+ref table Events
+ref table Leadership
+ref table 'Media News'
+ref table 'Media Sermon'
+ref table 'Media Testimony'
+ref table 'Media Video'
+ref table 'Big Sunday'
+ref table 'General Meeting'
+ref table Graduation
+ref table Memorial
+ref table Passover
+ref table Wedding
+ref table Women
+ref table Youth
+ref table Projects
+ref table 'User Login'

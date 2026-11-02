@@ -1,0 +1,56 @@
+table Graduation
+
+	measure 'Graduation Count' = COUNTROWS('Graduation')
+		formatString: #,0
+
+	column Date
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: GraduationDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Venue
+		dataType: string
+		summarizeBy: none
+		sourceColumn: GraduationVenue
+
+	column 'Graduate Name'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: GraduateName
+
+	column Mobile
+		dataType: string
+		summarizeBy: none
+		sourceColumn: GraduateMobile
+
+	column 'Degree Programme'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: GraduateDegree
+
+	column Leader
+		dataType: string
+		summarizeBy: none
+		sourceColumn: GraduateLeader
+
+	column 'Leader Mobile'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: GraduateLeaderMobile
+
+	partition Graduation = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "PassGraduation"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"GraduationDate", "GraduationVenue", "GraduateName", "GraduateMobile", "GraduateDegree", "GraduateLeader", "GraduateLeaderMobile"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

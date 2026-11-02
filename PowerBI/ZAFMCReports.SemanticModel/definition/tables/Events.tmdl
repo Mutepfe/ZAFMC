@@ -1,0 +1,62 @@
+table Events
+
+	measure 'Event Count' = COUNTROWS('Events')
+		formatString: #,0
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: EventName
+
+	column Date
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: EventDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Venue
+		dataType: string
+		summarizeBy: none
+		sourceColumn: EventVenue
+
+	column 'Contact Person'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: EventPerson
+
+	column 'Person Cell'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: EventPersonCell
+
+	column Email
+		dataType: string
+		summarizeBy: none
+		sourceColumn: EventPersonEmail
+
+	column Duration
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: EventDuration
+
+	column Status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: EventStatus
+
+	partition Events = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "Events"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"EventName", "EventDate", "EventVenue", "EventPerson", "EventPersonCell", "EventPersonEmail", "EventDuration", "EventStatus"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

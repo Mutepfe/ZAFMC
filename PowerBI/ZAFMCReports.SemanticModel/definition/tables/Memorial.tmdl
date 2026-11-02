@@ -1,0 +1,46 @@
+table Memorial
+
+	measure 'Memorial Count' = COUNTROWS('Memorial')
+		formatString: #,0
+
+	column 'Memorial Date'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: MemorialDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Deceased Name'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: DeceasedName
+
+	column 'Memorial Venue'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MemorialVenue
+
+	column 'Church Leader'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChurchLeader
+
+	column 'Relative Mobile'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: RelativeMobile
+
+	partition Memorial = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "PassMemorial"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"MemorialDate", "DeceasedName", "MemorialVenue", "ChurchLeader", "RelativeMobile"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

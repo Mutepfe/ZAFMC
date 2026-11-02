@@ -1,0 +1,174 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 10000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Wedding"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "Wedding.Date",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Wedding"
+                    }
+                  },
+                  "Property": "Venue"
+                }
+              },
+              "queryRef": "Wedding.Venue",
+              "nativeQueryRef": "Venue",
+              "displayName": "Venue"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Wedding"
+                    }
+                  },
+                  "Property": "Bride"
+                }
+              },
+              "queryRef": "Wedding.Bride",
+              "nativeQueryRef": "Bride",
+              "displayName": "Bride"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Wedding"
+                    }
+                  },
+                  "Property": "Bride Mobile"
+                }
+              },
+              "queryRef": "Wedding.Bride Mobile",
+              "nativeQueryRef": "Bride Mobile",
+              "displayName": "Bride Mobile"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Wedding"
+                    }
+                  },
+                  "Property": "Groom"
+                }
+              },
+              "queryRef": "Wedding.Groom",
+              "nativeQueryRef": "Groom",
+              "displayName": "Groom"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Wedding"
+                    }
+                  },
+                  "Property": "Groom Mobile"
+                }
+              },
+              "queryRef": "Wedding.Groom Mobile",
+              "nativeQueryRef": "Groom Mobile",
+              "displayName": "Groom Mobile"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Wedding"
+                    }
+                  },
+                  "Property": "Marriage Officer"
+                }
+              },
+              "queryRef": "Wedding.Marriage Officer",
+              "nativeQueryRef": "Marriage Officer",
+              "displayName": "Marriage Officer"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Wedding"
+                    }
+                  },
+                  "Property": "Leader"
+                }
+              },
+              "queryRef": "Wedding.Leader",
+              "nativeQueryRef": "Leader",
+              "displayName": "Leader"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Wedding"
+                    }
+                  },
+                  "Property": "Leader Mobile"
+                }
+              },
+              "queryRef": "Wedding.Leader Mobile",
+              "nativeQueryRef": "Leader Mobile",
+              "displayName": "Leader Mobile"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Wedding Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

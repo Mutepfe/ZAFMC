@@ -1,0 +1,46 @@
+table 'Media Sermon'
+
+	measure 'Sermon Count' = COUNTROWS('Media Sermon')
+		formatString: #,0
+
+	column Preacher
+		dataType: string
+		summarizeBy: none
+		sourceColumn: SermonPreacher
+
+	column 'Event Name'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: SermonEventName
+
+	column Date
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: SermonDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Verse
+		dataType: string
+		summarizeBy: none
+		sourceColumn: SermonVerse
+
+	column 'Sermon File'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: SermonFile
+
+	partition 'Media Sermon' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "MediaSermon"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"SermonPreacher", "SermonEventName", "SermonDate", "SermonVerse", "SermonFile"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

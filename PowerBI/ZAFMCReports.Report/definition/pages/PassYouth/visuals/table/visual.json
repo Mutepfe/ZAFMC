@@ -1,0 +1,99 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 8000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Youth"
+                    }
+                  },
+                  "Property": "Venue"
+                }
+              },
+              "queryRef": "Youth.Venue",
+              "nativeQueryRef": "Venue",
+              "displayName": "Venue"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Youth"
+                    }
+                  },
+                  "Property": "Leader"
+                }
+              },
+              "queryRef": "Youth.Leader",
+              "nativeQueryRef": "Leader",
+              "displayName": "Leader"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Youth"
+                    }
+                  },
+                  "Property": "Duration"
+                }
+              },
+              "queryRef": "Youth.Duration",
+              "nativeQueryRef": "Duration",
+              "displayName": "Youth Duration"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Youth"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "Youth.Date",
+              "nativeQueryRef": "Date",
+              "displayName": "Youth Date"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Youth Report table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,41 @@
+table 'Big Sunday'
+
+	measure 'Big Sunday Count' = COUNTROWS('Big Sunday')
+		formatString: #,0
+
+	column Date
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: BigSundayDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Venue
+		dataType: string
+		summarizeBy: none
+		sourceColumn: BigSundayVenue
+
+	column Leader
+		dataType: string
+		summarizeBy: none
+		sourceColumn: BigSundayLeader
+
+	column 'Leader Cell'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: BigSundayLeaderCell
+
+	partition 'Big Sunday' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "PassBigSunday"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"BigSundayDate", "BigSundayVenue", "BigSundayLeader", "BigSundayLeaderCell"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

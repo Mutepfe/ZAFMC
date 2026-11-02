@@ -1,0 +1,61 @@
+table 'User Login'
+
+	measure 'Login Count' = COUNTROWS('User Login')
+		formatString: #,0
+
+	column 'Passport ID'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LogInPassportID
+
+	column Firstname
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LogInFirstname
+
+	column Surname
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LogInSurname
+
+	column 'Mac Address'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LogInMacAddress
+
+	column 'Login Date'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: LogInDateTime
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Mobile Number'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LogInMobileNumber
+
+	column 'Email Address'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LogInEmailAddress
+
+	column 'Church Position'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LogInChurchPosition
+
+	partition 'User Login' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "LogIn"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"LogInPassportID", "LogInFirstname", "LogInSurname", "LogInMacAddress", "LogInDateTime", "LogInMobileNumber", "LogInEmailAddress", "LogInChurchPosition"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

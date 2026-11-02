@@ -1,0 +1,101 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 7000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media News"
+                    }
+                  },
+                  "Property": "News Name"
+                }
+              },
+              "queryRef": "Media News.News Name",
+              "nativeQueryRef": "News Name",
+              "displayName": "News Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media News"
+                    }
+                  },
+                  "Property": "News Date"
+                }
+              },
+              "queryRef": "Media News.News Date",
+              "nativeQueryRef": "News Date",
+              "displayName": "News Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media News"
+                    }
+                  },
+                  "Property": "News File"
+                }
+              },
+              "queryRef": "Media News.News File",
+              "nativeQueryRef": "News File",
+              "displayName": "News File"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Media News"
+                  }
+                },
+                "Property": "News Name"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Media News table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

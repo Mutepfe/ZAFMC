@@ -30,3 +30,8 @@ Thumbs.db
 # Large project archives (exceed GitHub 100MB limit)
 ZAFMC.zip
 ZAFMC.rar
+# Power BI Desktop project: local data cache and per-user settings (never commit; cache.abf holds member data)
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+# PBIX files embed data
+PowerBI/**/*.pbix

@@ -1,0 +1,148 @@
+{
+  "name": "ZAFMCTheme",
+  "dataColors": [
+    "#800000",
+    "#B03A2E",
+    "#5D6D7E",
+    "#D98880",
+    "#7B241C",
+    "#A6ACAF",
+    "#E6B0AA",
+    "#4D5656"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#333333",
+  "tableAccent": "#800000",
+  "textClasses": {
+    "title": {
+      "color": "#800000",
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 14
+    },
+    "label": {
+      "color": "#333333",
+      "fontFace": "Segoe UI",
+      "fontSize": 10
+    },
+    "callout": {
+      "color": "#800000",
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 28
+    }
+  },
+  "visualStyles": {
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "columnHeaders": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#800000"
+              }
+            },
+            "bold": true,
+            "backColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": "#800000"
+              }
+            }
+          }
+        ],
+        "values": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#333333"
+              }
+            }
+          }
+        ],
+        "grid": [
+          {
+            "gridHorizontalColor": {
+              "solid": {
+                "color": "#D3D3D3"
+              }
+            },
+            "gridVerticalColor": {
+              "solid": {
+                "color": "#D3D3D3"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "header": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#800000"
+              }
+            },
+            "bold": true
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#800000"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "actionButton": {
+      "*": {
+        "fill": [
+          {
+            "show": true,
+            "fillColor": {
+              "solid": {
+                "color": "#800000"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "text": [
+          {
+            "show": true,
+            "fontColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

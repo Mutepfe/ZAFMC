@@ -1,0 +1,5 @@
+expression SqlServer = "JACOB\SQLEXPRESS2025" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	annotation PBI_ResultType = Text
+
+expression SqlDatabase = "ZION" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	annotation PBI_ResultType = Text

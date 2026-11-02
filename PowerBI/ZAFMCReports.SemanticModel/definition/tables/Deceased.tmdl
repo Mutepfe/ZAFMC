@@ -1,0 +1,59 @@
+table Deceased
+
+	measure 'Deceased Count' = COUNTROWS('Deceased')
+		formatString: #,0
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: DecName
+
+	column Surname
+		dataType: string
+		summarizeBy: none
+		sourceColumn: DecSurname
+
+	column 'Passport ID'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: DecPassportID
+
+	column 'Date Of Death'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: DecDOD
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Position
+		dataType: string
+		summarizeBy: none
+		sourceColumn: DecPosition
+
+	column 'Burial Place'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: DecBurialPlace
+
+	column 'Memorial Date'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: DecMemorial
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Deceased = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "AboutDeceased"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"DecName", "DecSurname", "DecPassportID", "DecDOD", "DecPosition", "DecBurialPlace", "DecMemorial"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

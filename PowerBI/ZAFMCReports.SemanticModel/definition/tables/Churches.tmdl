@@ -1,0 +1,153 @@
+table Churches
+
+	measure 'Church Count' = COUNTROWS('Churches')
+		formatString: #,0
+
+	measure 'Total Members' = SUM('Churches'[Members])
+		formatString: #,0
+
+	measure 'Total Pastors' = SUM('Churches'[Branch Pastors])
+		formatString: #,0
+
+	measure 'Total Evangelists' = SUM('Churches'[Branch Evangelists])
+		formatString: #,0
+
+	measure 'Total Preachers' = SUM('Churches'[Branch Preachers])
+		formatString: #,0
+
+	measure 'Total Prophets' = SUM('Churches'[Branch Prophets])
+		formatString: #,0
+
+	measure 'Total Decons' = SUM('Churches'[Branch Decons])
+		formatString: #,0
+
+	measure 'Total General Members' = SUM('Churches'[General Members])
+		formatString: #,0
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchName
+
+	column Leader
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchLeader
+
+	column 'Leader Cell'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchLeaderCell
+
+	column 'Leader Email'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchLeaderEmail
+
+	column 'Date Opened'
+		dataType: dateTime
+		formatString: d MMM yyyy
+		summarizeBy: none
+		sourceColumn: ChrchDateOpened
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Members
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ChrchNumMembers
+
+	column Province
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchProvince
+
+	column District
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchDistrict
+
+	column Zone
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchZone
+
+	column Section
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchSection
+
+	column Pastors
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchPastor
+
+	column Evangelists
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchEvangelist
+
+	column Preachers
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchPreachers
+
+	column Prophets
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchProphets
+
+	column Decons
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchDecons
+
+	column 'Other Members'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ChrchMembers
+
+	column 'Branch Pastors' = VAR t = [Pastors] RETURN IF(ISBLANK(t), BLANK(), LEN(t) - LEN(SUBSTITUTE(t, ",", "")) + 1)
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column 'Branch Evangelists' = VAR t = [Evangelists] RETURN IF(ISBLANK(t), BLANK(), LEN(t) - LEN(SUBSTITUTE(t, ",", "")) + 1)
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column 'Branch Preachers' = VAR t = [Preachers] RETURN IF(ISBLANK(t), BLANK(), LEN(t) - LEN(SUBSTITUTE(t, ",", "")) + 1)
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column 'Branch Prophets' = VAR t = [Prophets] RETURN IF(ISBLANK(t), BLANK(), LEN(t) - LEN(SUBSTITUTE(t, ",", "")) + 1)
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column 'Branch Decons' = VAR t = [Decons] RETURN IF(ISBLANK(t), BLANK(), LEN(t) - LEN(SUBSTITUTE(t, ",", "")) + 1)
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column 'General Members' = VAR t = [Other Members] RETURN IF(ISBLANK(t), BLANK(), LEN(t) - LEN(SUBSTITUTE(t, ",", "")) + 1)
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	partition Churches = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Navigation = Source{[Schema = "dbo", Item = "Churches"]}[Data],
+				    Selected = Table.SelectColumns(Navigation, {"ChrchName", "ChrchLeader", "ChrchLeaderCell", "ChrchLeaderEmail", "ChrchDateOpened", "ChrchNumMembers", "ChrchProvince", "ChrchDistrict", "ChrchZone", "ChrchSection", "ChrchPastor", "ChrchEvangelist", "ChrchPreachers", "ChrchProphets", "ChrchDecons", "ChrchMembers"})
+				in
+				    Selected
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

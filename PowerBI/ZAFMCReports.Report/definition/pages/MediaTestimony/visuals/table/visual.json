@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.7.0/schema.json",
+  "name": "table",
+  "position": {
+    "x": 20,
+    "y": 168,
+    "z": 7000,
+    "width": 1240,
+    "height": 542,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media Testimony"
+                    }
+                  },
+                  "Property": "Testifier"
+                }
+              },
+              "queryRef": "Media Testimony.Testifier",
+              "nativeQueryRef": "Testifier",
+              "displayName": "Testifier"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media Testimony"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "Media Testimony.Date",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Media Testimony"
+                    }
+                  },
+                  "Property": "Testimony File"
+                }
+              },
+              "queryRef": "Media Testimony.Testimony File",
+              "nativeQueryRef": "Testimony File",
+              "displayName": "Testimony File"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Media Testimony table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
