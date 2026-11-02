@@ -35,3 +35,6 @@ ZAFMC.rar
 **/.pbi/cache.abf
 # PBIX files embed data
 PowerBI/**/*.pbix
+
+# Uploaded member photos / ID documents (stored in the database; never commit personal files)
+ZION/
